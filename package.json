@@ -1,6 +1,16 @@
 {
   "name": "ngu-node-cli",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {},
+  "scripts": {
+    "prestart": "clear",
+    "start": "node index.js"
+  },
+  "devDependencies": {
+    "eslint": "^7.4.0",
+    "eslint-config-prettier": "^6.11.0",
+    "prettier": "^2.0.5"
+  }
 }
