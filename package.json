@@ -1,9 +1,12 @@
 {
   "name": "ngu-node-cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "index.js",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "node-window-manager": "^2.2.3",
+    "robotjs": "^0.6.0"
+  },
   "scripts": {
     "prestart": "clear",
     "start": "node index.js"
