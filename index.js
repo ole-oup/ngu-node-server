@@ -2,9 +2,9 @@ const readline = require('readline');
 const fs = require('fs');
 const ini = require('ini');
 const { windowManager } = require('node-window-manager');
-// const robot = require('robotjs');
+
+const toweridle = require('./lib/toweridle.js');
 const lazyIdle = require('./lib/lazyidle.js');
-const idle = require('./lib/idle.js');
 
 const config = ini.parse(fs.readFileSync('./config.ini', 'utf-8'));
 
@@ -38,8 +38,7 @@ const getGameCoords = () => {
 
 console.log(`
   modes:
-  0: debug
-  1: idle
+  1: toweridle
   2: lazyidle
 `);
 
@@ -53,19 +52,19 @@ const inputPromise = new Promise((resolve, reject) => {
   } catch (err) {
     reject('Error: ' + err);
   }
-  return;
+  // return;
 });
 
 inputPromise
   .then((input) => {
     const coords = getGameCoords();
     switch (input) {
-      case '0':
-        break;
       case '1':
-        idle(coords);
+        console.log('toweridle');
+        toweridle(coords);
         break;
       case '2':
+        console.log('lazyidle');
         lazyIdle();
         break;
       default:
