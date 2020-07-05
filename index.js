@@ -1,15 +1,19 @@
 const readline = require('readline');
-const { windowManager, Window } = require('node-window-manager');
+const fs = require('fs');
+const ini = require('ini');
+const { windowManager } = require('node-window-manager');
 // const robot = require('robotjs');
 const lazyIdle = require('./lib/lazyidle.js');
 const idle = require('./lib/idle.js');
+
+const config = ini.parse(fs.readFileSync('./config.ini', 'utf-8'));
 
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
-const getGameWindow = () => {
+const getGameCoords = () => {
   const windows = windowManager.getWindows();
   let win = new Object(null);
 
@@ -23,49 +27,51 @@ const getGameWindow = () => {
     }
   }
 
-  return win;
+  win.bringToTop();
 
-  // return windowFound;
+  const bounds = win.getBounds();
+  const x = bounds.x + 3;
+  const y = bounds.y + 27;
+
+  return { x, y };
 };
-
-const activateFoundWindow = (window) => {
-  window.bringToTop();
-};
-
-/*
-node window manager
-wenn answer -> focus ngu
-wenn focus von ngu weg -> focus terminal (kann man erkennen welches?) -> script pausieren, console: abrrechen? -> input ja: terminal terminieren
-bei nein script weitermachen
-*/
 
 console.log(`
   modes:
-  d: debug
+  0: debug
   1: idle
   2: lazyidle
 `);
 
-const inputPromise = new Promise((resolve) => {
-  rl.question('Please choose a mode: ', (answer) => {
-    resolve(answer);
-    rl.close();
-  });
-});
-
-inputPromise.then((successMessage) => {
-  const gameWindow = getGameWindow();
-
-  activateFoundWindow(gameWindow);
-
-  switch (successMessage) {
-    case '1':
-      idle();
-      break;
-    case '2':
-      lazyIdle();
-      break;
-    default:
-      console.error(new Error('Invalid mode'));
+const inputPromise = new Promise((resolve, reject) => {
+  try {
+    rl.question('Choose a mode: ', (answer) => {
+      rl.close();
+      resolve(answer);
+      return;
+    });
+  } catch (err) {
+    reject('Error: ' + err);
   }
+  return;
 });
+
+inputPromise
+  .then((input) => {
+    const coords = getGameCoords();
+    switch (input) {
+      case '0':
+        break;
+      case '1':
+        idle(coords);
+        break;
+      case '2':
+        lazyIdle();
+        break;
+      default:
+        console.error(new Error('Invalid mode'));
+    }
+  })
+  .catch((error) => {
+    console.error(new Error(error));
+  });
