@@ -1,12 +1,14 @@
-const fs = require('fs');
-const ini = require('ini');
-const readline = require('readline');
-const { windowManager } = require('node-window-manager');
+import fs from 'fs';
+import ini from 'ini';
+import readline from 'readline';
+import nwm from 'node-window-manager';
 
-const cp = require('./lib/helper/print.js');
+import cp from './lib/helper/print.js';
 
-const toweridle = require('./lib/toweridle.js');
-const hhb = require('./lib/thirtymin.js');
+import toweridle from './lib/toweridle.js';
+import hhb from './lib/thirtymin.js';
+
+const { windowManager } = nwm;
 
 const getGameCoords = async () => {
   const windows = windowManager.getWindows();
