@@ -1,14 +1,21 @@
 import fs from 'fs';
 import ini from 'ini';
-import readline from 'readline';
 import nwm from 'node-window-manager';
 
 import cp from './lib/helper/print.js';
+import rl from './lib/helper/question.js';
 
 import toweridle from './lib/toweridle.js';
 import hhb from './lib/thirtymin.js';
 
 const { windowManager } = nwm;
+
+const config = ini.parse(fs.readFileSync('./config.ini', 'utf-8'));
+
+// initialize empty object for window
+let gameWindow = new Object(null);
+// set invalid mode
+let mode = 0;
 
 const getGameCoords = async () => {
   const windows = windowManager.getWindows();
@@ -16,20 +23,20 @@ const getGameCoords = async () => {
     'C:\\Program Files (x86)\\Steam\\steamapps\\common\\NGU IDLE\\NGUIdle.exe';
 
   for (let i = 0; i < windows.length; i++) {
-    win = windows[i].path === path ? windows[i] : false;
-    if (win) break;
+    gameWindow = windows[i].path === path ? windows[i] : false;
+    if (gameWindow) break;
   }
 
   try {
-    process.on('exit', () => win.show());
-    process.on('SIGINT', () => win.show());
-    process.on('SIGUSR1', () => win.show());
-    process.on('SIGUSR2', () => win.show());
-    process.on('uncaughtException', () => win.show());
+    process.on('exit', () => gameWindow.show());
+    process.on('SIGINT', () => gameWindow.show());
+    process.on('SIGUSR1', () => gameWindow.show());
+    process.on('SIGUSR2', () => gameWindow.show());
+    process.on('uncaughtException', () => gameWindow.show());
 
-    win.show();
-    win.bringToTop();
-    const bounds = win.getBounds();
+    gameWindow.show();
+    gameWindow.bringToTop();
+    const bounds = gameWindow.getBounds();
     // offset x & y b/c of window borders
     bounds.x += 3;
     bounds.y += 27;
@@ -62,20 +69,6 @@ const getFlags = async (config) => {
   }
 };
 
-function rl(query) {
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
-
-  return new Promise((resolve) => {
-    rl.question(query, (ans) => {
-      rl.close();
-      resolve(ans);
-    });
-  });
-}
-
 const init = async (config) => {
   try {
     getFlags(config);
@@ -95,10 +88,10 @@ const init = async (config) => {
 
     switch (m) {
       case 1:
-        toweridle(coords, config, win);
+        toweridle(coords, config, gameWindow);
         break;
       case 2:
-        hhb(coords);
+        hhb(coords, gameWindow);
         break;
       default:
         throw 'Invalid Mode';
@@ -109,12 +102,5 @@ const init = async (config) => {
 };
 
 console.clear();
-
-const config = ini.parse(fs.readFileSync('./config.ini', 'utf-8'));
-
-// initialize empty object for window
-let win = new Object(null);
-// set invalid mode
-let mode = 0;
 
 init(config);
