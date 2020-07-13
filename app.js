@@ -12,8 +12,12 @@ const { windowManager } = nwm;
 
 const config = ini.parse(fs.readFileSync('./config.ini', 'utf-8'));
 
-// initialize empty object for window
+// initialize empty object for game window
 let gameWindow = new Object(null);
+
+// get terminal
+const terminal = windowManager.getActiveWindow();
+
 // set invalid mode
 let mode = 0;
 
@@ -35,7 +39,6 @@ const getGameCoords = async () => {
     process.on('uncaughtException', () => gameWindow.show());
 
     gameWindow.show();
-    gameWindow.bringToTop();
     const bounds = gameWindow.getBounds();
     // offset x & y b/c of window borders
     bounds.x += 3;
@@ -88,10 +91,12 @@ const init = async (config) => {
 
     switch (m) {
       case 1:
-        toweridle(coords, config, gameWindow);
-        break;
+        throw 'auflösung anpassen du doof';
+      // gameWindow.bringToTop();
+      // toweridle(coords, config, gameWindow);
+      // break;
       case 2:
-        hhb(coords, gameWindow);
+        hhb(coords, config, gameWindow, terminal);
         break;
       default:
         throw 'Invalid Mode';

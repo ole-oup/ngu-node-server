@@ -1,6 +1,6 @@
 {
   "name": "ngu-node-cli",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "main": "index.js",
   "license": "MIT",
   "type": "module",
@@ -18,8 +18,6 @@
     "prettier": "^2.0.5"
   },
   "scripts": {
-    "start": "node app.js",
-    "prod": "cross-env NODE_ENV=production node app.js",
-    "30m": "cross-env NODE_ENV=development node app.js -2"
+    "start": "node app.js"
   }
 }
