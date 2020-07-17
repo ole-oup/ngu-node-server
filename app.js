@@ -6,7 +6,7 @@ import cp from './lib/helper/print.js';
 import rl from './lib/helper/question.js';
 
 import toweridle from './lib/toweridle.js';
-import hhb from './lib/thirtymin.js';
+import thirtymin from './lib/thirtymin.js';
 
 const { windowManager } = nwm;
 
@@ -96,7 +96,7 @@ const init = async (config) => {
       // toweridle(coords, config, gameWindow);
       // break;
       case 2:
-        hhb(coords, config, gameWindow, terminal);
+        thirtymin(coords, config, gameWindow, terminal);
         break;
       default:
         throw 'Invalid Mode';
