@@ -11,5 +11,8 @@
   "rules": {
     "prefer-destructuring": ["error", { "object": true, "array": false }],
     "eqeqeq": "error"
+  },
+  "globals": {
+    "BigInt": true
   }
 }

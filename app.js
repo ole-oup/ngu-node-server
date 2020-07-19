@@ -32,11 +32,16 @@ const getGameCoords = async () => {
   }
 
   try {
-    process.on('exit', () => gameWindow.show());
-    process.on('SIGINT', () => gameWindow.show());
-    process.on('SIGUSR1', () => gameWindow.show());
-    process.on('SIGUSR2', () => gameWindow.show());
-    process.on('uncaughtException', () => gameWindow.show());
+    const events = [
+      'exit',
+      'SIGINT',
+      'SIGUSR1',
+      'SIGUSR2',
+      'uncaughtException',
+    ];
+    events.forEach((e) => {
+      process.on(e, () => gameWindow.show());
+    });
 
     gameWindow.show();
     const bounds = gameWindow.getBounds();
@@ -87,16 +92,24 @@ const init = async (config) => {
     const coords = await getGameCoords();
     if (!coords) throw 'Game not found';
 
-    const m = Number(mode);
+    gameWindow.bringToTop();
 
+    const data = {
+      terminal,
+      crd: coords,
+      cfg: config,
+      win: gameWindow,
+      start: new Date(),
+    };
+
+    const m = Number(mode);
     switch (m) {
       case 1:
-        throw 'auflösung anpassen du doof';
-      // gameWindow.bringToTop();
-      // toweridle(coords, config, gameWindow);
-      // break;
+        // todo toweridle.js auch auf data objekt umstellen
+        toweridle(coords, config, gameWindow);
+        break;
       case 2:
-        thirtymin(coords, config, gameWindow, terminal);
+        thirtymin(data);
         break;
       default:
         throw 'Invalid Mode';
