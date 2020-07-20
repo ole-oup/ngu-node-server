@@ -9,8 +9,9 @@
   },
   "extends": ["eslint:recommended", "prettier"],
   "rules": {
-    "prefer-destructuring": ["error", { "object": true, "array": false }],
-    "eqeqeq": "error"
+    "prefer-destructuring": ["warn", { "object": true, "array": false }],
+    "prefer-template": "warn",
+    "eqeqeq": "warn"
   },
   "globals": {
     "BigInt": true

@@ -2,11 +2,12 @@ import fs from 'fs';
 import ini from 'ini';
 import nwm from 'node-window-manager';
 
-import cp from './lib/helper/print.js';
-import rl from './lib/helper/question.js';
-
 import toweridle from './lib/toweridle.js';
 import thirtymin from './lib/thirtymin.js';
+import rebirth from './lib/rebirth.js';
+
+import cp from './lib/helper/print.js';
+import rl from './lib/helper/question.js';
 
 const { windowManager } = nwm;
 
@@ -61,17 +62,39 @@ const getFlags = async (config) => {
 
   if (flags.length > 0) {
     flags.forEach((flag) => {
-      const f = flag.trim();
-      switch (f.toLowerCase()) {
-        case '-1':
-          mode = 1;
-          break;
-        case '-2':
-          mode = 2;
-          break;
+      const f = {};
+
+      f.trim = flag.trim();
+      f.lc = f.trim.toLowerCase();
+
+      f.m = Number(flag[1]); // mode number
+      f.NaN = Number.isNaN(f.m);
+
+      mode = f.NaN === false ? f.m : 0;
+
+      // options
+      switch (f.lc) {
         case '-h':
         case '--hide':
-          config.general.hide = 1;
+          config.general.hide = '1';
+          break;
+        case '-a':
+        case '--rebirth-all':
+          config.rebirth.gold = '1';
+          config.rebirth.boss = '1';
+          config.rebirth.wish = '1';
+          break;
+        case '-rg':
+        case '--gold':
+          config.rebirth.gold = '1';
+          break;
+        case '-rb':
+        case '-boss':
+          config.rebirth.boss = '1';
+          break;
+        case '-rw':
+        case '-wish':
+          config.rebirth.wish = '1';
           break;
       }
     });
@@ -83,7 +106,7 @@ const init = async (config) => {
     getFlags(config);
 
     if (mode === 0) {
-      cp('\n  1. toweridle\n  2. 30m\n\n');
+      cp('\n  1. rebirth\n  2. toweridle\n  3. 30m\n\n');
       mode = await rl('choose a mode: ');
     }
 
@@ -96,19 +119,23 @@ const init = async (config) => {
     gameWindow.bringToTop();
 
     const data = {
-      terminal,
-      crd: coords,
-      cfg: config,
-      win: gameWindow,
+      terminal, //         termin that has node running
+      crd: coords, //      game's bounds
+      cfg: config, //      config.ini
+      win: gameWindow, //  game's window object
+      inf: false, //       infinite itopod [idle / toweridle]
+      dur: null, //        itopod duration [idle / toweridle]
     };
 
     const m = Number(mode);
     switch (m) {
       case 1:
-        // todo toweridle.js auch auf data objekt umstellen
-        toweridle(coords, config, gameWindow);
+        rebirth(data);
         break;
       case 2:
+        toweridle(data);
+        break;
+      case 3:
         thirtymin(data);
         break;
       default:
