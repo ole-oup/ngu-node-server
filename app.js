@@ -40,6 +40,7 @@ const getGameCoords = async () => {
       'uncaughtException',
     ];
     events.forEach((e) => {
+      // todo hier cleanup function (zb. wenn idle -> q drücken für ingame idle)
       process.on(e, () => gameWindow.show());
     });
 
@@ -99,7 +100,6 @@ const init = async (config) => {
       crd: coords,
       cfg: config,
       win: gameWindow,
-      start: new Date(),
     };
 
     const m = Number(mode);
