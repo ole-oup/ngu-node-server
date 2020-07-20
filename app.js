@@ -70,7 +70,7 @@ const getFlags = async (config) => {
       f.m = Number(flag[1]); // mode number
       f.NaN = Number.isNaN(f.m);
 
-      mode = f.NaN === false ? f.m : 0;
+      if (f.NaN === false) mode = f.m;
 
       // options
       switch (f.lc) {
@@ -78,21 +78,25 @@ const getFlags = async (config) => {
         case '--hide':
           config.general.hide = '1';
           break;
+        case '-f':
+        case '--fstop':
+          config.idle.fstop = '0';
+          break;
         case '-a':
         case '--rebirth-all':
           config.rebirth.gold = '1';
           config.rebirth.boss = '1';
           config.rebirth.wish = '1';
           break;
-        case '-rg':
+        case '-g':
         case '--gold':
           config.rebirth.gold = '1';
           break;
-        case '-rb':
+        case '-b':
         case '-boss':
           config.rebirth.boss = '1';
           break;
-        case '-rw':
+        case '-w':
         case '-wish':
           config.rebirth.wish = '1';
           break;
@@ -101,13 +105,30 @@ const getFlags = async (config) => {
   }
 };
 
+const chooseMode = async (modes) => {
+  const input = await rl(`choose a mode (1-${modes.length}): `);
+
+  if (input === 'modes') {
+    modes.forEach((e) => {
+      console.log(e);
+    });
+    return chooseMode(modes);
+  }
+
+  return Number(input);
+};
+
 const init = async (config) => {
   try {
     getFlags(config);
 
     if (mode === 0) {
-      cp('\n  1. rebirth\n  2. toweridle\n  3. 30m\n\n');
-      mode = await rl('choose a mode: ');
+      const modes = [];
+      modes.push('  1. rebirth');
+      modes.push('  2. toweridle');
+      modes.push('  3. 30m');
+
+      mode = await chooseMode(modes);
     }
 
     // clear screen
@@ -127,8 +148,7 @@ const init = async (config) => {
       dur: null, //        itopod duration [idle / toweridle]
     };
 
-    const m = Number(mode);
-    switch (m) {
+    switch (mode) {
       case 1:
         rebirth(data);
         break;
