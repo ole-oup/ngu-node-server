@@ -11,7 +11,8 @@
   "rules": {
     "prefer-destructuring": ["warn", { "object": true, "array": false }],
     "prefer-template": "warn",
-    "eqeqeq": "warn"
+    "eqeqeq": "warn",
+    "no-constant-condition": "off"
   },
   "globals": {
     "BigInt": true

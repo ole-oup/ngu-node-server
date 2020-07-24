@@ -8,6 +8,7 @@ import rebirth from './lib/rebirth.js';
 
 import cp from './lib/helper/print.js';
 import rl from './lib/helper/question.js';
+import snipe from './lib/snipe.js';
 
 const { windowManager } = nwm;
 
@@ -127,6 +128,7 @@ const init = async (config) => {
       modes.push('  1. rebirth');
       modes.push('  2. toweridle');
       modes.push('  3. 30m');
+      modes.push('  4. snipe');
 
       mode = await chooseMode(modes);
     }
@@ -144,19 +146,26 @@ const init = async (config) => {
       crd: coords, //      game's bounds
       cfg: config, //      config.ini
       win: gameWindow, //  game's window object
-      inf: false, //       infinite itopod [idle / toweridle]
-      dur: null, //        itopod duration [idle / toweridle]
+      inf: null, //       infinite itopod [idle / toweridle]
+      dur: null, //        itopod duration [idle / toweridle] in ms?
     };
 
     switch (mode) {
       case 1:
         rebirth(data);
+        console.log('rebirth');
         break;
       case 2:
         toweridle(data);
+        console.log('toweridle');
         break;
       case 3:
         thirtymin(data);
+        console.log('30m');
+        break;
+      case 4:
+        snipe(data);
+        console.log('snipe');
         break;
       default:
         throw 'Invalid Mode';
