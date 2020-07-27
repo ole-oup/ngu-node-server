@@ -146,8 +146,9 @@ const init = async (config) => {
       crd: coords, //      game's bounds
       cfg: config, //      config.ini
       win: gameWindow, //  game's window object
-      inf: null, //       infinite itopod [idle / toweridle]
+      inf: null, //        infinite itopod [idle / toweridle]
       dur: null, //        itopod duration [idle / toweridle] in ms?
+      skc: 0, //           snipe killcount
     };
 
     switch (mode) {
