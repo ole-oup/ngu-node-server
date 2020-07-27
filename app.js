@@ -152,20 +152,16 @@ const init = async (config) => {
 
     switch (mode) {
       case 1:
-        rebirth(data);
-        console.log('rebirth');
+        await rebirth(data);
         break;
       case 2:
-        toweridle(data);
-        console.log('toweridle');
+        await toweridle(data);
         break;
       case 3:
-        thirtymin(data);
-        console.log('30m');
+        await thirtymin(data);
         break;
       case 4:
         snipe(data);
-        console.log('snipe');
         break;
       default:
         throw 'Invalid Mode';
