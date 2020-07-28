@@ -85,13 +85,13 @@ const getFlags = async (config) => {
           break;
         case '-a':
         case '--rebirth-all':
-          config.rebirth.gold = '1';
+          config.rebirth.spell = '1';
           config.rebirth.boss = '1';
           config.rebirth.wish = '1';
           break;
-        case '-g':
-        case '--gold':
-          config.rebirth.gold = '1';
+        case '-s':
+        case '--spell':
+          config.rebirth.spell = '1';
           break;
         case '-b':
         case '-boss':
