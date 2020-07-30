@@ -2,13 +2,14 @@ import fs from 'fs';
 import ini from 'ini';
 import nwm from 'node-window-manager';
 
+import distributeRes from './lib/helper/distribute.js';
 import toweridle from './lib/toweridle.js';
 import thirtymin from './lib/thirtymin.js';
-import rebirth from './lib/rebirth.js';
+import snipe from './lib/snipe.js';
 
 import cp from './lib/helper/print.js';
 import rl from './lib/helper/question.js';
-import snipe from './lib/snipe.js';
+import attack from './lib/helper/attack.js';
 
 const { windowManager } = nwm;
 
@@ -83,8 +84,8 @@ const getFlags = async (config) => {
         case '--fstop':
           config.idle.fstop = '0';
           break;
-        case '-a':
-        case '--rebirth-all':
+        case '-n':
+        case '--new':
           config.rebirth.spell = '1';
           config.rebirth.boss = '1';
           config.rebirth.wish = '1';
@@ -129,6 +130,7 @@ const init = async (config) => {
       modes.push('  2. toweridle');
       modes.push('  3. 30m');
       modes.push('  4. snipe');
+      modes.push('  5. attack');
 
       mode = await chooseMode(modes);
     }
@@ -141,19 +143,21 @@ const init = async (config) => {
 
     gameWindow.bringToTop();
 
+    // data (state) for modules
     const data = {
-      terminal, //         termin that has node running
+      terminal, //         terminal that has node running
       crd: coords, //      game's bounds
       cfg: config, //      config.ini
       win: gameWindow, //  game's window object
       inf: null, //        infinite itopod [idle / toweridle]
       dur: null, //        itopod duration [idle / toweridle] in ms?
       skc: 0, //           snipe killcount
+      tdd: 0, //           timer data difference [displayTimer / spinnerPGC]
     };
 
     switch (mode) {
       case 1:
-        await rebirth(data);
+        await distributeRes(data);
         break;
       case 2:
         await toweridle(data);
@@ -162,7 +166,10 @@ const init = async (config) => {
         await thirtymin(data);
         break;
       case 4:
-        snipe(data);
+        await snipe(data);
+        break;
+      case 5:
+        await attack(data);
         break;
       default:
         throw 'Invalid Mode';

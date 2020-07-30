@@ -1,6 +1,6 @@
 {
   "name": "ngu-node-cli",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "main": "index.js",
   "license": "MIT",
   "type": "module",
@@ -15,6 +15,7 @@
     "prettier": "^2.0.5"
   },
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "new": "node app.js -1 --new"
   }
 }
