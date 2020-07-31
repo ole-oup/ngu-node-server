@@ -150,9 +150,11 @@ const init = async (config) => {
       cfg: config, //      config.ini
       win: gameWindow, //  game's window object
       inf: null, //        infinite itopod [idle / toweridle]
-      dur: null, //        itopod duration [idle / toweridle] in ms?
-      skc: 0, //           snipe killcount
+      dur: null, //        itopod duration [idle / toweridle, snipe] in ms?
+      skc: 1, //           snipe killcount
       tdd: 0, //           timer data difference [displayTimer / spinnerPGC]
+      lat: new Date(), //  last attack time [idle / spinnerPGC]
+      lam: 0, //           last attack ms [idle / spinnerPGC]
     };
 
     switch (mode) {
