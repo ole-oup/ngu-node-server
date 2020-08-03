@@ -149,12 +149,14 @@ const init = async (config) => {
       crd: coords, //      game's bounds
       cfg: config, //      config.ini
       win: gameWindow, //  game's window object
-      inf: null, //        infinite itopod [idle / toweridle]
+      inf: null, //        infinite itopod [idle / toweridle, snipe]
       dur: null, //        itopod duration [idle / toweridle, snipe] in ms?
-      skc: 1, //           snipe killcount
+      skc: 0, //           snipe killcount
       tdd: 0, //           timer data difference [displayTimer / spinnerPGC]
       lat: new Date(), //  last attack time [idle / spinnerPGC]
       lam: 0, //           last attack ms [idle / spinnerPGC]
+      wfm: 0, //           wait for move [snipe / idle]
+      to: null, //         timeout [snipe, spinnerPGC]
     };
 
     switch (mode) {
