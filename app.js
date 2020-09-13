@@ -2,7 +2,7 @@ import fs from 'fs';
 import ini from 'ini';
 import nwm from 'node-window-manager';
 
-import distributeRes from './lib/helper/distribute.js';
+import rebirth from './lib/rebirth.js';
 import toweridle from './lib/toweridle.js';
 import thirtymin from './lib/thirtymin.js';
 import snipe from './lib/snipe.js';
@@ -151,7 +151,7 @@ const init = async (config) => {
       win: gameWindow, //              game's window object
       spin: ['|', '/', '—', '\\'], //  spinner
       inf: null, //                    infinite itopod [idle / toweridle, snipe]
-      dur: null, //                    itopod duration [idle / toweridle, snipe] in ms?
+      dur: null, //                    itopod duration [idle / toweridle, snipe] in ms
       skc: 0, //                       snipe killcount
       tdd: 0, //                       timer data difference [displayTimer / spinnerPGC]
       lat: new Date(), //              last action time [idle / spinnerPGC / spinner]
@@ -164,7 +164,7 @@ const init = async (config) => {
 
     switch (mode) {
       case 1:
-        await distributeRes(data);
+        await rebirth(data);
         break;
       case 2:
         await toweridle(data);
