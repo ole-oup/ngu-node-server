@@ -84,23 +84,9 @@ const getFlags = async (config) => {
         case '--fstop':
           config.idle.fstop = '0';
           break;
-        case '-n':
-        case '--new':
-          config.rebirth.spell = '1';
-          config.rebirth.boss = '1';
-          config.rebirth.wish = '1';
-          break;
         case '-s':
-        case '--spell':
-          config.rebirth.spell = '1';
-          break;
-        case '-b':
-        case '-boss':
-          config.rebirth.boss = '1';
-          break;
-        case '-w':
-        case '-wish':
-          config.rebirth.wish = '1';
+        case '-slow':
+          config.general.slowcd = config.general.slowcd === '1' ? '0' : '1';
           break;
       }
     });
