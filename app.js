@@ -2,6 +2,7 @@ import fs from 'fs';
 import ini from 'ini';
 import nwm from 'node-window-manager';
 
+import db from './lib/debugger.js';
 import rebirth from './lib/rebirth.js';
 import toweridle from './lib/toweridle.js';
 import thirtymin from './lib/thirtymin.js';
@@ -59,8 +60,12 @@ const getGameCoords = async () => {
   }
 };
 
-const getFlags = async (config) => {
+const getFlags = (config, m) => {
   const flags = process.argv.slice(2);
+
+  [...m].forEach((c) => {
+    flags.push(c);
+  });
 
   if (flags.length > 0) {
     flags.forEach((flag) => {
@@ -76,16 +81,13 @@ const getFlags = async (config) => {
 
       // options
       switch (f.lc) {
-        case '-h':
-        case '--hide':
+        case 'h':
           config.general.hide = '1';
           break;
-        case '-f':
-        case '--fstop':
+        case 'f':
           config.idle.fstop = '0';
           break;
-        case '-s':
-        case '-slow':
+        case 's':
           config.general.slowcd = config.general.slowcd === '1' ? '0' : '1';
           break;
       }
@@ -103,13 +105,11 @@ const chooseMode = async (modes) => {
     return chooseMode(modes);
   }
 
-  return Number(input);
+  return input;
 };
 
 const init = async (config) => {
   try {
-    getFlags(config);
-
     if (mode === 0) {
       const modes = [];
       modes.push('  1. rebirth');
@@ -120,6 +120,8 @@ const init = async (config) => {
 
       mode = await chooseMode(modes);
     }
+
+    await getFlags(config, mode);
 
     // clear screen
     console.clear();
@@ -148,7 +150,12 @@ const init = async (config) => {
       to: null, //                     timeout [snipe, spinnerPGC]
     };
 
-    switch (mode) {
+    const m = Number(mode.substring(0, 1));
+
+    switch (m) {
+      case 0:
+        await db(data);
+        break;
       case 1:
         await rebirth(data);
         break;
