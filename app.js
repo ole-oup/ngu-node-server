@@ -10,7 +10,7 @@ import snipe from './lib/snipe.js';
 
 import cp from './lib/helper/print.js';
 import rl from './lib/helper/question.js';
-import attack from './lib/helper/attack.js';
+import quest from './lib/quest.js';
 
 const { windowManager } = nwm;
 
@@ -116,7 +116,7 @@ const init = async (config) => {
       modes.push('  2. toweridle');
       modes.push('  3. 30m');
       modes.push('  4. snipe');
-      modes.push('  5. attack');
+      modes.push('  5. quest');
 
       mode = await chooseMode(modes);
     }
@@ -169,8 +169,7 @@ const init = async (config) => {
         await snipe(data);
         break;
       case 5:
-        data.win.bringToTop();
-        attack(data);
+        await quest(data);
         break;
       default:
         throw 'Invalid Mode';
