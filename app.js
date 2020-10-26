@@ -141,13 +141,7 @@ const init = async (config) => {
       inf: null, //                    infinite itopod [idle / toweridle, snipe]
       dur: null, //                    itopod duration [idle / toweridle, snipe] in ms
       skc: 0, //                       snipe killcount
-      tdd: 0, //                       timer data difference [displayTimer / spinnerPGC]
-      // lat: new Date(), //              last action time [idle / spinnerPGC / spinner]
-      // lam: 0, //                       last action ms [idle / spinnerPGC / spinner]
       wfm: 0, //                       wait for move [snipe / idle]
-      swt: new Date(), //              stopwatch time [spinner]
-      swd: null, //                    stopwatch duration [spinner]
-      to: null, //                     timeout [snipe, spinnerPGC]
     };
 
     const m = Number(mode.substring(0, 1));
