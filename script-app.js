@@ -1,5 +1,3 @@
-import fs from 'fs';
-import ini from 'ini';
 import nwm from 'node-window-manager';
 
 import db from './lib/debugger.js';
@@ -15,42 +13,45 @@ import dt from './lib/helper/displayTimer.js';
 
 const { windowManager } = nwm;
 
-// get terminal
-const terminal = windowManager.getActiveWindow();
-
 const getGameCoords = async () => {
   // initialize empty object for game window
-  let gameWindow = new Object(null);
+  let gameWindow = false;
+  let terminal = false;
 
   const windows = windowManager.getWindows();
-  const path =
+  const gamePath =
     'C:\\Program Files (x86)\\Steam\\steamapps\\common\\NGU IDLE\\NGUIdle.exe';
+  const scriptTitle = 'ngu_node.ps1';
 
   for (let i = 0; i < windows.length; i++) {
-    gameWindow = windows[i].path === path ? windows[i] : false;
+    gameWindow = windows[i].path === gamePath ? windows[i] : false;
+    // if (gameWindow && terminal) break;
     if (gameWindow) break;
   }
 
+  for (let i = 0; i < windows.length; i++) {
+    terminal = windows[i].getTitle() === scriptTitle ? windows[i] : false;
+    if (terminal) break;
+  }
+
   try {
-    gameWindow.show();
     const bounds = gameWindow.getBounds();
     // offset x & y b/c of window borders
     bounds.x += 3;
     bounds.y += 27;
 
-    return { coords: bounds, gameWin: gameWindow };
+    return { terminal, coords: bounds, gameWin: gameWindow };
   } catch (err) {
     return cp(err, true);
   }
 };
 
-const init = async (mode, rmode) => {
+const init = async (config, mode, rmode) => {
   try {
     const appStart = new Date();
-    const config = ini.parse(fs.readFileSync('./config.ini', 'utf-8'));
 
     const ggc = await getGameCoords();
-    const { coords, gameWin } = ggc;
+    const { coords, gameWin, terminal } = ggc;
 
     if (!ggc) throw 'Game not found';
 

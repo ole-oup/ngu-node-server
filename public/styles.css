@@ -1,9 +1,15 @@
+:root {
+  --prim-color: #22221e;
+  --sec-color: #fcfae0;
+  --wish-bg: #757575;
+}
+
 body,
 html {
-  background-color: #22221e;
-  color: #fff;
+  background-color: var(--prim-color);
+  color: var(--sec-color);
   font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
-  margin: 50px 0;
+  margin: 1vh 0;
   text-align: center;
 }
 
@@ -14,26 +20,46 @@ html {
   align-items: center;
 }
 
+.flex-row {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .container {
-  width: 500px;
+  min-width: 500px;
   margin: 20px;
   padding: 30px;
-  background-color: rgba(255, 255, 255, 0.2);
-  border: 1px solid #fff;
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 1px solid var(--sec-color);
 }
 
 .mode {
-  background-color: rgb(200, 200, 200);
+  background-color: var(--sec-color);
   border: 1px solid black;
   border-radius: 5px;
-  font-weight: 800;
+  font-weight: 600;
   height: 40px;
   width: 100px;
   margin: 10px 20px;
 }
 
-.mode:hover {
+.mode:hover,
+.wish:hover {
   cursor: pointer;
-  background-color: #22221e;
-  color: rgb(214, 214, 214);
+  color: var(--sec-color);
+  background-color: var(--prim-color);
+}
+
+.selected-wish {
+  background-color: var(--wish-bg);
+}
+
+.wish {
+  width: 30px;
+  height: 30px;
+  margin: 10px;
+  padding: 5px;
+  border: 1px solid var(--sec-color);
 }

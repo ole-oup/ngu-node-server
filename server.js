@@ -1,22 +1,26 @@
 import express from 'express';
+
 import init from './script-app.js';
 
-const server = () => {
+const server = (cfg) => {
   const app = express();
-  const port = 3000;
+  const port = 3662;
 
   console.clear();
+  console.log('NGU script app local server');
+
+  app.use(express.static('public'));
 
   app.get('/app/:mode', (req, res) => {
     const { mode } = req.params;
-    init(mode).then((data) => {
+    init(cfg, mode).then((data) => {
       res.send({ status: 'complete', time: data });
     });
   });
 
   app.get('/app/:mode/:rmode', (req, res) => {
     const { mode, rmode } = req.params;
-    init(mode, rmode).then((data) => {
+    init(cfg, mode, rmode).then((data) => {
       res.send({ status: 'complete', rmode, time: data });
     });
   });
@@ -24,7 +28,7 @@ const server = () => {
   app.post('/app/:mode/:rmode', (req, res) => {
     const { mode, rmode } = req.params;
     console.log(req.body);
-    init(mode, rmode).then((data) => {
+    init(cfg, mode, rmode).then((data) => {
       res.send({ status: 'complete', rmode, time: data });
     });
   });
@@ -34,10 +38,8 @@ const server = () => {
     res.send({ status: 'complete', time: 'x' });
   });
 
-  app.use(express.static('public'));
-
   app.listen(port, () => {
-    console.log(`Started app, listening at http://localhost:${port}`);
+    console.log(`Listening at http://localhost:${port}`);
   });
 };
 

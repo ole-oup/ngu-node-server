@@ -1,0 +1,33 @@
+{
+  "general": {
+    "zone": 0,
+    "timeout": 2,
+    "slowcd": 0,
+    "quest": 0,
+    "timer": 0
+  },
+  "rebirth": {
+    "aug": 3,
+    "spell": 8,
+    "hackday": 1
+  },
+  "idle": {
+    "fstop": 0
+  },
+  "thirtym": {
+    "dist1": 1,
+    "dist2": 4,
+    "dist3": 7,
+    "dist4": 20,
+    "total": 30
+  },
+  "snipe": {
+    "atk": "y,t,e,w,a",
+    "move": 1,
+    "heal": 0,
+    "idle": 60
+  },
+  "attack": {
+    "cd": 0
+  }
+}
