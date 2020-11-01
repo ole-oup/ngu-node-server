@@ -2,8 +2,7 @@ import server from './server.js';
 import fs from 'fs';
 
 const writeCfg = (cfg) => {
-  let data = JSON.stringify(cfg, null, 2);
-
+  const data = JSON.stringify(cfg, null, 2);
   fs.writeFile('config.json', data, (err) => {
     if (err) throw err;
     console.log('Data written to file');

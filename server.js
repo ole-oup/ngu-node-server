@@ -2,7 +2,7 @@ import express from 'express';
 
 import init from './script-app.js';
 
-const server = (cfg) => {
+const server = (cfg, writeCfg) => {
   const app = express();
   const port = 3662;
 
@@ -14,14 +14,18 @@ const server = (cfg) => {
   app.get('/app/:mode', (req, res) => {
     const { mode } = req.params;
     init(cfg, mode).then((data) => {
-      res.send({ status: 'complete', time: data });
+      res.send({ status: 'complete', action: mode, time: data });
     });
   });
 
   app.get('/app/:mode/:rmode', (req, res) => {
     const { mode, rmode } = req.params;
     init(cfg, mode, rmode).then((data) => {
-      res.send({ status: 'complete', rmode, time: data });
+      res.send({
+        status: 'complete',
+        action: `${mode} => ${rmode}`,
+        time: data,
+      });
     });
   });
 
@@ -29,13 +33,18 @@ const server = (cfg) => {
     const { mode, rmode } = req.params;
     console.log(req.body);
     init(cfg, mode, rmode).then((data) => {
-      res.send({ status: 'complete', rmode, time: data });
+      res.send({
+        status: 'complete',
+        action: `${mode} => ${rmode}`,
+        time: data,
+      });
     });
   });
 
   app.post('/config', (req, res) => {
-    console.dir(req.body);
-    res.send({ status: 'complete', time: 'x' });
+    console.dir(req.body); // das muss cfg sein
+    writeCfg(req.body);
+    res.send({ status: 'complete', action: 'cfg' });
   });
 
   app.listen(port, () => {
