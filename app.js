@@ -4,6 +4,7 @@ import nwm from 'node-window-manager';
 
 import db from './lib/debugger.js';
 import rebirth from './lib/rebirth.js';
+// import rebirthserver from './lib/server.js';
 import toweridle from './lib/toweridle.js';
 import thirtymin from './lib/thirtymin.js';
 import snipe from './lib/snipe.js';
@@ -121,7 +122,7 @@ const init = async (config) => {
       mode = await chooseMode(modes);
     }
 
-    await getFlags(config, mode);
+    getFlags(config, mode);
 
     // clear screen
     console.clear();
@@ -152,6 +153,7 @@ const init = async (config) => {
         break;
       case 1:
         await rebirth(data);
+        // rebirthserver(data);
         break;
       case 2:
         await toweridle(data);
