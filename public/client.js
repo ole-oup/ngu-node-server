@@ -1,17 +1,13 @@
 /* global fetch:false document:false*/
 
-// const postData = async (url = '', data = {}) => {
-//   const response = await fetch(url, {
-//     method: 'POST',
-//     headers: { 'Content-Type': 'application/json' },
-//     body: JSON.stringify(data),
-//   });
-//   return response.json();
-// };
-
-// postData('/rebirth', { rmode: 1 }).then((data) => {
-//   console.log(data);
-// });
+const postData = async (url, data) => {
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  return response.json();
+};
 
 const getData = async (url) => {
   const response = await fetch(url, {
@@ -20,17 +16,23 @@ const getData = async (url) => {
   return response.json();
 };
 
-// TIME MACHINE
+// TIME MACHINE (1)
 document.getElementById('rmode1').addEventListener('click', () => {
-  getData('/rebirth/1').then((data) => console.log(data));
+  getData('/app/1/1').then((data) => console.log(data));
 });
 
-// AUGS
+// AUGS (!)
 document.getElementById('rmode2').addEventListener('click', () => {
-  getData('/rebirth/2').then((data) => console.log(data));
+  getData('/app/1/2').then((data) => console.log(data));
 });
 
-// WISHES
+// WISHES (1)
 document.getElementById('rmode3').addEventListener('click', () => {
-  getData('/rebirth/3').then((data) => console.log(data));
-}); // todo in einer form, checkboxes für wishes, 3 button ist submit post oder get?
+  console.log(document.querySelectorAll('.wish'));
+  // postData('/app/1/3', wishes).then((data) => console.log(data));
+});
+
+// IDLE (2)
+document.getElementById('m2').addEventListener('click', () => {
+  getData('/app/2').then((data) => console.log(data));
+});

@@ -3,12 +3,20 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" />
     <title>NGU script app</title>
   </head>
   <body>
-    <button id="rmode1">1</button>
-    <button id="rmode2">2</button>
-    <button id="rmode3">3</button>
+    <div class="flex-wrap">
+      <div class="container">
+        <button class="mode" id="rmode1">TM</button>
+        <button class="mode" id="rmode2">AUGS</button>
+        <button class="mode" id="rmode3">WISH</button>
+      </div>
+      <div class="container">
+        <button class="mode" id="m2">IDLE</button>
+      </div>
+    </div>
     <script src="./client.js"></script>
   </body>
 </html>
