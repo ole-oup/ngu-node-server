@@ -55,7 +55,7 @@ document.getElementById('rmode2').addEventListener('click', () => {
 // WISHES (1)
 document.getElementById('rmode3').addEventListener('click', () => {
   // cookie setzen mit selected wishes -> dann bei queryselectorall wenn im cookie -> selected
-  // postData('/app/1/3', wishes).then((data) => console.log(data));
+  postData('/app/1/3', wishes).then((data) => console.log(data));
 });
 
 // IDLE (2)
