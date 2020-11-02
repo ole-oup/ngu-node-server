@@ -8,7 +8,7 @@ timer: 0 // display timer with spinner
 rebirth:
 aug: 3,
 spell: 8, // spell # (1-8)
-hackday: 1 // don't set hacks
+hackday: 0 // don't set hacks
 wishes: ["11", "12", "13", "14"] // selected wishes
 
 idle:

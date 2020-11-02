@@ -9,8 +9,8 @@
   "rebirth": {
     "aug": 3,
     "spell": 8,
-    "hackday": 1,
-    "wishes": ["22", "25", "26", "17"]
+    "hackday": 0,
+    "wishes": ["21", "31", "22", "23"]
   },
   "idle": {
     "fstop": 0
