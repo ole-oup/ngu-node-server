@@ -7,48 +7,137 @@
     <title>NGU script app</title>
   </head>
   <body>
-    <div class="flex-wrap">
+    <div class="flex-column">
       <div class="container">
         <button class="mode" id="rmode1">TM</button>
         <button class="mode" id="rmode2">AUGS</button>
         <button class="mode" id="rmode3">WISH</button>
       </div>
+
       <div class="container">
         <div class="flex-row">
-          <div class="wish flex-wrap">11</div>
-          <div class="wish flex-wrap">12</div>
-          <div class="wish flex-wrap">13</div>
-          <div class="wish flex-wrap">14</div>
-          <div class="wish flex-wrap">15</div>
-          <div class="wish flex-wrap">16</div>
-          <div class="wish flex-wrap">17</div>
+          <div class="wish flex-column">11</div>
+          <div class="wish flex-column">12</div>
+          <div class="wish flex-column">13</div>
+          <div class="wish flex-column">14</div>
+          <div class="wish flex-column">15</div>
+          <div class="wish flex-column">16</div>
+          <div class="wish flex-column">17</div>
         </div>
         <div class="flex-row">
-          <div class="wish flex-wrap">21</div>
-          <div class="wish flex-wrap">22</div>
-          <div class="wish flex-wrap">23</div>
-          <div class="wish flex-wrap">24</div>
-          <div class="wish flex-wrap">25</div>
-          <div class="wish flex-wrap">26</div>
-          <div class="wish flex-wrap">27</div>
+          <div class="wish flex-column">21</div>
+          <div class="wish flex-column">22</div>
+          <div class="wish flex-column">23</div>
+          <div class="wish flex-column">24</div>
+          <div class="wish flex-column">25</div>
+          <div class="wish flex-column">26</div>
+          <div class="wish flex-column">27</div>
         </div>
         <div class="flex-row">
-          <div class="wish flex-wrap">31</div>
-          <div class="wish flex-wrap">32</div>
-          <div class="wish flex-wrap">33</div>
-          <div class="wish flex-wrap">34</div>
-          <div class="wish flex-wrap">35</div>
-          <div class="wish flex-wrap">36</div>
-          <div class="wish flex-wrap">37</div>
+          <div class="wish flex-column">31</div>
+          <div class="wish flex-column">32</div>
+          <div class="wish flex-column">33</div>
+          <div class="wish flex-column">34</div>
+          <div class="wish flex-column">35</div>
+          <div class="wish flex-column">36</div>
+          <div class="wish flex-column">37</div>
         </div>
       </div>
+
       <div class="container">
         <button class="mode" id="mode2">IDLE</button>
         <button class="mode" id="mode3">GUFFS</button>
         <button class="mode" id="mode4">SNIPE</button>
         <button class="mode" id="mode5">QUEST</button>
       </div>
-      <div class="container" id="config"></div>
+
+      <div class="container flex-column">
+        <h3>general</h3>
+        <!-- <div class="flex-row">
+          <input type="text" id="zone" />
+          <label for="zone">zone</label>
+        </div> -->
+        <div class="flex-row">
+          <input type="checkbox" id="slowcd" />
+          <label for="slowcd">slowcd</label>
+        </div>
+        <div class="flex-row">
+          <input type="checkbox" id="quest" />
+          <label for="quest">quest</label>
+        </div>
+        <div class="flex-row">
+          <label for="">questdur</label>
+          <label id="questdur"></label>
+        </div>
+        <div class="flex-row">
+          <label for="">timer</label>
+          <label id="timer"></label>
+        </div>
+        <div class="flex-row">
+          <label for="">fstop</label>
+          <label id="fstop"></label>
+        </div>
+      </div>
+
+      <div class="container flex-column">
+        <h3>rebirth</h3>
+        <div class="flex-row">
+          <label for="">aug</label>
+          <label id="aug"></label>
+        </div>
+        <div class="flex-row">
+          <label for="">spell</label>
+          <label id="spell"></label>
+        </div>
+        <div class="flex-row">
+          <label for="">hackday</label>
+          <label id="hackday"></label>
+        </div>
+      </div>
+
+      <div class="container flex-column">
+        <h3>thirtym</h3>
+        <div class="flex-row">
+          <label for="">dist1</label>
+          <label id="dist1"></label>
+        </div>
+        <div class="flex-row">
+          <label for="">dist2</label>
+          <label id="dist2"></label>
+        </div>
+        <div class="flex-row">
+          <label for="">dist3</label>
+          <label id="dist3"></label>
+        </div>
+        <div class="flex-row">
+          <label for="">dist4</label>
+          <label id="dist4"></label>
+        </div>
+        <div class="flex-row">
+          <label for="">total</label>
+          <label id="total"></label>
+        </div>
+      </div>
+
+      <div class="container flex-column">
+        <h3>snipe</h3>
+        <div class="flex-row">
+          <label for="">atk</label>
+          <label id="atk"></label>
+        </div>
+        <div class="flex-row">
+          <label for="">move</label>
+          <label id="move"></label>
+        </div>
+        <div class="flex-row">
+          <label for="">heal</label>
+          <label id="heal"></label>
+        </div>
+        <div class="flex-row">
+          <label for="">idle</label>
+          <label id="idle"></label>
+        </div>
+      </div>
     </div>
     <script src="./client.js"></script>
   </body>

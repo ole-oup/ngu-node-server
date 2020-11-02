@@ -1,37 +1,23 @@
 {
   "general": {
     "zone": 0,
-    "timeout": 2,
     "slowcd": 0,
     "quest": 0,
-    "timer": 0
-  },
-  "rebirth": {
+    "questdur": 8,
+    "timer": 0,
+    "fstop": 0,
     "aug": 3,
     "spell": 8,
     "hackday": 0,
-    "wishes": ["21", "31", "22", "23"]
-  },
-  "idle": {
-    "fstop": 0
-  },
-  "thirtym": {
+    "wishes": ["31", "21", "23", "22"],
     "dist1": 1,
     "dist2": 4,
     "dist3": 7,
     "dist4": 20,
-    "total": 30
-  },
-  "snipe": {
+    "total": 30,
     "atk": "y,t,e,w,a",
     "move": 1,
     "heal": 0,
     "idle": 60
-  },
-  "attack": {
-    "cd": 0
-  },
-  "quest": {
-    "duration": 8
   }
 }

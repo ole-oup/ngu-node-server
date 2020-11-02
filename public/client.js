@@ -8,12 +8,16 @@ const getData = async (url) => {
 };
 
 const postData = async (url, data) => {
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
-  });
-  return response.json();
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    return response.json();
+  } catch (err) {
+    return err;
+  }
 };
 
 getData('/config.json').then((config) => {
@@ -82,9 +86,4 @@ getData('/config.json').then((config) => {
   document.getElementById('mode5').addEventListener('click', () => {
     postData('/app/mode/5').then((data) => console.log(data));
   });
-
-  // create table element in CONFIG
-  const table = document.createElement('table');
-  table.setAttribute('style', 'width: 100%');
-  document.getElementById('config').appendChild(table);
 });

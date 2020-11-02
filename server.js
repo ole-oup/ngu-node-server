@@ -59,31 +59,6 @@ const server = () => {
     res.send(response);
   });
 
-  // app.post('/app/mode/:mode', async (req, res) => {
-  //   const { mode } = req.params;
-
-  //   let response = {
-  //     status: 'Error',
-  //     action: mode,
-  //     msg: '',
-  //     time: '',
-  //   };
-
-  //   try {
-  //     const cfg = await readCfg();
-  //     // const time = await init(cfg, mode);
-
-  //     console.log(cfg);
-
-  //     response.status = 'Success';
-  //     response.msg = `Completed Mode ${mode}`;
-  //     response.time = time;
-  //   } catch (err) {
-  //     console.error(`\x1b[91m${err}\x1b[0m`);
-  //   }
-  //   res.send(response);
-  // });
-
   app.post('/app/config', (req, res) => {
     let response = {
       status: 'Error',
