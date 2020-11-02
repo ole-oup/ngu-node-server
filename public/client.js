@@ -22,11 +22,11 @@ const postData = async (url, data) => {
 
 getData('/config.json').then((config) => {
   const cfg = { ...config };
-  const selectedWishes = cfg.rebirth.wishes;
+  const { wishes } = cfg;
 
   // add eventlisteners to wishes
   document.querySelectorAll('.wish').forEach((element) => {
-    selectedWishes.forEach((wish) => {
+    wishes.forEach((wish) => {
       if (wish === element.innerHTML) element.classList.add('selected-wish');
     });
 
@@ -34,19 +34,18 @@ getData('/config.json').then((config) => {
       if (element.classList.contains('selected-wish')) {
         element.classList.remove('selected-wish');
 
-        let i = selectedWishes.length;
+        let i = wishes.length;
         while (i--) {
-          if (selectedWishes[i] === element.innerHTML)
-            selectedWishes.splice(i, 1);
+          if (wishes[i] === element.innerHTML) wishes.splice(i, 1);
         }
       } else {
         element.classList.add('selected-wish');
-        selectedWishes.push(element.innerHTML);
+        wishes.push(element.innerHTML);
       }
 
-      if (selectedWishes.length === 4) {
+      if (wishes.length === 4) {
         document.documentElement.style.setProperty('--wish-bg', '#757575');
-        cfg.rebirth.wishes = selectedWishes;
+        cfg.wishes = wishes;
         postData('/app/config', cfg).then((data) => console.log(data));
       } else document.documentElement.style.setProperty('--wish-bg', '#a81f1f'); // red
     });
