@@ -9,6 +9,7 @@ rebirth:
 aug: 3,
 spell: 8, // spell # (1-8)
 hackday: 1 // don't set hacks
+wishes: ["11", "12", "13", "14"] // selected wishes
 
 idle:
 fstop: 0 // stop on focus lost

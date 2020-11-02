@@ -9,7 +9,8 @@
   "rebirth": {
     "aug": 3,
     "spell": 8,
-    "hackday": 1
+    "hackday": 1,
+    "wishes": ["22", "25", "26", "17"]
   },
   "idle": {
     "fstop": 0
@@ -29,5 +30,8 @@
   },
   "attack": {
     "cd": 0
+  },
+  "quest": {
+    "duration": 8
   }
 }

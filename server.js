@@ -6,6 +6,8 @@ const server = (cfg, writeCfg) => {
   const app = express();
   const port = 3662;
 
+  const config = cfg;
+
   console.clear();
   console.log('NGU script app local server');
 
@@ -41,10 +43,24 @@ const server = (cfg, writeCfg) => {
     });
   });
 
-  app.post('/config', (req, res) => {
-    console.dir(req.body); // das muss cfg sein
-    writeCfg(req.body);
-    res.send({ status: 'complete', action: 'cfg' });
+  app.post('/app/config', (req, res) => {
+    let response = {
+      status: '',
+      action: 'cfg',
+      msg: '',
+    };
+
+    try {
+      response.cfg = req.body;
+
+      console.dir(response); // da muss cfg sein
+
+      writeCfg(response.cfg);
+    } catch (err) {
+      response.status = 'Error';
+      response.msg = err;
+    }
+    res.send(response);
   });
 
   app.listen(port, () => {

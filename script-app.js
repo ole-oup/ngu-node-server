@@ -13,20 +13,19 @@ import dt from './lib/helper/displayTimer.js';
 
 const { windowManager } = nwm;
 
-const getGameCoords = async () => {
-  // initialize empty object for game window
-  let gameWindow = false;
+const getGameCoords = () => {
+  let gameWin = false;
   let terminal = false;
 
   const windows = windowManager.getWindows();
+
   const gamePath =
     'C:\\Program Files (x86)\\Steam\\steamapps\\common\\NGU IDLE\\NGUIdle.exe';
   const scriptTitle = 'ngu_node.ps1';
 
   for (let i = 0; i < windows.length; i++) {
-    gameWindow = windows[i].path === gamePath ? windows[i] : false;
-    // if (gameWindow && terminal) break;
-    if (gameWindow) break;
+    gameWin = windows[i].path === gamePath ? windows[i] : false;
+    if (gameWin) break;
   }
 
   for (let i = 0; i < windows.length; i++) {
@@ -35,12 +34,13 @@ const getGameCoords = async () => {
   }
 
   try {
-    const bounds = gameWindow.getBounds();
+    const bounds = gameWin.getBounds();
     // offset x & y b/c of window borders
     bounds.x += 3;
     bounds.y += 27;
+    terminal.show(); // test terminal
 
-    return { terminal, coords: bounds, gameWin: gameWindow };
+    return { gameWin, terminal, coords: bounds };
   } catch (err) {
     return cp(err, true);
   }
@@ -50,7 +50,7 @@ const init = async (config, mode, rmode) => {
   try {
     const appStart = new Date();
 
-    const ggc = await getGameCoords();
+    const ggc = getGameCoords();
     const { coords, gameWin, terminal } = ggc;
 
     if (!ggc) throw 'Game not found';
