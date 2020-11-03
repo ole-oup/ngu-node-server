@@ -8,25 +8,35 @@ const getData = async (url) => {
 };
 
 const postData = async (url, data) => {
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  return response.json();
+};
+
+const saveCfg = async (cfg) => {
   try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-    return response.json();
+    if (cfg.init !== true) throw 'cfg not initialized';
+    const res = await postData('/app/config', cfg);
+    console.log(res);
   } catch (err) {
-    return err;
+    console.warn(err);
   }
 };
 
-const saveCfg = (cfg) => {
-  postData('/app/config', cfg).then((data) => console.log(data));
-};
-
 const client = async () => {
-  const config = await getData('/config.json');
-  const cfg = { ...config };
+  let cfg = {};
+
+  try {
+    cfg = await getData('/config.json');
+  } catch (err) {
+    console.warn(err.message);
+    console.log('Loading default config');
+    cfg = await getData('/default-config.json');
+  }
+
   const { wishes } = cfg;
 
   // add eventlisteners to wishes
