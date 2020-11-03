@@ -20,7 +20,12 @@ const postData = async (url, data) => {
   }
 };
 
-getData('/config.json').then((config) => {
+const saveCfg = (cfg) => {
+  postData('/app/config', cfg).then((data) => console.log(data));
+};
+
+const client = async () => {
+  const config = await getData('/config.json');
   const cfg = { ...config };
   const { wishes } = cfg;
 
@@ -46,10 +51,24 @@ getData('/config.json').then((config) => {
       if (wishes.length === 4) {
         document.documentElement.style.setProperty('--wish-bg', '#757575');
         cfg.wishes = wishes;
-        postData('/app/config', cfg).then((data) => console.log(data));
+        saveCfg(cfg);
       } else document.documentElement.style.setProperty('--wish-bg', '#a81f1f'); // red
     });
   });
+
+  document.querySelectorAll('input[type=checkbox]').forEach((input) => {
+    input.value = cfg[input.id];
+    input.addEventListener('change', () => {
+      cfg[input.id] = input.checked === true ? 1 : 0;
+      saveCfg(cfg);
+    });
+  });
+
+  document
+    .querySelectorAll('input[type=number], input[type=text]')
+    .forEach((input) => {
+      input.value = cfg[input.id];
+    });
 
   // TIME MACHINE (1)
   document.getElementById('rmode1').addEventListener('click', () => {
@@ -85,4 +104,6 @@ getData('/config.json').then((config) => {
   document.getElementById('mode5').addEventListener('click', () => {
     postData('/app/mode/5').then((data) => console.log(data));
   });
-});
+};
+
+client(); // start function

@@ -9,12 +9,18 @@ const readCfg = () => {
 };
 
 const writeCfg = (cfg) => {
-  if (!cfg) throw 'Invalid data';
+  if (!cfg.init) throw 'Invalid data';
   const data = JSON.stringify(cfg, null, 2);
   fs.writeFile('public/config.json', data, (err) => {
     if (err) throw err;
-    console.log('Data written to file');
   });
+};
+
+const timestamp = () => {
+  const time = new Date().toLocaleTimeString();
+  const timestr = `[${time}] `;
+
+  return `\x1b[90m${timestr}\x1b[0m`;
 };
 
 const server = () => {
@@ -23,9 +29,9 @@ const server = () => {
 
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
-
   app.use(express.static('public'));
 
+  const errstr = '\x1b[91mError\x1b[0m';
   console.clear();
   console.log('NGU script app local server');
 
@@ -39,7 +45,7 @@ const server = () => {
 
     let response = {
       status: 'Error',
-      action: `R${rmode}`,
+      action: isRebirth ? `R${rmode}` : `M${rmode}`,
       msg: '',
       time: '',
     };
@@ -48,11 +54,12 @@ const server = () => {
       const cfg = await readCfg();
       const time = await init(cfg, appMode, appRMode);
 
+      console.log(timestamp() + response.action);
       response.status = 'Success';
       response.msg = isRebirth ? 'Completed rebirth' : 'Task ended';
       response.time = time;
     } catch (err) {
-      console.error('\x1b[91mError\x1b[0m');
+      console.error(errstr);
       console.log(err);
       response.msg = 'Task failed';
     }
@@ -68,9 +75,12 @@ const server = () => {
 
     try {
       writeCfg(req.body);
+      console.log(timestamp() + response.action);
       response.status = 'Success';
       response.msg = 'Data written to file';
     } catch (err) {
+      console.error(errstr);
+      console.log(err);
       response.msg = err;
     }
     res.send(response);
