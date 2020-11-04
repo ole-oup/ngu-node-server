@@ -59,15 +59,22 @@ const client = async () => {
       }
 
       if (wishes.length === 4) {
-        document.documentElement.style.setProperty('--wish-bg', '#757575');
+        document.documentElement.style.setProperty(
+          '--wish-bg',
+          'var(--selected)'
+        );
         cfg.wishes = wishes;
         saveCfg(cfg);
-      } else document.documentElement.style.setProperty('--wish-bg', '#a81f1f'); // red
+      } else
+        document.documentElement.style.setProperty(
+          '--wish-bg',
+          'var(--err-color)'
+        ); // red
     });
   });
 
   document.querySelectorAll('input[type=checkbox]').forEach((input) => {
-    input.value = cfg[input.id];
+    input.checked = cfg[input.id] === 1 ? true : false;
     input.addEventListener('change', () => {
       cfg[input.id] = input.checked === true ? 1 : 0;
       saveCfg(cfg);
@@ -78,42 +85,59 @@ const client = async () => {
     .querySelectorAll('input[type=number], input[type=text]')
     .forEach((input) => {
       input.value = cfg[input.id];
+      input.addEventListener('change', () => {
+        cfg[input.id] = input.value;
+        saveCfg(cfg);
+      });
     });
 
-  // TIME MACHINE (1)
-  document.getElementById('rmode1').addEventListener('click', () => {
-    postData('/app/rebirth/1').then((data) => console.log(data));
+  document.querySelectorAll('.mode').forEach((button) => {
+    button.addEventListener('click', () => {
+      const isRebirth = button.id[0] === 'r' ? true : false;
+      const uri = isRebirth
+        ? `/app/rebirth/${button.id[5]}`
+        : `/app/mode/${button.id[4]}`;
+
+      postData(uri).then((res) => {
+        return res === 'Success' ? console.log(res) : console.warn(res);
+      });
+    });
   });
 
-  // AUGS (1)
-  document.getElementById('rmode2').addEventListener('click', () => {
-    postData('/app/rebirth/2').then((data) => console.log(data));
-  });
+  // // TIME MACHINE (1)
+  // document.getElementById('rmode1').addEventListener('click', () => {
+  //   postData('/app/rebirth/1').then((data) => console.log(data));
+  // });
 
-  // WISHES (1)
-  document.getElementById('rmode3').addEventListener('click', () => {
-    postData('/app/rebirth/3').then((data) => console.log(data));
-  });
+  // // AUGS (1)
+  // document.getElementById('rmode2').addEventListener('click', () => {
+  //   postData('/app/rebirth/2').then((data) => console.log(data));
+  // });
 
-  // IDLE (2)
-  document.getElementById('mode2').addEventListener('click', () => {
-    postData('/app/mode/2').then((data) => console.log(data));
-  });
+  // // WISHES (1)
+  // document.getElementById('rmode3').addEventListener('click', () => {
+  //   postData('/app/rebirth/3').then((data) => console.log(data));
+  // });
 
-  // GUFFS (3)
-  document.getElementById('mode3').addEventListener('click', () => {
-    postData('/app/mode/3').then((data) => console.log(data));
-  });
+  // // IDLE (2)
+  // document.getElementById('mode2').addEventListener('click', () => {
+  //   postData('/app/mode/2').then((data) => console.log(data));
+  // });
 
-  // SNIPE (4)
-  document.getElementById('mode4').addEventListener('click', () => {
-    postData('/app/mode/4').then((data) => console.log(data));
-  });
+  // // GUFFS (3)
+  // document.getElementById('mode3').addEventListener('click', () => {
+  //   postData('/app/mode/3').then((data) => console.log(data));
+  // });
 
-  // QUEST (5)
-  document.getElementById('mode5').addEventListener('click', () => {
-    postData('/app/mode/5').then((data) => console.log(data));
-  });
+  // // SNIPE (4)
+  // document.getElementById('mode4').addEventListener('click', () => {
+  //   postData('/app/mode/4').then((data) => console.log(data));
+  // });
+
+  // // QUEST (5)
+  // document.getElementById('mode5').addEventListener('click', () => {
+  //   postData('/app/mode/5').then((data) => console.log(data));
+  // });
 };
 
 client(); // start function

@@ -1,14 +1,14 @@
 {
-  "slowcd": 1,
-  "quest": 1,
+  "slowcd": 0,
+  "quest": 0,
   "timer": 0,
   "fstop": 0,
   "hackday": 0,
-  "zone": 0,
+  "zone": "0",
   "questdur": 8,
   "aug": 3,
   "spell": 8,
-  "dist1": 1,
+  "dist1": "1",
   "dist2": 4,
   "dist3": 7,
   "dist4": 20,
@@ -18,10 +18,10 @@
   "idle": 60,
   "atk": "y,t,e,w,a",
   "wishes": [
-    "31",
-    "21",
-    "22",
-    "23"
+    "17",
+    "26",
+    "24",
+    "33"
   ],
   "init": true
 }

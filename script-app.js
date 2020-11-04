@@ -97,7 +97,6 @@ const init = async (config, mode, rmode) => {
     }
 
     const time = dt({}, gd(appStart));
-    console.log(`Completed Mode ${mode} in ${time}`);
 
     return time;
   } catch (err) {

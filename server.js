@@ -18,7 +18,7 @@ const writeCfg = (cfg) => {
 
 const timestamp = () => {
   const time = new Date().toLocaleTimeString();
-  const timestr = `[${time}] `;
+  const timestr = `[${time}]`;
 
   return `\x1b[90m${timestr}\x1b[0m`;
 };
@@ -54,9 +54,9 @@ const server = () => {
       const cfg = await readCfg();
       const time = await init(cfg, appMode, appRMode);
 
-      console.log(timestamp() + response.action);
+      console.log(`${timestamp()} Completed Task ${response.action}`);
       response.status = 'Success';
-      response.msg = isRebirth ? 'Completed rebirth' : 'Task ended';
+      response.msg = isRebirth ? 'Completed rebirth' : 'Completed task';
       response.time = time;
     } catch (err) {
       console.error(errstr);
