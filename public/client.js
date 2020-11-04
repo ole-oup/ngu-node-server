@@ -15,40 +15,61 @@ const displayTimer = (start) => {
 };
 
 const getData = async (url) => {
-  const response = await fetch(url, {
-    method: 'GET',
-  });
-  return response.json();
+  try {
+    const response = await fetch(url, {
+      method: 'GET',
+    });
+
+    return response.json();
+  } catch (err) {
+    return { status: 'Error' };
+  }
 };
 
 const postData = async (url, data) => {
-  const start = new Date();
-  const timer = document.getElementById('timer');
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
 
-  const startTimer = setInterval(() => {
-    timer.innerHTML = displayTimer(start);
-  }, 1000);
+    return response.json();
+  } catch (err) {
+    console.warn(err);
+    return { status: 'Error' };
+  }
+};
 
-  const stopTimer = () => {
-    clearInterval(startTimer);
-    timer.innerHTML = '';
-  };
+const getTimer = async (url) => {
+  try {
+    const start = new Date();
+    const timer = document.getElementById('timer');
 
-  const response = fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
-  });
+    const startTimer = setInterval(() => {
+      timer.innerHTML = displayTimer(start);
+    }, 1000);
 
-  stopTimer();
-  return response.json();
+    const stopTimer = () => {
+      clearInterval(startTimer);
+      timer.innerHTML = '';
+    };
+
+    const response = await fetch(url, {
+      method: 'GET',
+    });
+    stopTimer();
+    return response.json();
+  } catch (err) {
+    return { status: 'Error' };
+  }
 };
 
 const saveCfg = async (cfg) => {
   try {
     if (cfg.init !== true) throw 'cfg not initialized';
     const res = await postData('/app/config', cfg);
-    console.log(res);
+    console.log(res.msg);
   } catch (err) {
     console.warn(err);
   }
@@ -126,12 +147,10 @@ const saveCfg = async (cfg) => {
         ? `/app/rebirth/${button.id[5]}`
         : `/app/mode/${button.id[4]}`;
 
-      console.log('start');
-      const res = await postData(uri, {});
-      console.log(res);
+      const res = await getTimer(uri);
       return res.status === 'Success'
         ? console.log(res.msg)
-        : console.warn(res.msg);
+        : console.error(res.msg);
     });
   });
 })();

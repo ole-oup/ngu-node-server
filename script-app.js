@@ -69,23 +69,23 @@ const init = async (config, mode, rmode) => {
       wfm: 0, //                       wait for move [snipe / idle]
     };
 
-    switch (mode) {
-      case '0':
+    switch (Number(mode)) {
+      case 0:
         await db(state);
         break;
-      case '1':
+      case 1:
         await rebirth(state, rmode);
         break;
-      case '2':
+      case 2:
         await toweridle(state);
         break;
-      case '3':
+      case 3:
         await thirtymin(state);
         break;
-      case '4':
+      case 4:
         await snipe(state);
         break;
-      case '5':
+      case 5:
         await quest(state);
         break;
       default:

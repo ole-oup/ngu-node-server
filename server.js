@@ -28,7 +28,7 @@ const server = () => {
   console.clear();
   console.log('NGU script app local server');
 
-  app.post('/app/:mode/:rmode', async (req, res) => {
+  app.get('/app/:mode/:rmode', async (req, res) => {
     const { mode, rmode } = req.params;
 
     const isRebirth = mode === 'rebirth';
@@ -44,18 +44,18 @@ const server = () => {
     };
 
     try {
+      cp(`Starting Mode ${response.action}`);
       const cfg = await readCfg();
       const time = await init(cfg, appMode, appRMode);
-
       response.status = 'Success';
       response.msg = isRebirth
-        ? `Completed rebirth ${rmode}`
-        : `Completed Mode ${rmode}`;
+        ? `Ended rebirth ${rmode}`
+        : `Ended Mode ${rmode}`;
       response.time = time;
-      cp(`Completed Mode ${response.action}`);
+      cp(`Ended Mode ${response.action}`);
     } catch (err) {
-      response.msg = 'Mode failed';
-      cp(err.message, true);
+      response.msg = err;
+      cp(err, true);
     }
     res.send(JSON.stringify(response));
   });
@@ -74,7 +74,7 @@ const server = () => {
       cp(response.msg);
     } catch (err) {
       response.msg = err;
-      cp(err.message, true);
+      cp(err, true);
     }
     res.send(response);
   });

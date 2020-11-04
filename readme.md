@@ -1,5 +1,5 @@
+ring: 0 // equip the ring of might for respawn and cd reduction (bottom right corner of first inventory page)
 quest: 0 // do quests instead of itopod
-timer: 0 // display timer with spinner
 fstop: 0 // stop on focus lost
 hackday: 0 // don't set hacks in rebirth
 
