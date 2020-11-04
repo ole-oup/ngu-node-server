@@ -1,5 +1,6 @@
 import express from 'express';
 import fs from 'fs';
+import cp from './lib/helper/print.js';
 
 import init from './script-app.js';
 
@@ -16,13 +17,6 @@ const writeCfg = (cfg) => {
   });
 };
 
-const timestamp = () => {
-  const time = new Date().toLocaleTimeString();
-  const timestr = `[${time}]`;
-
-  return `\x1b[90m${timestr}\x1b[0m`;
-};
-
 const server = () => {
   const app = express();
   const port = 3662;
@@ -31,7 +25,6 @@ const server = () => {
   app.use(express.urlencoded({ extended: true }));
   app.use(express.static('public'));
 
-  const errstr = '\x1b[91mError\x1b[0m';
   console.clear();
   console.log('NGU script app local server');
 
@@ -54,16 +47,17 @@ const server = () => {
       const cfg = await readCfg();
       const time = await init(cfg, appMode, appRMode);
 
-      console.log(`${timestamp()} Completed Task ${response.action}`);
       response.status = 'Success';
-      response.msg = isRebirth ? 'Completed rebirth' : 'Completed task';
+      response.msg = isRebirth
+        ? `Completed rebirth ${rmode}`
+        : `Completed Mode ${rmode}`;
       response.time = time;
+      cp(`Completed Mode ${response.action}`);
     } catch (err) {
-      console.error(errstr);
-      console.log(err);
-      response.msg = 'Task failed';
+      response.msg = 'Mode failed';
+      cp(err.message, true);
     }
-    res.send(response);
+    res.send(JSON.stringify(response));
   });
 
   app.post('/app/config', (req, res) => {
@@ -75,13 +69,12 @@ const server = () => {
 
     try {
       writeCfg(req.body);
-      console.log(timestamp() + response.action);
       response.status = 'Success';
       response.msg = 'Data written to file';
+      cp(response.msg);
     } catch (err) {
-      console.error(errstr);
-      console.log(err);
       response.msg = err;
+      cp(err.message, true);
     }
     res.send(response);
   });

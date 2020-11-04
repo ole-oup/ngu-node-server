@@ -2,7 +2,7 @@
   "slowcd": 0,
   "quest": 0,
   "timer": 0,
-  "fstop": 0,
+  "fstop": 1,
   "hackday": 0,
   "zone": "0",
   "questdur": 8,
@@ -18,10 +18,10 @@
   "idle": 60,
   "atk": "y,t,e,w,a",
   "wishes": [
-    "17",
     "26",
     "24",
-    "33"
+    "33",
+    "17"
   ],
   "init": true
 }

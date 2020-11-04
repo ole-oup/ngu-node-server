@@ -1,4 +1,3 @@
-slowcd: 0 // set to 1 if respawn < cd
 quest: 0 // do quests instead of itopod
 timer: 0 // display timer with spinner
 fstop: 0 // stop on focus lost
@@ -19,3 +18,10 @@ idle: 60 // snipe backup idle duration
 atk: y,t,e,w,a // snipe attack order
 
 wishes: ["11", "12", "13", "14"] // selected wishes
+
+cd muss immer kleiner als respawn sein also cd immer >1 s ohne cd reduction oder >0.85s mit
+
+guff run: (thirtym)
+neuen rb starten
+loadout equippen, möglichst 1 min max res (ansonsten dist1 anpassen?)
+autospell number boost!

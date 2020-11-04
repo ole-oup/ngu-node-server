@@ -1,5 +1,19 @@
 /* global fetch:false document:false */
 
+const displayTimer = (start) => {
+  const now = new Date();
+  const d = now.getTime() - start.getTime();
+
+  const td = { d }; // timer data
+
+  td.m = Math.floor(td.d / 1000 / 60);
+  td.min = td.m < 10 ? `0${td.m}` : String(td.m);
+  td.s = Math.floor((td.d / 1000) % 60);
+  td.sec = td.s < 10 ? `0${td.s}` : String(td.s);
+
+  return `${td.min}:${td.sec}`;
+};
+
 const getData = async (url) => {
   const response = await fetch(url, {
     method: 'GET',
@@ -8,11 +22,25 @@ const getData = async (url) => {
 };
 
 const postData = async (url, data) => {
-  const response = await fetch(url, {
+  const start = new Date();
+  const timer = document.getElementById('timer');
+
+  const startTimer = setInterval(() => {
+    timer.innerHTML = displayTimer(start);
+  }, 1000);
+
+  const stopTimer = () => {
+    clearInterval(startTimer);
+    timer.innerHTML = '';
+  };
+
+  const response = fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
   });
+
+  stopTimer();
   return response.json();
 };
 
@@ -26,7 +54,7 @@ const saveCfg = async (cfg) => {
   }
 };
 
-const client = async () => {
+(async () => {
   let cfg = {};
 
   try {
@@ -92,52 +120,18 @@ const client = async () => {
     });
 
   document.querySelectorAll('.mode').forEach((button) => {
-    button.addEventListener('click', () => {
+    button.addEventListener('click', async () => {
       const isRebirth = button.id[0] === 'r' ? true : false;
       const uri = isRebirth
         ? `/app/rebirth/${button.id[5]}`
         : `/app/mode/${button.id[4]}`;
 
-      postData(uri).then((res) => {
-        return res === 'Success' ? console.log(res) : console.warn(res);
-      });
+      console.log('start');
+      const res = await postData(uri, {});
+      console.log(res);
+      return res.status === 'Success'
+        ? console.log(res.msg)
+        : console.warn(res.msg);
     });
   });
-
-  // // TIME MACHINE (1)
-  // document.getElementById('rmode1').addEventListener('click', () => {
-  //   postData('/app/rebirth/1').then((data) => console.log(data));
-  // });
-
-  // // AUGS (1)
-  // document.getElementById('rmode2').addEventListener('click', () => {
-  //   postData('/app/rebirth/2').then((data) => console.log(data));
-  // });
-
-  // // WISHES (1)
-  // document.getElementById('rmode3').addEventListener('click', () => {
-  //   postData('/app/rebirth/3').then((data) => console.log(data));
-  // });
-
-  // // IDLE (2)
-  // document.getElementById('mode2').addEventListener('click', () => {
-  //   postData('/app/mode/2').then((data) => console.log(data));
-  // });
-
-  // // GUFFS (3)
-  // document.getElementById('mode3').addEventListener('click', () => {
-  //   postData('/app/mode/3').then((data) => console.log(data));
-  // });
-
-  // // SNIPE (4)
-  // document.getElementById('mode4').addEventListener('click', () => {
-  //   postData('/app/mode/4').then((data) => console.log(data));
-  // });
-
-  // // QUEST (5)
-  // document.getElementById('mode5').addEventListener('click', () => {
-  //   postData('/app/mode/5').then((data) => console.log(data));
-  // });
-};
-
-client(); // start function
+})();

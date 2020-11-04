@@ -57,16 +57,12 @@ const init = async (config, mode, rmode) => {
 
     gameWin.bringToTop();
 
-    // clear screen
-    console.clear();
-
     // data (state) for modules
     const state = {
       terminal, //                     terminal that has node running
       crd: coords, //                  game bounds
       cfg: config, //                  config
       win: gameWin, //                 game's window object
-      spin: ['|', '/', '—', '\\'], //  spinner
       inf: null, //                    infinite itopod [idle / toweridle, snipe]
       dur: null, //                    itopod duration [idle / toweridle, snipe] in ms
       skc: 0, //                       snipe killcount
