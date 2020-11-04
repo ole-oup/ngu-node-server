@@ -1,23 +1,23 @@
-ring: 0 // equip the ring of might for respawn and cd reduction (bottom right corner of first inventory page)
-quest: 0 // do quests instead of itopod
-fstop: 0 // stop on focus lost
-hackday: 0 // don't set hacks in rebirth
+ring: 0 // equip the ring of might for respawn and cd reduction (bottom right corner of first inventory page) | toweridle
+quest: 0 // do quests instead of itopod | goToAdv
+fstop: 0 // stop on focus lost | waitFor
 
-zone: 0 // zones to go back
-questdur: 8 // quest duration in m
-aug: 3 // aug for rebirth
-spell: 8 // spell # (1-8)
-dist1: 1 // minutes until first distribution (tm)
-dist2: 4 // minutes until second distribution (tm)
-dist3: 7 // minutes until third distribution (augs)
-dist4: 20 // minutes until fourth distribution (augs)
-total: 30 // total minutes until rebirth
-move: 1 // move to wait for: 0 = none, 1 = charge, 2 = megabuff
-heal: 0 // heal in safe zone
-idle: 60 // snipe backup idle duration
-atk: y,t,e,w,a // snipe attack order
+questdur: 8 // quest duration in m | quest
+aug: 3 // aug for rebirth | rebirth
+spell: 8 // spell # (1-8) | rebirth
+dist1: 1 // minutes until first distribution (tm) | thirtyMin
+dist2: 4 // minutes until second distribution (tm) | thirtyMin
+dist3: 7 // minutes until third distribution (augs) | thirtyMin
+dist4: 20 // minutes until fourth distribution (augs) | thirtyMin
+total: 30 // total minutes until rebirth | thirtyMin
+zone: 0 // zones to go back | snipe
+move: 1 // move to wait for: 0 = none, 1 = charge, 2 = megabuff | snipe
+heal: 0 // heal in safe zone | snipe
+idle: 60 // backup idle duration | snipe
+atk: ytewa // attack order | snipe
 
-wishes: ["11", "12", "13", "14"] // selected wishes
+wishes: ["11", "12", "13", "14"] // selected wishes | rebirth
+hack: "hack" // selected hack | rebirth
 
 cd muss immer kleiner als respawn sein also cd immer >1 s ohne cd reduction oder >0.85s mit
 

@@ -10,52 +10,71 @@
     <div class="flex-column">
       <div id="timer"></div>
 
-      <div class="container">
-        <button class="mode" id="rmode1">TM</button>
-        <button class="mode" id="rmode2">AUGS</button>
-        <button class="mode" id="rmode3">WISH</button>
-        <div class="flex-row">
-          <input type="checkbox" id="hackday" />
-          <label for="hackday">hackday</label>
+      <div class="container flex-column">
+        <div>
+          <button class="mode" id="rmode1">TM</button>
+          <button class="mode" id="rmode2">AUGS</button>
+          <button class="mode" id="rmode3">WISH</button>
         </div>
-        <div class="flex-row">
-          <input type="number" id="aug" />
-          <label for="aug">aug</label>
+        <div>
+          <div class="flex-row">
+            <input type="number" id="aug" />
+            <label for="aug">aug</label>
+          </div>
+          <div class="flex-row">
+            <input type="number" id="spell" />
+            <label for="spell">spell</label>
+          </div>
         </div>
-        <div class="flex-row">
-          <input type="number" id="spell" />
-          <label for="spell">spell</label>
+        <div>
+          <div class="flex-row" style="margin-top: 10px;">
+            <div class="wish flex-column">11</div>
+            <div class="wish flex-column">12</div>
+            <div class="wish flex-column">13</div>
+            <div class="wish flex-column">14</div>
+            <div class="wish flex-column">15</div>
+            <div class="wish flex-column">16</div>
+            <div class="wish flex-column">17</div>
+          </div>
+          <div class="flex-row">
+            <div class="wish flex-column">21</div>
+            <div class="wish flex-column">22</div>
+            <div class="wish flex-column">23</div>
+            <div class="wish flex-column">24</div>
+            <div class="wish flex-column">25</div>
+            <div class="wish flex-column">26</div>
+            <div class="wish flex-column">27</div>
+          </div>
+          <div class="flex-row">
+            <div class="wish flex-column">31</div>
+            <div class="wish flex-column">32</div>
+            <div class="wish flex-column">33</div>
+            <div class="wish flex-column">34</div>
+            <div class="wish flex-column">35</div>
+            <div class="wish flex-column">36</div>
+            <div class="wish flex-column">37</div>
+          </div>
         </div>
-        <div class="flex-row" style="margin-top: 10px;">
-          <div class="wish flex-column">11</div>
-          <div class="wish flex-column">12</div>
-          <div class="wish flex-column">13</div>
-          <div class="wish flex-column">14</div>
-          <div class="wish flex-column">15</div>
-          <div class="wish flex-column">16</div>
-          <div class="wish flex-column">17</div>
-        </div>
-        <div class="flex-row">
-          <div class="wish flex-column">21</div>
-          <div class="wish flex-column">22</div>
-          <div class="wish flex-column">23</div>
-          <div class="wish flex-column">24</div>
-          <div class="wish flex-column">25</div>
-          <div class="wish flex-column">26</div>
-          <div class="wish flex-column">27</div>
-        </div>
-        <div class="flex-row">
-          <div class="wish flex-column">31</div>
-          <div class="wish flex-column">32</div>
-          <div class="wish flex-column">33</div>
-          <div class="wish flex-column">34</div>
-          <div class="wish flex-column">35</div>
-          <div class="wish flex-column">36</div>
-          <div class="wish flex-column">37</div>
-        </div>
+        <select id="hack">
+          <option value="a/d">a/d</option>
+          <option value="adv">adv</option>
+          <option value="tm">tm</option>
+          <option value="drop">drop</option>
+          <option value="aug">aug</option>
+          <option value="engu">engu</option>
+          <option value="mngu">mgnu</option>
+          <option value="blood">blood</option>
+          <option value="qp">qp</option>
+          <option value="dc">dc</option>
+          <option value="xp">xp</option>
+          <option value="number">number</option>
+          <option value="pp">pp</option>
+          <option selected value="hack">hack</option>
+          <option value="wish">wish</option>
+        </select>
       </div>
 
-      <div class="container">
+      <div class="container flex-column">
         <button class="mode" id="mode2">IDLE</button>
         <div class="flex-row">
           <input type="checkbox" id="ring" />
@@ -71,7 +90,7 @@
         </div>
       </div>
 
-      <div class="container">
+      <div class="container flex-column">
         <button class="mode" id="mode3">GUFFS</button>
         <div class="flex-row">
           <input type="number" id="dist1" />
@@ -95,7 +114,7 @@
         </div>
       </div>
 
-      <div class="container">
+      <div class="container flex-column">
         <button class="mode" id="mode4">SNIPE</button>
         <div class="flex-row">
           <input type="number" id="zone" />
@@ -119,7 +138,7 @@
         </div>
       </div>
 
-      <div class="container">
+      <div class="container flex-column">
         <button class="mode" id="mode5">QUEST</button>
         <div class="flex-row">
           <input type="number" id="questdur" />
@@ -127,7 +146,7 @@
         </div>
       </div>
 
-      <div class="container">
+      <div class="container flex-column">
         <button class="mode" id="mode0">DEBUG</button>
       </div>
     </div>

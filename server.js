@@ -21,6 +21,8 @@ const server = () => {
   const app = express();
   const port = 3662;
 
+  let isActive = false;
+
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   app.use(express.static('public'));
@@ -44,6 +46,8 @@ const server = () => {
     };
 
     try {
+      if (isActive) throw 'Server currently active';
+      isActive = true;
       cp(`Starting Mode ${response.action}`);
       const cfg = await readCfg();
       const time = await init(cfg, appMode, appRMode);
@@ -57,6 +61,7 @@ const server = () => {
       response.msg = err;
       cp(err, true);
     }
+    isActive = false;
     res.send(JSON.stringify(response));
   });
 
@@ -68,6 +73,8 @@ const server = () => {
     };
 
     try {
+      if (isActive) throw 'Server currently active';
+      isActive = true;
       writeCfg(req.body);
       response.status = 'Success';
       response.msg = 'Data written to file';
@@ -76,6 +83,7 @@ const server = () => {
       response.msg = err;
       cp(err, true);
     }
+    isActive = false;
     res.send(response);
   });
 

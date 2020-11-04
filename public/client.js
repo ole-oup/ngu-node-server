@@ -37,7 +37,7 @@ const postData = async (url, data) => {
     return response.json();
   } catch (err) {
     console.warn(err);
-    return { status: 'Error' };
+    return { status: 'Error', msg: 'Error fetching data' };
   }
 };
 
@@ -45,6 +45,8 @@ const getTimer = async (url) => {
   try {
     const start = new Date();
     const timer = document.getElementById('timer');
+
+    if (timer.innerHTML !== '') throw 'timer not empty';
 
     const startTimer = setInterval(() => {
       timer.innerHTML = displayTimer(start);
@@ -61,7 +63,7 @@ const getTimer = async (url) => {
     stopTimer();
     return response.json();
   } catch (err) {
-    return { status: 'Error' };
+    return { status: 'Error', msg: err };
   }
 };
 
@@ -77,7 +79,6 @@ const saveCfg = async (cfg) => {
 
 (async () => {
   let cfg = {};
-
   try {
     cfg = await getData('/config.json');
   } catch (err) {
@@ -131,11 +132,12 @@ const saveCfg = async (cfg) => {
   });
 
   document
-    .querySelectorAll('input[type=number], input[type=text]')
+    .querySelectorAll('input[type=number], input[type=text], select')
     .forEach((input) => {
       input.value = cfg[input.id];
       input.addEventListener('change', () => {
-        cfg[input.id] = input.value;
+        cfg[input.id] =
+          input.type === 'number' ? Number(input.value) : input.value;
         saveCfg(cfg);
       });
     });

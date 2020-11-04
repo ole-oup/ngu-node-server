@@ -1,8 +1,7 @@
 {
   "ring": 1,
   "quest": 0,
-  "fstop": 1,
-  "hackday": 0,
+  "fstop": 0,
   "zone": "0",
   "questdur": 8,
   "aug": 3,
@@ -15,12 +14,13 @@
   "move": 1,
   "heal": 0,
   "idle": 60,
-  "atk": "y,t,e,w,a",
+  "atk": "ytewa",
   "wishes": [
     "26",
     "24",
-    "33",
-    "17"
+    "17",
+    "33"
   ],
+  "hack": "adv",
   "init": true
 }
