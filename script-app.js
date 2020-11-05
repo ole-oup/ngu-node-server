@@ -14,6 +14,10 @@ import dt from './lib/helper/displayTimer.js';
 
 const { windowManager } = nwm;
 
+const activeWindow = () => {
+  return windowManager.getActiveWindow();
+};
+
 const getGameCoords = () => {
   let gameWin = false;
 
@@ -49,6 +53,10 @@ const init = async (config, mode, rmode) => {
     if (!ggc) throw 'Game not found';
 
     gameWin.bringToTop();
+    let currWin = activeWindow();
+    while (currWin.getTitle() !== 'NGU Idle') {
+      currWin = activeWindow();
+    }
 
     // data (state) for modules
     const state = {
@@ -81,14 +89,14 @@ const init = async (config, mode, rmode) => {
         await quest(state);
         break;
       case 6:
-        await lazyshifter(state, windowManager.getActiveWindow);
+        await lazyshifter(state, activeWindow);
         break;
       default:
         throw 'Invalid Mode';
     }
 
     if (Number(state.cfg.lazystop) === 1)
-      await lazyshifter(state, windowManager.getActiveWindow);
+      await lazyshifter(state, activeWindow);
 
     const time = dt({}, gd(appStart));
     return time;
