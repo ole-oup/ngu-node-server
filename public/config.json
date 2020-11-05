@@ -1,12 +1,13 @@
 {
   "ring": 1,
   "quest": 0,
-  "fstop": 0,
-  "zone": "0",
+  "fstop": 1,
+  "lazystop": 1,
+  "zone": 0,
   "questdur": 8,
   "aug": 3,
   "spell": 8,
-  "dist1": "1",
+  "dist1": 1,
   "dist2": 4,
   "dist3": 7,
   "dist4": 20,
@@ -16,11 +17,11 @@
   "idle": 60,
   "atk": "ytewa",
   "wishes": [
+    "17",
     "26",
     "24",
-    "17",
     "33"
   ],
-  "hack": "adv",
+  "hack": "hack",
   "init": true
 }

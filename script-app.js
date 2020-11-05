@@ -5,9 +5,10 @@ import rebirth from './lib/rebirth.js';
 import toweridle from './lib/toweridle.js';
 import thirtymin from './lib/thirtymin.js';
 import snipe from './lib/snipe.js';
+import quest from './lib/quest.js';
+import lazyshifter from './lib/lazyshifter.js';
 
 import cp from './lib/helper/print.js';
-import quest from './lib/quest.js';
 import gd from './lib/helper/getDifference.js';
 import dt from './lib/helper/displayTimer.js';
 
@@ -15,22 +16,15 @@ const { windowManager } = nwm;
 
 const getGameCoords = () => {
   let gameWin = false;
-  let terminal = false;
 
   const windows = windowManager.getWindows();
 
   const gamePath =
     'C:\\Program Files (x86)\\Steam\\steamapps\\common\\NGU IDLE\\NGUIdle.exe';
-  const scriptTitle = 'ngu_node.ps1';
 
   for (let i = 0; i < windows.length; i++) {
     gameWin = windows[i].path === gamePath ? windows[i] : false;
     if (gameWin) break;
-  }
-
-  for (let i = 0; i < windows.length; i++) {
-    terminal = windows[i].getTitle() === scriptTitle ? windows[i] : false;
-    if (terminal) break;
   }
 
   try {
@@ -38,9 +32,8 @@ const getGameCoords = () => {
     // offset x & y b/c of window borders
     bounds.x += 3;
     bounds.y += 27;
-    terminal.show(); // test terminal
 
-    return { gameWin, terminal, coords: bounds };
+    return { gameWin, coords: bounds };
   } catch (err) {
     return cp(err, true);
   }
@@ -51,7 +44,7 @@ const init = async (config, mode, rmode) => {
     const appStart = new Date();
 
     const ggc = getGameCoords();
-    const { coords, gameWin, terminal } = ggc;
+    const { coords, gameWin } = ggc;
 
     if (!ggc) throw 'Game not found';
 
@@ -59,7 +52,6 @@ const init = async (config, mode, rmode) => {
 
     // data (state) for modules
     const state = {
-      terminal, //                     terminal that has node running
       crd: coords, //                  game bounds
       cfg: config, //                  config
       win: gameWin, //                 game's window object
@@ -88,12 +80,17 @@ const init = async (config, mode, rmode) => {
       case 5:
         await quest(state);
         break;
+      case 6:
+        await lazyshifter(state, windowManager.getActiveWindow);
+        break;
       default:
         throw 'Invalid Mode';
     }
 
-    const time = dt({}, gd(appStart));
+    if (Number(state.cfg.lazystop) === 1)
+      await lazyshifter(state, windowManager.getActiveWindow);
 
+    const time = dt({}, gd(appStart));
     return time;
   } catch (err) {
     return cp(err, true);

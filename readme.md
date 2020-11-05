@@ -1,6 +1,7 @@
 ring: 0 // equip the ring of might for respawn and cd reduction (bottom right corner of first inventory page) | toweridle
 quest: 0 // do quests instead of itopod | goToAdv
 fstop: 0 // stop on focus lost | waitFor
+lazystop: 1 // set lazy itopod shifter on stop
 
 questdur: 8 // quest duration in m | quest
 aug: 3 // aug for rebirth | rebirth

@@ -1,6 +1,6 @@
 {
-  "name": "ngu-node-cli",
-  "version": "0.9.8",
+  "name": "ngu-node-server",
+  "version": "0.9.9",
   "main": "index.js",
   "license": "MIT",
   "type": "module",

@@ -1,5 +1,8 @@
 /* global fetch:false document:false */
 
+const alert = document.getElementById('alert');
+const timer = document.getElementById('timer');
+
 const displayTimer = (start) => {
   const now = new Date();
   const d = now.getTime() - start.getTime();
@@ -22,7 +25,8 @@ const getData = async (url) => {
 
     return response.json();
   } catch (err) {
-    return { status: 'Error' };
+    console.error(err);
+    return { status: 'Error', msg: 'GET Error' };
   }
 };
 
@@ -36,15 +40,14 @@ const postData = async (url, data) => {
 
     return response.json();
   } catch (err) {
-    console.warn(err);
-    return { status: 'Error', msg: 'Error fetching data' };
+    console.error(err);
+    return { status: 'Error', msg: 'POST Error' };
   }
 };
 
 const getTimer = async (url) => {
   try {
     const start = new Date();
-    const timer = document.getElementById('timer');
 
     if (timer.innerHTML !== '') throw 'timer not empty';
 
@@ -67,13 +70,23 @@ const getTimer = async (url) => {
   }
 };
 
+const setNotification = (res) => {
+  alert.classList.add('fade');
+  setTimeout(() => {
+    alert.classList.remove('fade');
+  }, 1300);
+  alert.innerHTML = res.msg;
+  if (Number(res.scode) === 1) alert.style.color = 'var(--sec-color)';
+  else alert.style.color = 'var(--err-color)';
+};
+
 const saveCfg = async (cfg) => {
   try {
     if (cfg.init !== true) throw 'cfg not initialized';
     const res = await postData('/app/config', cfg);
-    console.log(res.msg);
+    setNotification(res);
   } catch (err) {
-    console.warn(err);
+    console.error(err);
   }
 };
 
@@ -82,8 +95,8 @@ const saveCfg = async (cfg) => {
   try {
     cfg = await getData('/config.json');
   } catch (err) {
-    console.warn(err.message);
-    console.log('Loading default config');
+    console.error(err);
+    setNotification({ msg: 'Loading default config' });
     cfg = await getData('/default-config.json');
   }
 
@@ -119,7 +132,7 @@ const saveCfg = async (cfg) => {
         document.documentElement.style.setProperty(
           '--wish-bg',
           'var(--err-color)'
-        ); // red
+        );
     });
   });
 
@@ -144,15 +157,17 @@ const saveCfg = async (cfg) => {
 
   document.querySelectorAll('.mode').forEach((button) => {
     button.addEventListener('click', async () => {
-      const isRebirth = button.id[0] === 'r' ? true : false;
-      const uri = isRebirth
-        ? `/app/rebirth/${button.id[5]}`
-        : `/app/mode/${button.id[4]}`;
+      try {
+        const isRebirth = button.id[0] === 'r' ? true : false;
+        const uri = isRebirth
+          ? `/app/rebirth/${button.id[5]}`
+          : `/app/mode/${button.id[4]}`;
 
-      const res = await getTimer(uri);
-      return res.status === 'Success'
-        ? console.log(res.msg)
-        : console.error(res.msg);
+        const res = await getTimer(uri);
+        setNotification(res);
+      } catch (err) {
+        console.error(err);
+      }
     });
   });
 })();

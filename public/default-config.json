@@ -2,6 +2,7 @@
   "ring": 0,
   "quest": 0,
   "fstop": 0,
+  "lazystop": 1,
   "zone": 0,
   "questdur": 8,
   "aug": 3,

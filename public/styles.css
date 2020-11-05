@@ -33,6 +33,21 @@ html {
   font-size: 2em;
 }
 
+#alert {
+  color: var(--err-color);
+  position: fixed;
+  max-width: 300px;
+  top: 55px;
+  right: 15px;
+  font-size: 1.4em;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+#alert.fade {
+  opacity: 1;
+}
+
 .flex-column {
   display: flex;
   flex-flow: column nowrap;
@@ -79,7 +94,7 @@ html {
 .wish {
   width: 30px;
   height: 30px;
-  margin: 0.2em;
+  margin: 0.4em;
   padding: 5px;
   border: 1px solid var(--sec-color);
 }
@@ -142,9 +157,6 @@ select {
 }
 
 @media only screen and (max-width: 700px) {
-  body {
-    width: 90vw;
-  }
   .container {
     width: 80%;
   }

@@ -40,6 +40,7 @@ const server = () => {
 
     let response = {
       status: 'Error',
+      scode: 0,
       action: isRebirth ? `R${rmode}` : `M${rmode}`,
       msg: '',
       time: '',
@@ -52,6 +53,7 @@ const server = () => {
       const cfg = await readCfg();
       const time = await init(cfg, appMode, appRMode);
       response.status = 'Success';
+      response.scode = 1;
       response.msg = isRebirth
         ? `Ended rebirth ${rmode}`
         : `Ended Mode ${rmode}`;
@@ -68,6 +70,7 @@ const server = () => {
   app.post('/app/config', (req, res) => {
     let response = {
       status: 'Error',
+      scode: 0,
       action: 'cfg',
       msg: '',
     };
@@ -77,6 +80,7 @@ const server = () => {
       isActive = true;
       writeCfg(req.body);
       response.status = 'Success';
+      response.scode = 1;
       response.msg = 'Data written to file';
       cp(response.msg);
     } catch (err) {
