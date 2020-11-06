@@ -8,9 +8,9 @@ import snipe from './lib/snipe.js';
 import quest from './lib/quest.js';
 import lazyshifter from './lib/lazyshifter.js';
 
-import cp from './lib/helper/print.js';
-import gd from './lib/helper/getDifference.js';
-import dt from './lib/helper/displayTimer.js';
+import cp from './lib/util/print.js';
+import gd from './lib/util/getDifference.js';
+import dt from './lib/util/displayTimer.js';
 
 const { windowManager } = nwm;
 
@@ -52,6 +52,7 @@ const init = async (config, mode, rmode) => {
 
     if (!ggc) throw 'Game not found';
 
+    const initWin = activeWindow();
     gameWin.bringToTop();
     let currWin = activeWindow();
     while (currWin.getTitle() !== 'NGU Idle') {
@@ -68,6 +69,8 @@ const init = async (config, mode, rmode) => {
       skc: 0, //                       snipe killcount
       wfm: 0, //                       wait for move [snipe / idle]
     };
+
+    if (mode === 'remote') return remote(state);
 
     switch (Number(mode)) {
       case 0:
@@ -89,14 +92,14 @@ const init = async (config, mode, rmode) => {
         await quest(state);
         break;
       case 6:
-        await lazyshifter(state, activeWindow);
+        state.cfg.lazystop = 1;
         break;
       default:
         throw 'Invalid Mode';
     }
 
     if (Number(state.cfg.lazystop) === 1)
-      await lazyshifter(state, activeWindow);
+      await lazyshifter(state, activeWindow, initWin);
 
     const time = dt({}, gd(appStart));
     return time;

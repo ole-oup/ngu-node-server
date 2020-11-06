@@ -1,6 +1,6 @@
 {
   "name": "ngu-node-server",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "index.js",
   "license": "MIT",
   "type": "module",
@@ -8,7 +8,8 @@
     "clipboardy": "^2.3.0",
     "express": "^4.17.1",
     "node-window-manager": "^2.2.3",
-    "robotjs": "^0.6.0"
+    "robotjs": "^0.6.0",
+    "screenshot-desktop": "^1.12.2"
   },
   "devDependencies": {
     "eslint": "^7.4.0",

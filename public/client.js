@@ -17,7 +17,7 @@ const displayTimer = (start) => {
   return `${td.min}:${td.sec}`;
 };
 
-const getData = async (url) => {
+export const getData = async (url) => {
   try {
     const response = await fetch(url, {
       method: 'GET',

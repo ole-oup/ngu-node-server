@@ -1,6 +1,6 @@
 import express from 'express';
 import fs from 'fs';
-import cp from './lib/helper/print.js';
+import cp from './lib/util/print.js';
 
 import init from './script-app.js';
 
@@ -19,7 +19,7 @@ const writeCfg = (cfg) => {
 
 const server = () => {
   const app = express();
-  const port = 3662;
+  const port = 3000;
 
   let isActive = false;
 
