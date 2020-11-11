@@ -2,6 +2,7 @@ import express from 'express';
 import fs from 'fs';
 import cp from './lib/util/print.js';
 
+import remote from './lib/remote.js';
 import init from './script-app.js';
 
 const readCfg = () => {
@@ -89,6 +90,10 @@ const server = () => {
     }
     isActive = false;
     res.send(response);
+  });
+
+  app.get('/remote', (req, res) => {
+    res.send(remote());
   });
 
   app.listen(port, () => {

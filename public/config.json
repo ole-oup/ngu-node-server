@@ -1,8 +1,8 @@
 {
   "ring": 1,
   "quest": 0,
-  "fstop": 1,
-  "lazystop": 1,
+  "fstop": 0,
+  "lazystop": 0,
   "zone": 0,
   "questdur": 8,
   "aug": 3,
@@ -17,10 +17,10 @@
   "idle": 60,
   "atk": "ytewa",
   "wishes": [
-    "17",
-    "25",
-    "12",
-    "32"
+    "33",
+    "14",
+    "22",
+    "35"
   ],
   "hack": "hack",
   "init": true

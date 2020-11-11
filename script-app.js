@@ -70,8 +70,6 @@ const init = async (config, mode, rmode) => {
       wfm: 0, //                       wait for move [snipe / idle]
     };
 
-    if (mode === 'remote') return remote(state);
-
     switch (Number(mode)) {
       case 0:
         await db(state);
