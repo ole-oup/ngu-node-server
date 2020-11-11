@@ -1,0 +1,21 @@
+wenn kein fstop
+  pause
+  alle x min versuchen game zu focusen und weiterzumachen
+
+nicht nach lazyshifter wegklicken -> zu script-app
+  option in cfg
+
+wenn fstop aus und focus weg -> nach x sekunden versuchen fokus wieder
+
+nach bestimmter zeit in idle -> optimal und anpassen
+
+fernsteuerung
+  per ipad -> auf localhost adresse gehen (192.168.178.20:port)
+  screenshots mit so viel framerate wie möglich anzeigen, aber möglichst ohne lag
+  der screenshot hat clic eventlistener der robot mouseklick sendet
+  tastatur auch erfassen (mit meiner kleinen)
+
+  gleichzeitig websocket server für remote images und http server für das script
+
+  https://stackoverflow.com/questions/11089732/display-image-from-blob-using-javascript-and-websockets
+  https://stackoverflow.com/a/34838031/11918503 -> gleichzeit ws und http
