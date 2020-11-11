@@ -4,6 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ob-sc/ngu-node-server.git"
+  },
   "dependencies": {
     "clipboardy": "^2.3.0",
     "express": "^4.17.1",
