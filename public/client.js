@@ -1,4 +1,4 @@
-/* global fetch:false document:false btoa:false */
+/* global fetch:false document:false */
 
 const alert = document.getElementById('alert');
 const timer = document.getElementById('timer');
@@ -24,21 +24,6 @@ const getData = async (url) => {
     });
 
     return response.json();
-  } catch (err) {
-    console.error(err);
-    return { status: 'Error', msg: 'GET Error' };
-  }
-};
-
-const getBuffer = async (url) => {
-  try {
-    const response = await fetch(url, {
-      method: 'GET',
-    });
-
-    const buffer = await response.arrayBuffer();
-
-    return buffer;
   } catch (err) {
     console.error(err);
     return { status: 'Error', msg: 'GET Error' };
@@ -186,20 +171,5 @@ const saveCfg = async (cfg) => {
     });
   });
 
-  const remoteBuffer = await getBuffer('/remote');
-
-  var arrayBufferView = new Uint8Array(remoteBuffer);
-  var blob = new Blob([arrayBufferView], { type: 'image/jpeg' });
-  var urlCreator = window.URL || window.webkitURL;
-  var imageUrl = urlCreator.createObjectURL(blob);
-  var img = document.querySelector('#remote');
-  img.src = imageUrl;
-
-  // let base64String = btoa(String.fromCharCode(...new Uint8Array(remoteBuffer)));
-
-  // document.getElementById(
-  //   'remote'
-  // ).src = `data:image/png;base64,${base64String}`;
-
-  // navigator.clipboard.writeText(base64String);
+  document.querySelector('.rmouse').addEventListener();
 })();
