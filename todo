@@ -59,6 +59,16 @@ nur maus fernsteuerung:
 
 websocket server
   andauernder austausch über kills, wann attacked wird, timer etc
+  broadcasten an alle clients
+  timer: nur start senden
+    client errechnet sich daraus timer und lässt ihn weiterlaufen
   
 
+ui
   tooltips für optionen
+  man kann alle optionen hiden
+  man kann einzelne container hiden (toggle oben rechts?)
+
+
+
+state management einbauen für server

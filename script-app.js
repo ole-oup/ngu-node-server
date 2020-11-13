@@ -43,7 +43,7 @@ const getGameCoords = () => {
   }
 };
 
-const init = async (config, mode, rmode) => {
+const init = async (config, mode, rmode, websocket) => {
   try {
     const appStart = new Date();
 
@@ -61,13 +61,14 @@ const init = async (config, mode, rmode) => {
 
     // data (state) for modules
     const state = {
-      crd: coords, //                  game bounds
-      cfg: config, //                  config
-      win: gameWin, //                 game's window object
-      inf: null, //                    infinite itopod [idle / toweridle, snipe]
-      dur: null, //                    itopod duration [idle / toweridle, snipe] in ms
-      skc: 0, //                       snipe killcount
-      wfm: 0, //                       wait for move [snipe / idle]
+      ws: websocket, // websocket from server
+      crd: coords, //   game bounds
+      cfg: config, //   config
+      win: gameWin, //  game's window object
+      inf: null, //     infinite itopod [idle / toweridle, snipe]
+      dur: null, //     itopod duration [idle / toweridle, snipe] in ms
+      skc: 0, //        snipe killcount
+      wfm: 0, //        wait for move [snipe / idle]
     };
 
     switch (Number(mode)) {

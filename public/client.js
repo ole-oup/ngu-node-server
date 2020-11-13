@@ -30,6 +30,21 @@ const getData = async (url) => {
   }
 };
 
+const postData = async (url, data) => {
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+
+    return response.json();
+  } catch (err) {
+    console.error(err);
+    return { status: 'Error', msg: 'POST Error' };
+  }
+};
+
 const getTimer = async (url) => {
   try {
     const start = new Date();
@@ -68,8 +83,8 @@ const setNotification = (res) => {
 const saveCfg = async (cfg) => {
   try {
     if (cfg.init !== true) throw 'cfg not initialized';
-    // const res = await postData('/app/config', cfg);
-    // setNotification(res);
+    const res = await postData('/app/config', cfg);
+    setNotification(res);
   } catch (err) {
     console.error(err);
   }
@@ -88,7 +103,8 @@ const saveCfg = async (cfg) => {
   const socket = new WebSocket('ws://localhost:3000');
 
   socket.onopen = () => {
-    console.log('open');
+    console.log('websocket open');
+    socket.send(JSON.stringify({ msg: 'hi' }));
   };
 
   socket.onmessage = function (event) {
