@@ -1,4 +1,5 @@
 import express from 'express';
+import WebSocket from 'ws';
 import fs from 'fs';
 import cp from './lib/util/print.js';
 
@@ -18,17 +19,27 @@ const writeCfg = (cfg) => {
 };
 
 const server = () => {
+  console.clear();
+  console.log('NGU script app local server');
+
   const app = express();
   const port = 3000;
 
   let isActive = false;
 
   app.use(express.json());
-  app.use(express.urlencoded({ extended: true }));
+  // app.use(express.urlencoded({ extended: true }));
   app.use(express.static('public'));
 
-  console.clear();
-  console.log('NGU script app local server');
+  const wss = new WebSocket.Server({ noServer: true });
+
+  wss.on('connection', (ws) => {
+    ws.on('message', (message) => {
+      console.log('received: %s', message);
+    });
+
+    ws.send('test');
+  });
 
   app.get('/app/:mode/:rmode', async (req, res) => {
     const { mode, rmode } = req.params;
@@ -91,8 +102,14 @@ const server = () => {
     res.send(response);
   });
 
-  app.listen(port, () => {
-    console.log(`Listening at http://localhost:${port}`);
+  const ser = app.listen(port, () =>
+    console.log(`Listening at http://localhost:${port}`)
+  );
+
+  ser.on('upgrade', (request, socket, head) => {
+    wss.handleUpgrade(request, socket, head, (socket) => {
+      wss.emit('connection', socket, request);
+    });
   });
 };
 

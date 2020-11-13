@@ -17,6 +17,19 @@ const displayTimer = (start) => {
   return `${td.min}:${td.sec}`;
 };
 
+const getData = async (url) => {
+  try {
+    const response = await fetch(url, {
+      method: 'GET',
+    });
+
+    return response.json();
+  } catch (err) {
+    console.error(err);
+    return { status: 'Error', msg: 'GET Error' };
+  }
+};
+
 const getTimer = async (url) => {
   try {
     const start = new Date();
@@ -55,27 +68,31 @@ const setNotification = (res) => {
 const saveCfg = async (cfg) => {
   try {
     if (cfg.init !== true) throw 'cfg not initialized';
-    const res = await postData('/app/config', cfg);
-    setNotification(res);
+    // const res = await postData('/app/config', cfg);
+    // setNotification(res);
   } catch (err) {
     console.error(err);
   }
 };
 
 (async () => {
-  // let cfg = {};
-  // try {
-  //   cfg = await getData('/config.json');
-  // } catch (err) {
-  //   console.error(err);
-  //   setNotification({ msg: 'Loading default config' });
-  //   cfg = await getData('/default-config.json');
-  // }
+  let cfg = {};
+  try {
+    cfg = await getData('/config.json');
+  } catch (err) {
+    console.error(err);
+    setNotification({ msg: 'Loading default config' });
+    cfg = await getData('/default-config.json');
+  }
 
   const socket = new WebSocket('ws://localhost:3000');
 
   socket.onopen = () => {
     console.log('open');
+  };
+
+  socket.onmessage = function (event) {
+    console.log(event.data);
   };
 
   const { wishes } = cfg;
@@ -149,5 +166,5 @@ const saveCfg = async (cfg) => {
     });
   });
 
-  document.querySelector('.rmouse').addEventListener();
+  // document.querySelector('.rmouse').addEventListener();
 })();
