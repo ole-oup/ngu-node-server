@@ -1,4 +1,4 @@
-/* global fetch:false document:false */
+/* global fetch:false document:false WebSocket:false */
 
 const alert = document.getElementById('alert');
 const timer = document.getElementById('timer');
@@ -15,34 +15,6 @@ const displayTimer = (start) => {
   td.sec = td.s < 10 ? `0${td.s}` : String(td.s);
 
   return `${td.min}:${td.sec}`;
-};
-
-const getData = async (url) => {
-  try {
-    const response = await fetch(url, {
-      method: 'GET',
-    });
-
-    return response.json();
-  } catch (err) {
-    console.error(err);
-    return { status: 'Error', msg: 'GET Error' };
-  }
-};
-
-const postData = async (url, data) => {
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-
-    return response.json();
-  } catch (err) {
-    console.error(err);
-    return { status: 'Error', msg: 'POST Error' };
-  }
 };
 
 const getTimer = async (url) => {
@@ -91,14 +63,20 @@ const saveCfg = async (cfg) => {
 };
 
 (async () => {
-  let cfg = {};
-  try {
-    cfg = await getData('/config.json');
-  } catch (err) {
-    console.error(err);
-    setNotification({ msg: 'Loading default config' });
-    cfg = await getData('/default-config.json');
-  }
+  // let cfg = {};
+  // try {
+  //   cfg = await getData('/config.json');
+  // } catch (err) {
+  //   console.error(err);
+  //   setNotification({ msg: 'Loading default config' });
+  //   cfg = await getData('/default-config.json');
+  // }
+
+  const socket = new WebSocket('ws://localhost:3000');
+
+  socket.onopen = () => {
+    console.log('open');
+  };
 
   const { wishes } = cfg;
 

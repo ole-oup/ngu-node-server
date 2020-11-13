@@ -1,4 +1,4 @@
-import server from './http-server.js';
+import server from './server.js';
 
 try {
   server();
