@@ -1,6 +1,6 @@
 {
   "name": "ngu-node-server",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "main": "index.js",
   "license": "MIT",
   "type": "module",
@@ -20,7 +20,6 @@
     "prettier": "^2.0.5"
   },
   "scripts": {
-    "prestart": "node align-terminal.js",
     "start": "node index.js"
   }
 }

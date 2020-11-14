@@ -65,4 +65,6 @@ ws onclose seite neu laden oder so
 snipe: nicht jedes mal neu floor auswählen
   variable in data und dann in gotoadv mit if?
     dann in script-app standard eintragen
-
+  
+  snipe endet nach dem ersten cycle -> nix gut
+  

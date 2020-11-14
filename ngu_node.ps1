@@ -4,4 +4,4 @@ $startPage = 'http://localhost:3000'
 
 Start-Process -FilePath $pathToChrome -ArgumentList $startmode, $startPage
 
-yarn start
+node index.js
