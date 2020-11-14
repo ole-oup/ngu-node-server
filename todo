@@ -54,7 +54,7 @@ nur maus fernsteuerung:
 
 websocket server
   andauernder austausch über kills, wann attacked wird, timer etc
-  
+  snipe # nicht console log sondern websocket! 
 
   tooltips für optionen
 
@@ -66,7 +66,3 @@ snipe: nicht jedes mal neu floor auswählen
   variable in data und dann in gotoadv mit if?
     dann in script-app standard eintragen
 
-gotoadv
-  zuerst enter itopod, dann q, dann floor auswählen
-
-snipe: started bei snipe #0, eh nicht console log sondern websocket! trotzdem einen draufrechnen
