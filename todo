@@ -3,7 +3,6 @@ wenn infinite (alle außer quest?) oder einfach alle: neustart bei error
 wenn das spiel nicht gefocused ist dann kriegt er das window iwie nicht und klickt in anderen programmen rum
   test ob wirklich focused
   beim init schon gettotop
-  
 
 wenn kein fstop
   pause
@@ -18,18 +17,13 @@ nach bestimmter zeit in idle -> optimal und anpassen
 
 automatisch moneypit
 
-
 server gibt auf einer get url die console.logs aus? neben cp noch iwo in variable speichern und dann immer senden
 check ob money pit -> auch in variable und in get url senden
 beide ab und zu abfragen auf dem client und dann die nachricht oder den status iwo displayen
 
-
 man kann alle optionen im client togglen (symbol iwo)
 links ist eine art inhaltsverzeichnis zum springen zwischen divvs
 unten ist dann remote, alle buttons aufgelistet?
-
-
-
 
 fernsteuerung
   per ipad -> auf localhost adresse gehen (192.168.178.20:port)
@@ -47,7 +41,6 @@ fernsteuerung
   unten für handy noch ein maustrackpad? wenn er x+y von der mitte getouched wird dann die maus in die richtung bewegen -> für hover
   reicht so ein maus trackpad schon?
 
-
 nur maus fernsteuerung:
   feld iwo unten an die page
   mausklick eventlistener
@@ -64,13 +57,25 @@ websocket server
   broadcasten an alle clients
   timer: nur start senden
     client errechnet sich daraus timer und lässt ihn weiterlaufen
-  
 
 ui
   tooltips für optionen
   man kann alle optionen hiden
   man kann einzelne container hiden (toggle oben rechts?)
 
-
-
 state management einbauen für server
+
+tooltips für optionen
+
+move als select mit optionen die value 1 und 2 haben, nicht input number
+
+ws onclose seite neu laden oder so
+
+snipe: nicht jedes mal neu floor auswählen
+  variable in data und dann in gotoadv mit if?
+    dann in script-app standard eintragen
+
+gotoadv
+  zuerst enter itopod, dann q, dann floor auswählen
+
+snipe: started bei snipe #0, eh nicht console log sondern websocket! trotzdem einen draufrechnen
