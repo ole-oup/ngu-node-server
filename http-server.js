@@ -27,15 +27,7 @@ const server = () => {
 
   let isActive = false; // todo raus?
 
-  const response = {
-    status: 'Error',
-    scode: 0,
-    action: '',
-    msg: '',
-  };
-
   app.use(express.json());
-  // app.use(express.urlencoded({ extended: true }));
   app.use(express.static('public'));
 
   const wss = new WebSocket.Server({ noServer: true });
@@ -52,18 +44,27 @@ const server = () => {
   app.get('/app/rebirth/:rmode', async (req, res) => {
     const { rmode } = req.params;
 
+    const response = {
+      status: 'Error',
+      scode: 0,
+      action: '',
+      msg: '',
+    };
+
     response.action = `Rebirth ${rmode}`;
 
     try {
       if (isActive) throw 'Server currently active';
       isActive = true;
-      cp(`Starting ${response.action}`);
+
       const cfg = await readCfg();
       const time = await init(cfg, 1, rmode);
+
       response.status = 'Success';
       response.scode = 1;
-      response.msg = `Ended Rebirth ${rmode}`;
+      response.msg = `Finished Rebirth ${rmode}`;
       response.time = time;
+
       cp(response.msg);
     } catch (err) {
       response.msg = err;
@@ -74,14 +75,25 @@ const server = () => {
   });
 
   app.post('/app/config', (req, res) => {
+    const response = {
+      status: 'Error',
+      scode: 0,
+      action: '',
+      msg: '',
+    };
+
     response.action = 'cfg';
+
     try {
       if (isActive) throw 'Server currently active';
       isActive = true;
+
       writeCfg(req.body);
+
       response.status = 'Success';
       response.scode = 1;
       response.msg = 'Data written to file';
+
       cp(response.msg);
     } catch (err) {
       response.msg = err;

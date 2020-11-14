@@ -1,3 +1,5 @@
+wenn infinite (alle außer quest?) oder einfach alle: neustart bei error
+
 wenn das spiel nicht gefocused ist dann kriegt er das window iwie nicht und klickt in anderen programmen rum
   test ob wirklich focused
   beim init schon gettotop
