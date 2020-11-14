@@ -58,6 +58,8 @@ websocket server
   timer: nur start senden
     client errechnet sich daraus timer und lässt ihn weiterlaufen
 
+  snipe # nicht console log sondern websocket! 
+
 ui
   tooltips für optionen
   man kann alle optionen hiden
@@ -74,8 +76,5 @@ ws onclose seite neu laden oder so
 snipe: nicht jedes mal neu floor auswählen
   variable in data und dann in gotoadv mit if?
     dann in script-app standard eintragen
-
-gotoadv
-  zuerst enter itopod, dann q, dann floor auswählen
-
-snipe: started bei snipe #0, eh nicht console log sondern websocket! trotzdem einen draufrechnen
+  snipe endet nach dem ersten cycle -> nix gut
+  
