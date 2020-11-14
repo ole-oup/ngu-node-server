@@ -57,3 +57,16 @@ websocket server
   
 
   tooltips für optionen
+
+  move als select mit optionen die value 1 und 2 haben, nicht input number
+
+ws onclose seite neu laden oder so
+
+snipe: nicht jedes mal neu floor auswählen
+  variable in data und dann in gotoadv mit if?
+    dann in script-app standard eintragen
+
+gotoadv
+  zuerst enter itopod, dann q, dann floor auswählen
+
+snipe: started bei snipe #0, eh nicht console log sondern websocket! trotzdem einen draufrechnen
