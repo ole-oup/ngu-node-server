@@ -32,6 +32,7 @@ const getGameCoords = () => {
   }
 
   try {
+    gameWin.setBounds({ x: 0, y: 0 });
     const bounds = gameWin.getBounds();
     // offset x & y b/c of window borders
     bounds.x += 3;
