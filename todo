@@ -73,6 +73,7 @@ state management einbauen für server
 tooltips für optionen
 
 move als select mit optionen die value 1 und 2 haben, nicht input number
+heal cfg toggle?
 
 ws onclose seite neu laden oder so
 
@@ -83,3 +84,5 @@ snipe: nicht jedes mal neu floor auswählen
   
   jede stunde speichern und floor anpassen
     floor sonst nicht extra auf optimum einstellen sondern einfach adv mode
+
+  mit precast v: wenn megabuff abgelaufen: zurück zu itopod (return aus gegner suchen reicht?)

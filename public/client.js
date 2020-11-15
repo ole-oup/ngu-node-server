@@ -26,7 +26,7 @@ const getData = async (url) => {
     return response.json();
   } catch (err) {
     console.error(err);
-    return { status: 'Error', msg: 'GET Error' };
+    return { status: 0, msg: 'GET Error' };
   }
 };
 
@@ -41,7 +41,7 @@ const postData = async (url, data) => {
     return response.json();
   } catch (err) {
     console.error(err);
-    return { status: 'Error', msg: 'POST Error' };
+    return { status: 0, msg: 'POST Error' };
   }
 };
 
@@ -76,7 +76,7 @@ const setNotification = (res) => {
     alert.classList.remove('fade');
   }, 1300);
   alert.innerHTML = res.msg;
-  if (Number(res.scode) === 1) alert.style.color = 'var(--sec-color)';
+  if (Number(res.status) === 1) alert.style.color = 'var(--sec-color)';
   else alert.style.color = 'var(--err-color)';
 };
 
@@ -104,11 +104,12 @@ const saveCfg = async (cfg) => {
 
   socket.onopen = () => {
     console.log('websocket open');
-    socket.send(JSON.stringify({ msg: 'hi' }));
+    socket.send(JSON.stringify({ msg: 'hi' })); // hier abfragen ob aktuell was läuft
   };
 
   socket.onmessage = function (event) {
     console.log(event.data);
+    // wenn kein timer dann hier aus start: x den timer starten
   };
 
   const { wishes } = cfg;
@@ -170,12 +171,13 @@ const saveCfg = async (cfg) => {
     button.addEventListener('click', async () => {
       try {
         const isRebirth = button.id[0] === 'r' ? true : false;
-        const uri = isRebirth
-          ? `/app/rebirth/${button.id[5]}`
-          : `/app/mode/${button.id[4]}`;
-
-        const res = await getTimer(uri);
-        setNotification(res);
+        if (isRebirth) {
+          const res = await getData(`/app/rebirth/${button.id[5]}`);
+          setNotification(res);
+        } else {
+          const mode = button.id[4];
+          socket.send(JSON.stringify({ req: 'mode', mode }));
+        }
       } catch (err) {
         console.error(err);
       }

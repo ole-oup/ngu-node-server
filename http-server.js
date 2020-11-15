@@ -25,7 +25,7 @@ const server = () => {
   const app = express();
   const port = 3000;
 
-  let isActive = false; // todo raus?
+  let isActive = false;
 
   app.use(express.json());
   app.use(express.static('public'));
@@ -34,8 +34,26 @@ const server = () => {
 
   wss.on('connection', (ws) => {
     ws.on('message', (message) => {
-      const data = JSON.parse(message);
-      console.log(data);
+      const response = {
+        status: 0,
+        action: '',
+        msg: '',
+      };
+      try {
+        const data = JSON.parse(message);
+        console.log(data);
+        if (data.req === 'mode') {
+          if (isActive) throw 'Server currently active';
+
+          const cfg = readCfg();
+          init(cfg, data.mode);
+        }
+      } catch (err) {
+        response.msg = err;
+        cp(err, true);
+      }
+      isActive = false;
+      ws.send(JSON.stringify(response));
     });
 
     // ws.send('test');
@@ -43,29 +61,20 @@ const server = () => {
 
   app.get('/app/rebirth/:rmode', async (req, res) => {
     const { rmode } = req.params;
-
     const response = {
-      status: 'Error',
-      scode: 0,
-      action: '',
+      status: 0,
+      action: `Rebirth ${rmode}`,
       msg: '',
     };
-
-    response.action = `Rebirth ${rmode}`;
-
     try {
       if (isActive) throw 'Server currently active';
       isActive = true;
 
-      const cfg = await readCfg();
-      const time = await init(cfg, 1, rmode);
+      const cfg = readCfg();
+      await init(cfg, 1, rmode);
 
-      response.status = 'Success';
-      response.scode = 1;
+      response.status = 1;
       response.msg = `Finished Rebirth ${rmode}`;
-      response.time = time;
-
-      cp(response.msg);
     } catch (err) {
       response.msg = err;
       cp(err, true);
@@ -76,24 +85,18 @@ const server = () => {
 
   app.post('/app/config', (req, res) => {
     const response = {
-      status: 'Error',
-      scode: 0,
-      action: '',
+      status: 0,
+      action: 'cfg',
       msg: '',
     };
-
-    response.action = 'cfg';
-
     try {
       if (isActive) throw 'Server currently active';
       isActive = true;
 
       writeCfg(req.body);
 
-      response.status = 'Success';
-      response.scode = 1;
+      response.status = 1;
       response.msg = 'Data written to file';
-
       cp(response.msg);
     } catch (err) {
       response.msg = err;

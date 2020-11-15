@@ -9,8 +9,6 @@ import quest from './lib/quest.js';
 import lazyshifter from './lib/lazyshifter.js';
 
 import cp from './lib/util/print.js';
-import gd from './lib/util/getDifference.js';
-import dt from './lib/util/displayTimer.js';
 
 const { windowManager } = nwm;
 
@@ -101,9 +99,6 @@ const init = async (config, mode, rmode, websocket) => {
 
     if (Number(state.cfg.lazystop) === 1)
       await lazyshifter(state, activeWindow, initWin);
-
-    const time = dt({}, gd(appStart));
-    return time;
   } catch (err) {
     return cp(err, true);
   }

@@ -1,3 +1,5 @@
+## config
+
 | option   | default                  | description                                                                          | location  |
 | -------- | ------------------------ | ------------------------------------------------------------------------------------ | --------- |
 | ring     | 0                        | equip RoM for respawn and cd reduction (bottom right corner of first inventory page) | toweridle |
@@ -19,6 +21,14 @@
 | atk      | ytewa                    | attack order                                                                         | snipe     |
 | wishes   | ["11", "12", "13", "14"] | selected wishes                                                                      | rebirth   |
 | hack     | "hack"                   | selected hack                                                                        | rebirth   |
+
+## server status
+
+| status | description |
+| ------ | ----------- |
+| 0      | Error       |
+| 1      | Success     |
+| 2      | Running     |
 
 cd muss immer kleiner als respawn sein also cd immer >1s ohne cd reduction oder >0.85s mit
 
