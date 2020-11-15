@@ -1,11 +1,11 @@
 import robot from 'robotjs';
 
-import { positions, button } from './util/uxpos.js';
-import wishes from './util/wishes.js';
-import cp from './util/print.js';
-import click from './util/click.js';
-import ga from './util/aug.js';
-import wait from './util/wait.js';
+import { positions, button } from '../util/uxpos.js';
+import wishes from '../util/wishes.js';
+import cp from '../util/print.js';
+import click from '../util/click.js';
+import ga from '../util/aug.js';
+import wait from '../util/wait.js';
 
 const rebirth = async (data, rmode) => {
   try {

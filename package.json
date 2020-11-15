@@ -12,6 +12,7 @@
     "clipboardy": "^2.3.0",
     "express": "^4.17.1",
     "node-window-manager": "^2.2.3",
+    "redux": "^4.0.5",
     "robotjs": "^0.6.0",
     "ws": "^7.4.0"
   },

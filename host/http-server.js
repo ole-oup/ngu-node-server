@@ -1,9 +1,9 @@
 import express from 'express';
 import WebSocket from 'ws';
 import fs from 'fs';
-import cp from './lib/util/print.js';
+import cp from '../app/util/print.js';
 
-import init from './script-app.js';
+import init from '../app/app-index.js';
 
 const readCfg = () => {
   const cfg = fs.readFileSync('public/config.json');

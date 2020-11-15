@@ -1,12 +1,12 @@
 import robot from 'robotjs';
 
-import click from './util/click.js';
-import wf from './util/waitFor.js';
-import idle from './util/idle.js';
-import cp from './util/print.js';
-import { positions, button } from './util/uxpos.js';
-import goToAdv from './util/goToAdv.js';
-import checkIdleBorder from './util/checkIdleBorder.js';
+import click from '../util/click.js';
+import wf from '../util/waitFor.js';
+import idle from '../util/idle.js';
+import cp from '../util/print.js';
+import { positions, button } from '../util/uxpos.js';
+import goToAdv from '../util/goToAdv.js';
+import checkIdleBorder from '../util/checkIdleBorder.js';
 
 robot.setKeyboardDelay(0);
 

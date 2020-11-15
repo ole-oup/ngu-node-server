@@ -1,14 +1,14 @@
 import robot from 'robotjs';
 
-import cp from './util/print.js';
-import idle from './util/idle.js';
-import { positions, button } from './util/uxpos.js';
-import dt from './util/displayTimer.js';
 import rebirth from './rebirth.js';
-import goToAdv from './util/goToAdv.js';
-import gd from './util/getDifference.js';
-import checkIdleBorder from './util/checkIdleBorder.js';
-import wait from './util/wait.js';
+import cp from '../util/print.js';
+import idle from '../util/idle.js';
+import { positions, button } from '../util/uxpos.js';
+import dt from '../util/displayTimer.js';
+import goToAdv from '../util/goToAdv.js';
+import gd from '../util/getDifference.js';
+import checkIdleBorder from '../util/checkIdleBorder.js';
+import wait from '../util/wait.js';
 
 const countdown = async (str, sec) => {
   for (sec; sec > 0; sec--) {

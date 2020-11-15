@@ -1,9 +1,9 @@
 import robot from 'robotjs';
-import click from './util/click.js';
+import click from '../util/click.js';
 
-import goToAdv from './util/goToAdv.js';
-import idle from './util/idle.js';
-import { button, positions } from './util/uxpos.js';
+import goToAdv from '../util/goToAdv.js';
+import idle from '../util/idle.js';
+import { button, positions } from '../util/uxpos.js';
 
 const towerIdle = async (data) => {
   data.inf = true;

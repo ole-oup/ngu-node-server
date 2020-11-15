@@ -1,6 +1,6 @@
 import robot from 'robotjs';
 
-import { button, positions } from './util/uxpos.js';
+import { button, positions } from '../util/uxpos.js';
 
 const lazyshifter = async (data, activeWindow, initWin) => {
   let currWin = activeWindow();

@@ -1,5 +1,5 @@
-import alignWindows from './alignWindows.js';
-import server from './http-server.js';
+import alignWindows from './host/align-windows.js';
+import server from './host/http-server.js';
 
 try {
   const wins = alignWindows();

@@ -104,7 +104,7 @@ const saveCfg = async (cfg) => {
 
   socket.onopen = () => {
     console.log('websocket open');
-    socket.send(JSON.stringify({ msg: 'hi' })); // hier abfragen ob aktuell was läuft
+    socket.send(JSON.stringify({ msg: 'hi' })); // hier abfragen ob aktuell was läuft, anstatt hi in der console vom server client connected
   };
 
   socket.onmessage = function (event) {

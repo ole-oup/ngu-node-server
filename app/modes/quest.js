@@ -1,7 +1,7 @@
-import goToAdv from './util/goToAdv.js';
-import idle from './util/idle.js';
-import checkIdleBorder from './util/checkIdleBorder.js';
-import { button, positions } from './util/uxpos.js';
+import goToAdv from '../util/goToAdv.js';
+import idle from '../util/idle.js';
+import checkIdleBorder from '../util/checkIdleBorder.js';
+import { button, positions } from '../util/uxpos.js';
 
 const quest = async (data) => {
   data.cfg.quest = 1;

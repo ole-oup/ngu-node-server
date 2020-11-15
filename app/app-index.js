@@ -1,14 +1,14 @@
 import nwm from 'node-window-manager';
 
-import db from './lib/debugger.js';
-import rebirth from './lib/rebirth.js';
-import toweridle from './lib/toweridle.js';
-import thirtymin from './lib/thirtymin.js';
-import snipe from './lib/snipe.js';
-import quest from './lib/quest.js';
-import lazyshifter from './lib/lazyshifter.js';
+import db from './modes/debugger.js';
+import rebirth from './modes/rebirth.js';
+import toweridle from './modes/toweridle.js';
+import thirtymin from './modes/thirtymin.js';
+import snipe from './modes/snipe.js';
+import quest from './modes/quest.js';
+import lazyshifter from './modes/lazyshifter.js';
 
-import cp from './lib/util/print.js';
+import cp from './util/print.js';
 
 const { windowManager } = nwm;
 
