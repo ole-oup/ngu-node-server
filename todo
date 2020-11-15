@@ -59,6 +59,9 @@ websocket server
     client errechnet sich daraus timer und lässt ihn weiterlaufen
 
   snipe # nicht console log sondern websocket! 
+  über websocket infos:
+    snipe: snipe # (total), time, snipes/min
+    idle: kills, time, kills/min
 
 ui
   tooltips für optionen
