@@ -1,7 +1,8 @@
 /* global fetch:false document:false WebSocket:false */
 
-const alert = document.getElementById('alert');
-const timer = document.getElementById('timer');
+const alert = document.querySelector('#alert');
+const settings = document.querySelector('#settings');
+const settingsContainer = document.querySelector('.settings-container');
 
 const displayTimer = (start) => {
   const now = new Date();
@@ -45,35 +46,25 @@ const postData = async (url, data) => {
   }
 };
 
-const getTimer = async (url) => {
-  try {
-    const start = new Date();
+// const start = new Date();
 
-    if (timer.innerHTML !== '') throw 'timer not empty';
+// if (timer.innerHTML !== '') throw 'timer not empty';
 
-    const startTimer = setInterval(() => {
-      timer.innerHTML = displayTimer(start);
-    }, 1000);
+// const startTimer = setInterval(() => {
+//   timer.innerHTML = displayTimer(start);
+// }, 1000);
 
-    const stopTimer = () => {
-      clearInterval(startTimer);
-      timer.innerHTML = '';
-    };
+// const stopTimer = () => {
+//   clearInterval(startTimer);
+//   timer.innerHTML = '';
+// };
 
-    const response = await fetch(url, {
-      method: 'GET',
-    });
-    stopTimer();
-    return response.json();
-  } catch (err) {
-    return { status: 'Error', msg: err };
-  }
-};
+// stopTimer();
 
 const setNotification = (res) => {
-  alert.classList.add('fade');
+  alert.classList.add('show');
   setTimeout(() => {
-    alert.classList.remove('fade');
+    alert.classList.remove('show');
   }, 1300);
   alert.innerHTML = res.msg;
   if (Number(res.status) === 1) alert.style.color = 'var(--sec-color)';
@@ -114,16 +105,17 @@ const saveCfg = async (cfg) => {
 
   const { wishes } = cfg;
 
-  // add eventlisteners to wishes
+  settings.addEventListener('click', () => {
+    settingsContainer.classList.toggle('show');
+  });
+
   document.querySelectorAll('.wish').forEach((element) => {
     wishes.forEach((wish) => {
       if (wish === element.innerHTML) element.classList.add('selected-wish');
     });
-
     element.addEventListener('click', () => {
       if (element.classList.contains('selected-wish')) {
         element.classList.remove('selected-wish');
-
         let i = wishes.length;
         while (i--) {
           if (wishes[i] === element.innerHTML) wishes.splice(i, 1);
@@ -132,7 +124,6 @@ const saveCfg = async (cfg) => {
         element.classList.add('selected-wish');
         wishes.push(element.innerHTML);
       }
-
       if (wishes.length === 4) {
         document.documentElement.style.setProperty(
           '--wish-bg',
@@ -183,6 +174,4 @@ const saveCfg = async (cfg) => {
       }
     });
   });
-
-  // document.querySelector('.rmouse').addEventListener();
 })();

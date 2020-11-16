@@ -38,15 +38,18 @@ const wf = (data, trigger) => {
       let currWin = windowManager.getActiveWindow();
       if (currWin.getTitle() !== 'NGU Idle') {
         data.win.bringToTop();
-        robot.keyTap('q');
+        if (Number(data.cfg.force) !== 1) robot.keyTap('q');
 
         currWin.bringToTop();
         if (Number(data.cfg.fstop) === 1) throw 'Game lost focus';
-        cp('paused');
+        cp('game lost focus');
+
+        if (Number(data.cfg.force) === 1) data.win.bringToTop();
 
         while (currWin.getTitle() !== 'NGU Idle') {
           currWin = windowManager.getActiveWindow();
         }
+
         checkIdleBorder(data, 'disable');
       }
       if (hex !== color) {

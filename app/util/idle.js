@@ -11,7 +11,6 @@ const loop = async (data) => {
 
   // for sniping
   if (data.wfm) {
-    // if we haven't waited before
     await wf(data, 'cd');
 
     if (data.wfm === 1) {

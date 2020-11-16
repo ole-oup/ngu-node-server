@@ -1,3 +1,13 @@
+config nicht übergeben mit state sondern direkt aus datei lesen
+  readcfg exportieren?
+
+terminal on exit (aus altem commit rauskramen oder google)
+  adventure und checken ob q an ist
+
+
+button mit dem ich per get die fenster alignen kann? damit ich den bei force = 1 schließen kann
+  brauch ich eig nicht weil strg+alt+entf > taskmanager nicht den focus verliert
+
 wenn infinite (alle außer quest?) oder einfach alle: neustart bei error
 
 wenn das spiel nicht gefocused ist dann kriegt er das window iwie nicht und klickt in anderen programmen rum

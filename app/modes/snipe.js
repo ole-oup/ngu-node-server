@@ -7,6 +7,7 @@ import cp from '../util/print.js';
 import { positions, button } from '../util/uxpos.js';
 import goToAdv from '../util/goToAdv.js';
 import checkIdleBorder from '../util/checkIdleBorder.js';
+import gd from '../util/getDifference.js';
 
 robot.setKeyboardDelay(0);
 
@@ -67,22 +68,27 @@ const snipeCycle = async (data) => {
   await wf(data, 'cd');
   robot.keyTap('v');
 
+  const searchStart = new Date();
+
   await wf(data, 'enemy');
   let c = crown(data);
 
-  while (!c) c = await waitForBoss(data);
+  while (!c) {
+    c = await waitForBoss(data);
+    if (Number(data.wfm) === 2 && gd(searchStart) > 13 * 1000) break; // reset snipe before megabuff runs out
+  }
 
   // if (data.wfm === 2) robot.keyTap('v');
 
   while (c) {
-    c = crown(data);
-
     await wf(data, 'cd');
 
     if (data.atkarr.length !== 0) {
       robot.keyTap(data.atkarr[0]);
       data.atkarr.shift();
     } else robot.keyTap('w');
+
+    c = crown(data);
   }
 
   data.skc++; // add to killcount

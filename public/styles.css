@@ -26,11 +26,27 @@ html {
   font-size: 20px;
 }
 
-#timer {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  font-size: 2em;
+#settings {
+  position: fixed;
+  float: left;
+  top: 10px;
+  left: 10px;
+  width: 50px;
+  height: 50px;
+  filter: invert(0.85);
+}
+
+#settings:hover {
+  cursor: pointer;
+  filter: invert(0.5);
+}
+
+.container {
+  width: 650px;
+  margin: 1em;
+  padding: 1em 0.5em;
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 1px solid var(--sec-color);
 }
 
 #alert {
@@ -40,12 +56,15 @@ html {
   top: 55px;
   right: 15px;
   font-size: 1.4em;
-  opacity: 0;
-  transition: opacity 1s;
+  display: none;
 }
 
-#alert.fade {
-  opacity: 1;
+.settings-container {
+  display: none;
+}
+
+.show {
+  display: block;
 }
 
 .flex-column {
@@ -62,12 +81,11 @@ html {
   align-items: center;
 }
 
-.container {
-  width: 650px;
-  margin: 1em;
-  padding: 1em 0.5em;
-  background-color: rgba(255, 255, 255, 0.15);
-  border: 1px solid var(--sec-color);
+.flex-wrap {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .mode {
@@ -77,7 +95,7 @@ html {
   font-size: 1.2rem;
   height: 2.5em;
   width: 6em;
-  margin: 1em 0.2em;
+  margin: 10px;
 }
 
 .mode:hover,
@@ -99,66 +117,67 @@ html {
   border: 1px solid var(--sec-color);
 }
 
-label {
+table.settingsTable {
   width: 200px;
-  margin: 0.5em 0;
+}
+
+td {
+  text-align: center;
+  width: 95px;
 }
 
 input[type='checkbox'] {
-  display: none;
+  width: 20px !important;
+  height: 20px !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  outline: 2px solid var(--sec-color);
+  box-shadow: none;
+  font-size: 2em;
 }
 
-input[type='checkbox'] + label::before {
-  width: 20px;
-  height: 20px;
-  border-radius: 15px;
-  border: 2px solid var(--prim-color);
+input[type='checkbox']:checked {
   background-color: var(--sec-color);
-  display: block;
-  content: '';
-  float: left;
-  margin: 0 5vw 5px 5px;
 }
-
-input[type='checkbox']:checked + label::before {
-  box-shadow: inset 0px 0px 0px 3px var(--sec-color);
-  background-color: var(--prim-color);
+and input[type='checkbox']:checked:after {
+  content: '\2713';
+  color: var(--sec-color);
+  position: absolute;
+  line-height: 1rem;
+  font-size: 1rem;
+  padding-left: 0.15rem;
 }
 
 input[type='number'] {
   text-align: center;
-  width: 60px;
-  height: 35px;
+  width: 40px;
+  height: 25px;
   border-radius: 5px;
   border: 2px solid var(--prim-color);
   background-color: var(--sec-color);
-  margin: 5px 0 5px 50px;
-  font-size: 1.2em;
+  font-size: 1em;
 }
 
 input[type='text'] {
   text-align: center;
-  width: 110px;
-  height: 35px;
+  width: 85px;
+  height: 25px;
   border-radius: 5px;
   border: 2px solid var(--prim-color);
   background-color: var(--sec-color);
-  font-size: 1.2em;
+  font-size: 1em;
 }
 
-select {
+select#hack {
   width: 150px;
-  height: 35px;
+  height: 25px;
+  margin-top: 15px;
   border-radius: 5px;
   border: 2px solid var(--prim-color);
   background-color: var(--sec-color);
-  font-size: 1.1em;
-  margin: 15px 0;
-}
-
-.rmouse {
-  height: 300px;
-  width: 300px;
+  font-size: 0.8em;
 }
 
 @media only screen and (max-width: 700px) {
