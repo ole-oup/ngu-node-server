@@ -15,7 +15,7 @@
       <div class="container settings-container">
         <div class="flex-column">
           <p>GENERAL</p>
-          <table class="settingsTable">
+          <table class="settings-table">
             <tbody>
               <tr>
                 <td><input type="checkbox" id="fstop" /></td>
@@ -34,7 +34,7 @@
         </div>
         <div class="flex-column">
           <p>REBIRTH</p>
-          <table class="settingsTable">
+          <table class="settings-table">
             <tbody>
               <tr>
                 <td><input type="number" id="aug" /></td>
@@ -49,7 +49,7 @@
         </div>
         <div class="flex-column">
           <p>ITOPOD</p>
-          <table class="settingsTable">
+          <table class="settings-table">
             <tbody>
               <tr>
                 <td><input type="checkbox" id="ring" /></td>
@@ -64,7 +64,7 @@
         </div>
         <div class="flex-column">
           <p>GUFFS</p>
-          <table class="settingsTable">
+          <table class="settings-table">
             <tbody>
               <tr>
                 <td><input type="number" id="dist1" /></td>
@@ -91,7 +91,7 @@
         </div>
         <div class="flex-column">
           <p>SNIPE</p>
-          <table class="settingsTable">
+          <table class="settings-table">
             <tbody>
               <tr>
                 <td><input type="checkbox" id="heal" /></td>
@@ -118,11 +118,29 @@
         </div>
         <div class="flex-column">
           <p>QUEST</p>
-          <table class="settingsTable">
+          <table class="settings-table">
             <tbody>
               <tr>
                 <td><input type="number" id="questdur" /></td>
                 <td><label for="questdur">questdur</label></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="container progress-container">
+        <div class="flex-column">
+          <div id="timer"></div>
+          <table class="settings-table">
+            <tbody>
+              <tr>
+                <td>kills</td>
+                <td id="kills"></td>
+              </tr>
+              <tr>
+                <td>kpm</td>
+                <td id="kpm"></td>
               </tr>
             </tbody>
           </table>

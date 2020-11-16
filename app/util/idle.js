@@ -38,7 +38,7 @@ const loop = async (data) => {
   if (data.inf ?? data.dur > diff) return loop(data);
 };
 
-const idle = async (data, start) => {
+const idle = async (data, start = null) => {
   try {
     data.start = start ?? new Date();
     robot.setKeyboardDelay(0);

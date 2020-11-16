@@ -18,6 +18,18 @@ const writeCfg = (cfg) => {
   });
 };
 
+const createResponse = (action = '', status = 0, msg = '') => {
+  return {
+    status,
+    action,
+    msg,
+    progress: {
+      kills: 0,
+      start: null,
+    },
+  };
+};
+
 const server = () => {
   console.clear();
   console.log('NGU script app local server');
@@ -34,53 +46,47 @@ const server = () => {
 
   wss.on('connection', (ws) => {
     ws.on('message', (message) => {
-      const response = {
-        status: 0,
-        action: '',
-        msg: '',
-      };
       try {
         const data = JSON.parse(message);
-
+        const response = createResponse();
+        const broadcast = (msg) => {
+          wss.clients.forEach((client) => {
+            if (client.readyState === WebSocket.OPEN)
+              client.send(JSON.stringify(msg));
+          });
+        };
         switch (data.req) {
           case 'mode':
-            if (isActive) throw 'Server currently active';
-            response.status = 2;
+            if (isActive) throw 'Server not ready';
+            response.status = 1;
             response.action = `m${data.mode}`;
-            response.msg = `starting mode ${data.mode}`;
+            response.msg = `Starting mode ${data.mode}`;
             cp(response.msg);
-            init(readCfg(), data.mode);
+            broadcast(response);
+            init(readCfg(), data.mode, 0, broadcast, createResponse);
             break;
           case 'status':
             response.status = 1;
             response.action = 'status';
-            response.msg = isActive ? 'Server active' : 'Server idle';
+            response.msg = isActive ? 'Server not ready' : 'Server ready';
+            broadcast(response);
             break;
           default:
             response.action = '?';
             response.msg = 'Unknown action';
+            broadcast(response);
         }
       } catch (err) {
-        response.msg = err;
         cp(err, true);
       }
-      isActive = false;
-      wss.clients.forEach((client) => {
-        if (client.readyState === WebSocket.OPEN)
-          client.send(JSON.stringify(response));
-      });
     });
   });
 
   app.get('/app/rebirth/:rmode', async (req, res) => {
     const { rmode } = req.params;
-    const response = {
-      status: 0,
-      action: `rebirth ${rmode}`,
-      msg: '',
-    };
+    const response = createResponse(`rebirth ${rmode}`);
     try {
-      if (isActive) throw 'Server currently active';
+      if (isActive) throw 'Server not ready';
       isActive = true;
 
       const cfg = readCfg();
@@ -97,13 +103,9 @@ const server = () => {
   });
 
   app.post('/app/config', (req, res) => {
-    const response = {
-      status: 0,
-      action: 'cfg',
-      msg: '',
-    };
+    const response = createResponse('cfg');
     try {
-      if (isActive) throw 'Server currently active';
+      if (isActive) throw 'Server not ready';
       isActive = true;
 
       writeCfg(req.body);

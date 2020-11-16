@@ -11,5 +11,7 @@
 
   "eslint.packageManager": "yarn",
   "eslint.format.enable": false,
-  "eslint.alwaysShowStatus": true
+  "eslint.alwaysShowStatus": true,
+
+  "editor.acceptSuggestionOnEnter": "off"
 }

@@ -1,24 +1,14 @@
-/* global fetch:false document:false WebSocket:false */
+/* global fetch:false document:false WebSocket:false location:false */
 
 const serverip = '192.168.178.35:3000';
 
 const alert = document.querySelector('#alert');
-const settings = document.querySelector('#settings');
 const settingsContainer = document.querySelector('.settings-container');
-
-const displayTimer = (start) => {
-  const now = new Date();
-  const d = now.getTime() - start.getTime();
-
-  const td = { d }; // timer data
-
-  td.m = Math.floor(td.d / 1000 / 60);
-  td.min = td.m < 10 ? `0${td.m}` : String(td.m);
-  td.s = Math.floor((td.d / 1000) % 60);
-  td.sec = td.s < 10 ? `0${td.s}` : String(td.s);
-
-  return `${td.min}:${td.sec}`;
-};
+const settings = document.querySelector('#settings');
+const progressContainer = document.querySelector('.progress-container');
+const timer = document.querySelector('#timer');
+const kills = document.querySelector('#kills');
+const kpm = document.querySelector('#kpm');
 
 const getData = async (url) => {
   try {
@@ -48,21 +38,6 @@ const postData = async (url, data) => {
   }
 };
 
-// const start = new Date();
-
-// if (timer.innerHTML !== '') throw 'timer not empty';
-
-// const startTimer = setInterval(() => {
-//   timer.innerHTML = displayTimer(start);
-// }, 1000);
-
-// const stopTimer = () => {
-//   clearInterval(startTimer);
-//   timer.innerHTML = '';
-// };
-
-// stopTimer();
-
 const setNotification = (res) => {
   alert.classList.add('fade');
   setTimeout(() => {
@@ -71,6 +46,37 @@ const setNotification = (res) => {
   alert.innerHTML = res.msg;
   if (Number(res.status) === 1) alert.style.color = 'var(--sec-color)';
   else alert.style.color = 'var(--err-color)';
+};
+
+const setProgress = (res) => {
+  const start = new Date(res.start);
+  const now = new Date();
+  const diff = now.getTime() - start.getTime();
+
+  progressContainer.classList.add('show');
+  if (timer.innerHTML === '') {
+    const timerInterval = () => {
+      const n = new Date();
+      const d = n.getTime() - start.getTime();
+      const td = { d };
+      const addZero = (num) => {
+        return num < 10 ? `0${num}` : String(num);
+      };
+      td.hrs = addZero(Math.floor(td.d / 1000 / 60 / 60));
+      td.min = addZero(Math.floor(td.d / 1000 / 60));
+      td.sec = addZero(Math.floor((td.d / 1000) % 60));
+
+      const time = `${td.hrs}:${td.min}:${td.sec}`;
+      timer.innerHTML = time;
+    };
+    setInterval(timerInterval, 1000);
+  }
+
+  const min = diff / 1000 / 60;
+  const perMin = res.kills / min;
+
+  kills.innerHTML = res.kills;
+  kpm.innerHTML = perMin.toFixed(2);
 };
 
 const saveCfg = async (cfg) => {
@@ -95,25 +101,26 @@ const saveCfg = async (cfg) => {
 
   const socket = new WebSocket(`ws://${serverip}`);
 
-  socket.onopen = () => {
-    console.log('websocket open');
-    socket.send(JSON.stringify({ req: 'status' })); // hier abfragen ob aktuell was läuft, anstatt hi in der console vom server client connected
-  };
+  socket.onopen = () => socket.send(JSON.stringify({ req: 'status' }));
 
-  socket.onmessage = function (event) {
-    const response = JSON.parse(event.data);
-    console.log(response);
-    if (Number(response.status) === 2) console.log(response.msg);
+  socket.onmessage = (e) => {
+    const response = JSON.parse(e.data);
+    if (Number(response.status) === 2) setProgress(response.progress);
     else setNotification(response);
-
-    // wenn kein timer dann hier aus start: x den timer starten
   };
 
-  const { wishes } = cfg;
+  socket.onclose = () => {
+    console.warn('Lost websocket connection, reloading in 3 seconds');
+    setTimeout(() => {
+      location.reload();
+    }, 3000);
+  };
 
   settings.addEventListener('click', () => {
     settingsContainer.classList.toggle('show');
   });
+
+  const { wishes } = cfg;
 
   document.querySelectorAll('.wish').forEach((element) => {
     wishes.forEach((wish) => {
