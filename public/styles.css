@@ -35,7 +35,6 @@ html {
   height: 50px;
   filter: invert(0.85);
 }
-
 #settings:hover {
   cursor: pointer;
   filter: invert(0.5);
@@ -53,16 +52,19 @@ html {
   color: var(--err-color);
   position: fixed;
   max-width: 300px;
-  top: 55px;
+  top: 5px;
   right: 15px;
-  font-size: 1.4em;
-  display: none;
+  font-size: 1.2em;
+  opacity: 0;
+  transition: opacity 0.8s;
+}
+#alert.fade {
+  opacity: 1;
 }
 
 .settings-container {
   display: none;
 }
-
 .show {
   display: block;
 }
@@ -133,17 +135,18 @@ input[type='checkbox'] {
   -moz-appearance: none;
   -o-appearance: none;
   appearance: none;
+  background-color: var(--sec-color);
   outline: 2px solid var(--sec-color);
   box-shadow: none;
   font-size: 2em;
 }
 
 input[type='checkbox']:checked {
-  background-color: var(--sec-color);
+  background-color: var(--prim-color);
 }
 and input[type='checkbox']:checked:after {
   content: '\2713';
-  color: var(--sec-color);
+  color: var(--prim-color);
   position: absolute;
   line-height: 1rem;
   font-size: 1rem;

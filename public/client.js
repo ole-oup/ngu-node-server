@@ -1,5 +1,7 @@
 /* global fetch:false document:false WebSocket:false */
 
+const serverip = '192.168.178.35:3000';
+
 const alert = document.querySelector('#alert');
 const settings = document.querySelector('#settings');
 const settingsContainer = document.querySelector('.settings-container');
@@ -62,10 +64,10 @@ const postData = async (url, data) => {
 // stopTimer();
 
 const setNotification = (res) => {
-  alert.classList.add('show');
+  alert.classList.add('fade');
   setTimeout(() => {
-    alert.classList.remove('show');
-  }, 1300);
+    alert.classList.remove('fade');
+  }, 3500);
   alert.innerHTML = res.msg;
   if (Number(res.status) === 1) alert.style.color = 'var(--sec-color)';
   else alert.style.color = 'var(--err-color)';
@@ -91,15 +93,19 @@ const saveCfg = async (cfg) => {
     cfg = await getData('/default-config.json');
   }
 
-  const socket = new WebSocket('ws://localhost:3000');
+  const socket = new WebSocket(`ws://${serverip}`);
 
   socket.onopen = () => {
     console.log('websocket open');
-    socket.send(JSON.stringify({ msg: 'hi' })); // hier abfragen ob aktuell was läuft, anstatt hi in der console vom server client connected
+    socket.send(JSON.stringify({ req: 'status' })); // hier abfragen ob aktuell was läuft, anstatt hi in der console vom server client connected
   };
 
   socket.onmessage = function (event) {
-    console.log(event.data);
+    const response = JSON.parse(event.data);
+    console.log(response);
+    if (Number(response.status) === 2) console.log(response.msg);
+    else setNotification(response);
+
     // wenn kein timer dann hier aus start: x den timer starten
   };
 

@@ -13,7 +13,7 @@ const readCfg = () => {
 const writeCfg = (cfg) => {
   if (!cfg.init) throw 'Invalid data';
   const data = JSON.stringify(cfg, null, 2);
-  fs.writeFile('public/config.json', data, (err) => {
+  fs.writeFileSync('public/config.json', data, (err) => {
     if (err) throw err;
   });
 };
@@ -41,29 +41,42 @@ const server = () => {
       };
       try {
         const data = JSON.parse(message);
-        console.log(data);
-        if (data.req === 'mode') {
-          if (isActive) throw 'Server currently active';
 
-          const cfg = readCfg();
-          init(cfg, data.mode);
+        switch (data.req) {
+          case 'mode':
+            if (isActive) throw 'Server currently active';
+            response.status = 2;
+            response.action = `m${data.mode}`;
+            response.msg = `starting mode ${data.mode}`;
+            cp(response.msg);
+            init(readCfg(), data.mode);
+            break;
+          case 'status':
+            response.status = 1;
+            response.action = 'status';
+            response.msg = isActive ? 'Server active' : 'Server idle';
+            break;
+          default:
+            response.action = '?';
+            response.msg = 'Unknown action';
         }
       } catch (err) {
         response.msg = err;
         cp(err, true);
       }
       isActive = false;
-      ws.send(JSON.stringify(response));
+      wss.clients.forEach((client) => {
+        if (client.readyState === WebSocket.OPEN)
+          client.send(JSON.stringify(response));
+      });
     });
-
-    // ws.send('test');
   });
 
   app.get('/app/rebirth/:rmode', async (req, res) => {
     const { rmode } = req.params;
     const response = {
       status: 0,
-      action: `Rebirth ${rmode}`,
+      action: `rebirth ${rmode}`,
       msg: '',
     };
     try {
