@@ -63,7 +63,7 @@ const setProgress = (res) => {
         return num < 10 ? `0${num}` : String(num);
       };
       td.hrs = addZero(Math.floor(td.d / 1000 / 60 / 60));
-      td.min = addZero(Math.floor(td.d / 1000 / 60));
+      td.min = addZero(Math.floor((td.d / 1000 / 60) % 60));
       td.sec = addZero(Math.floor((td.d / 1000) % 60));
 
       const time = `${td.hrs}:${td.min}:${td.sec}`;
