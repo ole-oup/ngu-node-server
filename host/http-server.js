@@ -3,7 +3,7 @@ import WebSocket from 'ws';
 import fs from 'fs';
 import cp from '../app/util/print.js';
 
-import init from '../app/app-index.js';
+import startApp from '../app/app-index.js';
 
 const readCfg = () => {
   const cfg = fs.readFileSync('public/config.json');
@@ -62,8 +62,9 @@ const server = () => {
             response.action = `m${data.mode}`;
             response.msg = `Starting mode ${data.mode}`;
             cp(response.msg);
+            isActive = true;
             broadcast(response);
-            init(readCfg(), data.mode, 0, broadcast, createResponse);
+            startApp(readCfg(), data.mode, 0, broadcast, createResponse);
             break;
           case 'status':
             response.status = 1;
@@ -90,15 +91,15 @@ const server = () => {
       isActive = true;
 
       const cfg = readCfg();
-      await init(cfg, 1, rmode);
+      await startApp(cfg, 1, rmode);
 
       response.status = 1;
       response.msg = `Finished Rebirth ${rmode}`;
+      isActive = false;
     } catch (err) {
       response.msg = err;
       cp(err, true);
     }
-    isActive = false;
     res.send(JSON.stringify(response));
   });
 
@@ -113,11 +114,11 @@ const server = () => {
       response.status = 1;
       response.msg = 'Data written to file';
       cp(response.msg);
+      isActive = false;
     } catch (err) {
       response.msg = err;
       cp(err, true);
     }
-    isActive = false;
     res.send(JSON.stringify(response));
   });
 

@@ -4,7 +4,14 @@ import wf from './waitFor.js';
 import gd from './getDifference.js';
 import cp from './print.js';
 
-const loop = async (data) => {
+// setImmediate() to unblock the event loop and allow communication with clients
+function setImmediatePromise() {
+  return new Promise((resolve) => {
+    setImmediate(() => resolve());
+  });
+}
+
+const loop = async (data, killcount) => {
   const diff = gd(data.start);
 
   if (!data.inf && diff > data.dur) return;
@@ -20,8 +27,7 @@ const loop = async (data) => {
           data.crd.x + 858,
           data.crd.y + 105
         );
-
-        if (ultimate !== '7c4e4e') return robot.keyTap('g');
+        if (ultimate !== '7c4e4e') return robot.keyTap('g'); // only return charge when ult is ready too
       }
     }
 
@@ -34,8 +40,18 @@ const loop = async (data) => {
   await wf(data, 'enemy');
 
   robot.keyTap('w');
+  const kc = killcount + 1;
+  const res = {
+    ...data.response('sniping', 2),
+    progress: {
+      kills: kc,
+      start: data.start,
+    },
+  };
+  data.broadcast(res);
 
-  if (data.inf ?? data.dur > diff) return loop(data);
+  await setImmediatePromise();
+  if (data.inf ?? data.dur > diff) loop(data, kc);
 };
 
 const idle = async (data, start = null) => {
@@ -44,7 +60,7 @@ const idle = async (data, start = null) => {
     robot.setKeyboardDelay(0);
     await wf(data, 'enemy');
 
-    await loop(data);
+    await loop(data, 0);
   } catch (err) {
     cp(err, true);
   }

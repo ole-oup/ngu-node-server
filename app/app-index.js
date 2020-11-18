@@ -42,7 +42,7 @@ const getGameCoords = () => {
   }
 };
 
-const init = async (config, mode, rmode, broadcast, response) => {
+const startApp = async (config, mode, rmode, broadcast, response) => {
   try {
     const appStart = new Date();
 
@@ -67,7 +67,7 @@ const init = async (config, mode, rmode, broadcast, response) => {
       cfg: config, //     config
       win: gameWin, //    game's window object
 
-      inf: null, //       infinite itopod [idle / toweridle, snipe]
+      inf: false, //      infinite itopod [idle / toweridle, snipe]
       dur: null, //       itopod duration [idle / toweridle, snipe] in ms
       wfm: 0, //          wait for move [snipe / idle]
     };
@@ -105,4 +105,4 @@ const init = async (config, mode, rmode, broadcast, response) => {
   }
 };
 
-export default init;
+export default startApp;

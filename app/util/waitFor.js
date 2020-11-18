@@ -25,7 +25,7 @@ const wf = (data, trigger) => {
     case 'hp':
       x = 514;
       y = 411;
-      timer.end = 10000;
+      // timer.end = 10000;
       break;
     default:
       throw 'WaitFor-Trigger Error';

@@ -14,7 +14,6 @@
   "heal": 0,
   "zone": 0,
   "move": 1,
-  "idle": 60,
   "atk": "ytewa",
   "questdur": 8,
   "wishes": ["11", "12", "13", "14"],

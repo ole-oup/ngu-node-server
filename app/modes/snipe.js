@@ -33,8 +33,6 @@ const waitForBoss = async (data) => {
 };
 
 const snipeCycle = async (data, killcount) => {
-  let kc = killcount;
-
   if (data.wfm !== 0) {
     // if we wait for a move -> start idle
     await button(data, positions.Adventure.EnterITOPOD.Button);
@@ -77,6 +75,7 @@ const snipeCycle = async (data, killcount) => {
     if (Number(data.wfm) === 2 && gd(searchStart) > 13 * 1000) break; // reset snipe before megabuff runs out
   }
 
+  let kc;
   while (c) {
     // only runs when there is a boss before the timeout
     await wf(data, 'cd');
@@ -91,7 +90,7 @@ const snipeCycle = async (data, killcount) => {
     if (!c) {
       kc = killcount + 1;
       const res = {
-        ...data.response('sniping', 2),
+        ...data.response('itopoding', 2),
         progress: {
           kills: kc,
           start,
@@ -109,14 +108,12 @@ const snipeCycle = async (data, killcount) => {
 
 const snipe = async (data) => {
   try {
-    const idle = Number(data.cfg.idle);
     data.wfm = Number(data.cfg.move);
 
     start = new Date();
-    let killcount = 0;
 
     if (data.wfm !== 0) data.inf = true;
-    else data.dur = idle * 1000;
+    data.dur = 60;
 
     data.broadcast({
       ...data.response('sniping', 2),
@@ -127,7 +124,7 @@ const snipe = async (data) => {
     });
 
     await goToAdv(data);
-    await snipeCycle(data, killcount);
+    await snipeCycle(data, 0);
   } catch (err) {
     cp(err);
   }

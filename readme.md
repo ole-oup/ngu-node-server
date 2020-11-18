@@ -17,7 +17,6 @@
 | heal     | 0                        | heal in safe zone                                                                    | snipe     |
 | zone     | 0                        | zones to go back                                                                     | snipe     |
 | move     | 1                        | move to wait for: 0 = none, 1 = charge, 2 = megabuff                                 | snipe     |
-| idle     | 60                       | backup idle duration                                                                 | snipe     |
 | atk      | ytewa                    | attack order                                                                         | snipe     |
 | questdur | 8                        | quest duration in m                                                                  | quest     |
 | wishes   | ["11", "12", "13", "14"] | selected wishes                                                                      | rebirth   |
