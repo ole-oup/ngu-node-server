@@ -40,18 +40,22 @@ const loop = async (data, killcount) => {
   await wf(data, 'enemy');
 
   robot.keyTap('w');
-  const kc = killcount + 1;
-  const res = {
-    ...data.response('sniping', 2),
-    progress: {
-      kills: kc,
-      start: data.start,
-    },
-  };
-  data.broadcast(res);
+
+  let kc = killcount;
+  if (data.mode === 2) {
+    kc++;
+    const res = {
+      ...data.response('idle', 2),
+      progress: {
+        kills: kc,
+        start: data.start,
+      },
+    };
+    data.broadcast(res);
+  }
 
   await setImmediatePromise();
-  if (data.inf ?? data.dur > diff) loop(data, kc);
+  if (data.inf ?? data.dur > diff) return loop(data, kc);
 };
 
 const idle = async (data, start = null) => {

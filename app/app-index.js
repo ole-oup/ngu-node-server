@@ -44,6 +44,7 @@ const getGameCoords = () => {
 
 const startApp = async (config, mode, rmode, broadcast, response) => {
   try {
+    const m = Number(mode);
     const appStart = new Date();
 
     const ggc = getGameCoords();
@@ -60,6 +61,7 @@ const startApp = async (config, mode, rmode, broadcast, response) => {
 
     // data (state) for modules
     const state = {
+      mode: m, //         current mode
       start: appStart, // start of current mode
       broadcast, //       broadcast() from http-server
       response, //        response from http-server
@@ -72,7 +74,7 @@ const startApp = async (config, mode, rmode, broadcast, response) => {
       wfm: 0, //          wait for move [snipe / idle]
     };
 
-    switch (Number(mode)) {
+    switch (m) {
       case 0:
         await db(state);
         break;

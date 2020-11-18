@@ -75,7 +75,7 @@ const snipeCycle = async (data, killcount) => {
     if (Number(data.wfm) === 2 && gd(searchStart) > 13 * 1000) break; // reset snipe before megabuff runs out
   }
 
-  let kc;
+  let kc = killcount;
   while (c) {
     // only runs when there is a boss before the timeout
     await wf(data, 'cd');
@@ -88,9 +88,9 @@ const snipeCycle = async (data, killcount) => {
     c = crown(data);
 
     if (!c) {
-      kc = killcount + 1;
+      kc++;
       const res = {
-        ...data.response('itopoding', 2),
+        ...data.response('snipe', 2),
         progress: {
           kills: kc,
           start,
@@ -113,10 +113,10 @@ const snipe = async (data) => {
     start = new Date();
 
     if (data.wfm !== 0) data.inf = true;
-    data.dur = 60;
+    else data.dur = 0;
 
     data.broadcast({
-      ...data.response('sniping', 2),
+      ...data.response('snipe', 2),
       progress: {
         kills: 0,
         start,
