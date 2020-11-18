@@ -11,7 +11,6 @@
   "rules": {
     "prefer-destructuring": ["warn", { "object": true, "array": false }],
     "prefer-template": "warn",
-    "eqeqeq": "warn",
     "no-constant-condition": "off",
     "no-else-return": "warn"
   },

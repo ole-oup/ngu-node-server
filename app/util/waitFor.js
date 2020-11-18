@@ -42,13 +42,13 @@ const wf = (data, trigger) => {
       let currWin = windowManager.getActiveWindow();
       if (currWin.getTitle() !== 'NGU Idle') {
         data.win.bringToTop();
-        if (Number(data.cfg.force) !== 1) robot.keyTap('q');
+        if (data.cfg.force != 1) robot.keyTap('q');
 
         currWin.bringToTop();
-        if (Number(data.cfg.fstop) === 1) throw 'Game lost focus';
+        if (data.cfg.fstop == 1) throw 'Game lost focus';
         else cp('Game lost focus');
 
-        if (Number(data.cfg.force) === 1) data.win.bringToTop();
+        if (data.cfg.force == 1) data.win.bringToTop();
 
         while (currWin.getTitle() !== 'NGU Idle') {
           currWin = windowManager.getActiveWindow();

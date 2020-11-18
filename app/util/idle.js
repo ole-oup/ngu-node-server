@@ -11,16 +11,18 @@ function setImmediatePromise() {
   });
 }
 
-const loop = async (data, killcount) => {
-  const diff = gd(data.start);
+robot.setKeyboardDelay(0);
 
-  if (!data.inf && diff > data.dur) return;
+const loop = async (data, killcount, start, duration, wfm, infinite) => {
+  const diff = gd(start);
+
+  if (!infinite && diff > duration) return;
 
   // for sniping
-  if (data.wfm) {
+  if (wfm !== null) {
     await wf(data, 'cd');
 
-    if (data.wfm === 1) {
+    if (wfm == 1) {
       const charge = robot.getPixelColor(data.crd.x + 757, data.crd.y + 139);
       if (charge !== '334452') {
         const ultimate = robot.getPixelColor(
@@ -31,7 +33,7 @@ const loop = async (data, killcount) => {
       }
     }
 
-    if (data.wfm === 2) {
+    if (wfm == 2) {
       const megabuff = robot.getPixelColor(data.crd.x + 664, data.crd.y + 175);
       if (megabuff !== '624a4a') return;
     }
@@ -48,23 +50,29 @@ const loop = async (data, killcount) => {
       ...data.response('idle', 2),
       progress: {
         kills: kc,
-        start: data.start,
+        start,
       },
     };
     data.broadcast(res);
   }
 
   await setImmediatePromise();
-  if (data.inf ?? data.dur > diff) return loop(data, kc);
+  if (infinite ?? duration > diff)
+    return loop(data, kc, start, duration, wfm, infinite);
 };
 
-const idle = async (data, start = null) => {
+const idle = async (
+  data,
+  start = null,
+  duration = 60,
+  wfm = null,
+  infinite = false
+) => {
   try {
-    data.start = start ?? new Date();
-    robot.setKeyboardDelay(0);
     await wf(data, 'enemy');
 
-    await loop(data, 0);
+    const idleStart = start ?? new Date();
+    await loop(data, 0, idleStart, duration, wfm, infinite);
   } catch (err) {
     cp(err, true);
   }

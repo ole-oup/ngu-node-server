@@ -69,7 +69,7 @@ const server = () => {
           case 'status':
             response.status = 1;
             response.action = 'status';
-            response.msg = isActive ? 'Server not ready' : 'Server ready';
+            response.msg = isActive ? 'Server active' : 'Server ready';
             broadcast(response);
             break;
           default:

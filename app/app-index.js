@@ -45,7 +45,7 @@ const getGameCoords = () => {
 const startApp = async (config, mode, rmode, broadcast, response) => {
   try {
     const m = Number(mode);
-    const appStart = new Date();
+    let lazymode = config.lazystop == 1;
 
     const ggc = getGameCoords();
     const { coords, gameWin } = ggc;
@@ -61,17 +61,13 @@ const startApp = async (config, mode, rmode, broadcast, response) => {
 
     // data (state) for modules
     const state = {
-      mode: m, //         current mode
-      start: appStart, // start of current mode
-      broadcast, //       broadcast() from http-server
-      response, //        response from http-server
-      crd: coords, //     game bounds
-      cfg: config, //     config
-      win: gameWin, //    game's window object
-
-      inf: false, //      infinite itopod [idle / toweridle, snipe]
-      dur: null, //       itopod duration [idle / toweridle, snipe] in ms
-      wfm: 0, //          wait for move [snipe / idle]
+      mode: m, //           current mode
+      start: new Date(), // start of current mode
+      broadcast, //         broadcast() from http-server
+      response, //          response from http-server
+      crd: coords, //       game bounds
+      cfg: config, //       config
+      win: gameWin, //      game's window object
     };
 
     switch (m) {
@@ -94,14 +90,12 @@ const startApp = async (config, mode, rmode, broadcast, response) => {
         await quest(state);
         break;
       case 6:
-        state.cfg.lazystop = 1;
+        lazymode = true;
         break;
       default:
         throw 'Invalid Mode';
     }
-
-    if (Number(state.cfg.lazystop) === 1)
-      await lazyshifter(state, activeWindow, initWin);
+    if (lazymode) await lazyshifter(state, activeWindow, initWin);
   } catch (err) {
     return cp(err, true);
   }

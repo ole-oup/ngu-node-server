@@ -44,7 +44,7 @@ const setNotification = (res) => {
     alert.classList.remove('fade');
   }, 3500);
   alert.innerHTML = res.msg;
-  if (Number(res.status) === 1) alert.style.color = 'var(--sec-color)';
+  if (res.status == 1) alert.style.color = 'var(--sec-color)';
   else alert.style.color = 'var(--err-color)';
 };
 
@@ -105,7 +105,7 @@ const saveCfg = async (cfg) => {
 
   socket.onmessage = (e) => {
     const response = JSON.parse(e.data);
-    if (Number(response.status) === 2) setProgress(response.progress);
+    if (response.status == 2) setProgress(response.progress);
     else setNotification(response);
   };
 
@@ -165,8 +165,7 @@ const saveCfg = async (cfg) => {
     .forEach((input) => {
       input.value = cfg[input.id];
       input.addEventListener('change', () => {
-        cfg[input.id] =
-          input.type === 'number' ? Number(input.value) : input.value;
+        cfg[input.id] = input.value;
         saveCfg(cfg);
       });
     });

@@ -4,14 +4,14 @@ import robot from 'robotjs';
 import { button, positions } from './uxpos.js';
 import checkIdleBorder from './checkIdleBorder.js';
 
-const goToAdv = async (data) => {
+const goToAdv = async (data, zone) => {
   await button(data, positions.Adventure.Menu);
 
   checkIdleBorder(data);
 
   // todo check beastmode
 
-  if (Number(data.cfg.quest) !== 1) {
+  if (data.cfg.quest != 1 || zone !== 'quest') {
     await button(data, positions.Adventure.EnterITOPOD.Button);
     await button(data, positions.Adventure.EnterITOPOD.Enter);
     await button(data, positions.Adventure.EnterITOPOD.Button);

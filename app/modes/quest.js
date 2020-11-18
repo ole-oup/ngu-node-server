@@ -4,14 +4,12 @@ import checkIdleBorder from '../util/checkIdleBorder.js';
 import { button, positions } from '../util/uxpos.js';
 
 const quest = async (data) => {
-  data.cfg.quest = 1;
   const { questdur } = data.cfg;
 
-  data.start = new Date();
-  data.dur = Number(questdur) * 60 * 1000;
+  const duration = Number(questdur) * 60 * 1000; // todo
 
-  await goToAdv(data);
-  await idle(data);
+  await goToAdv(data, 'quest');
+  await idle(data, null, duration);
 
   checkIdleBorder(data);
   await button(data, positions.Inventory.Menu);

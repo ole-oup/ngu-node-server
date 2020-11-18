@@ -1,7 +1,5 @@
-import gd from './getDifference.js';
-
-const dt = (data, duration) => {
-  const d = duration ?? gd(data.start); // duration
+const dt = (duration) => {
+  const d = duration;
 
   const td = { d }; // timer data
 

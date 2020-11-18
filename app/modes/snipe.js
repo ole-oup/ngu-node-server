@@ -23,7 +23,7 @@ const waitForBoss = async (data) => {
   robot.keyTap('right');
 
   const charge = robot.getPixelColor(data.crd.x + 757, data.crd.y + 139);
-  if (Number(data.cfg.heal) !== 1 && charge === '6687a3') {
+  if (data.cfg.heal != 1 && charge === '6687a3') {
     robot.keyTap('g');
   }
 
@@ -32,35 +32,33 @@ const waitForBoss = async (data) => {
   return crown(data);
 };
 
-const snipeCycle = async (data, killcount) => {
-  if (data.wfm !== 0) {
-    // if we wait for a move -> start idle
-    await button(data, positions.Adventure.EnterITOPOD.Button);
-    await button(data, positions.Adventure.EnterITOPOD.Enter);
+const snipeCycle = async (data, killcount, wfm) => {
+  // if we wait for a move -> start idle
+  await button(data, positions.Adventure.EnterITOPOD.Button);
+  await button(data, positions.Adventure.EnterITOPOD.Enter);
 
-    await idle(data);
+  await idle(data, null, 60, wfm, true);
 
-    if (Number(data.cfg.heal) === 1) {
-      await click(data.crd, 735, 210, true); // left arrow
-      await wf(data, 'cd');
-      robot.keyTap('b');
-      await wf(data, 'cd');
-      robot.keyTap('g');
-      await wf(data, 'cd');
-      robot.keyTap('r');
-      await wf(data, 'hp');
-    } else if (Number(data.cfg.heal) !== 1 && data.wfm === 2) {
-      // wait for charge if we wait for megabuff
-      await wf(data, 'cd');
-      robot.keyTap('g');
-    }
+  if (data.cfg.heal == 1) {
+    await click(data.crd, 735, 210, true); // left arrow
+    await wf(data, 'cd');
+    robot.keyTap('b');
+    await wf(data, 'cd');
+    robot.keyTap('g');
+    await wf(data, 'cd');
+    robot.keyTap('r');
+    await wf(data, 'hp');
+  } else if (data.cfg.heal != 1 && wfm == 2) {
+    // wait for charge if we wait for megabuff
+    await wf(data, 'cd');
+    robot.keyTap('g');
   }
 
   await click(data.crd, 937, 210, true); // right arrow
   const zonesBack = Number(data.cfg.zone);
   if (zonesBack !== 0) for (let i = 0; i < zonesBack; i++) robot.keyTap('left');
 
-  data.atkarr = [...data.cfg.atk];
+  const atkarr = [...data.cfg.atk];
 
   await wf(data, 'cd');
   robot.keyTap('v');
@@ -72,7 +70,7 @@ const snipeCycle = async (data, killcount) => {
 
   while (!c) {
     c = await waitForBoss(data);
-    if (Number(data.wfm) === 2 && gd(searchStart) > 13 * 1000) break; // reset snipe before megabuff runs out
+    if (wfm == 2 && gd(searchStart) > 13 * 1000) break; // reset snipe before megabuff runs out
   }
 
   let kc = killcount;
@@ -80,9 +78,9 @@ const snipeCycle = async (data, killcount) => {
     // only runs when there is a boss before the timeout
     await wf(data, 'cd');
 
-    if (data.atkarr.length !== 0) {
-      robot.keyTap(data.atkarr[0]);
-      data.atkarr.shift();
+    if (atkarr.length !== 0) {
+      robot.keyTap(atkarr[0]);
+      atkarr.shift();
     } else robot.keyTap('w');
 
     c = crown(data);
@@ -100,20 +98,12 @@ const snipeCycle = async (data, killcount) => {
     }
   }
 
-  // todo hier wird nur der versuch gezählt, wenn oben waitForBoss abläuft dann zählt er trotzdem
-  // oben in while if (!c) data.skc++
-  // skc umbenennen und einfach als versuchscounter laufen lassen?
-  snipeCycle(data, kc);
+  snipeCycle(data, kc, wfm);
 };
 
 const snipe = async (data) => {
   try {
-    data.wfm = Number(data.cfg.move);
-
     start = new Date();
-
-    if (data.wfm !== 0) data.inf = true;
-    else data.dur = 0;
 
     data.broadcast({
       ...data.response('snipe', 2),
@@ -124,7 +114,7 @@ const snipe = async (data) => {
     });
 
     await goToAdv(data);
-    await snipeCycle(data, 0);
+    await snipeCycle(data, 0, data.cfg.move);
   } catch (err) {
     cp(err);
   }

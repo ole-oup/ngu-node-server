@@ -10,6 +10,9 @@ import gd from '../util/getDifference.js';
 import checkIdleBorder from '../util/checkIdleBorder.js';
 import wait from '../util/wait.js';
 
+let timings = {};
+let counter = 0;
+
 const countdown = async (str, sec) => {
   for (sec; sec > 0; sec--) {
     cp(`${str} ${sec}...`);
@@ -27,14 +30,13 @@ const moneypit = async (data) => {
 };
 
 const idleWaiting = async (data, start, dist) => {
-  const d = data.timings[dist];
+  const d = timings[dist];
 
-  status(data, `idle to ${dist} => ${dt(data, d)}`);
+  status(data, `idle to ${dist} => ${dt(d)}`);
 
   await goToAdv(data);
 
-  data.dur = d;
-  await idle(data, start);
+  await idle(data, start, d);
 
   checkIdleBorder(data);
 
@@ -43,13 +45,13 @@ const idleWaiting = async (data, start, dist) => {
 };
 
 const status = (data, action) => {
-  cp(`rb #${data.counter}, ${action}`);
+  cp(`rb #${counter}, ${action}`);
 };
 
 const loop = async (data) => {
   data.win.bringToTop();
 
-  data.start = new Date();
+  const start = new Date();
 
   status(data, 'init dist');
   await rebirth(data, 1);
@@ -63,25 +65,25 @@ const loop = async (data) => {
 
   checkIdleBorder(data);
 
-  status(data, `waiting for dist1 => ${dt(data, data.timings.dist1)}`);
-  const curTime = gd(data.start);
-  await wait((data.timings.dist1 - curTime) / 1000);
+  status(data, `waiting for dist1 => ${dt(timings.dist1)}`);
+  const curTime = gd(start);
+  await wait((timings.dist1 - curTime) / 1000);
 
   status(data, 'dist1');
   await moneypit(data);
   await rebirth(data, 1);
 
-  await idleWaiting(data, data.start, 'dist2');
+  await idleWaiting(data, start, 'dist2');
   await rebirth(data, 1);
 
-  await idleWaiting(data, data.start, 'dist3');
+  await idleWaiting(data, start, 'dist3');
   await rebirth(data, 2);
 
-  await idleWaiting(data, data.start, 'dist4');
+  await idleWaiting(data, start, 'dist4');
   await rebirth(data, 2);
 
   // final wait
-  await idleWaiting(data, data.start, 'total');
+  await idleWaiting(data, start, 'total');
 
   // nuke
   await button(data, positions.FightBoss.Menu);
@@ -94,7 +96,7 @@ const loop = async (data) => {
   await button(data, positions.Rebirth.Rebirth);
   await button(data, positions.Rebirth.Yeah);
 
-  data.counter++;
+  counter++;
 
   loop(data);
 };
@@ -112,9 +114,7 @@ const thirtyMin = async (data) => {
     const total = Number(data.cfg.total);
     if (dist4 >= total) throw "Distributions can't be longer than total";
 
-    data.cfg.fstop = 0;
-
-    data.timings = {
+    timings = {
       dist1: dist1 * 60 * 1000,
       dist2: dist2 * 60 * 1000,
       dist3: dist3 * 60 * 1000,
@@ -122,7 +122,7 @@ const thirtyMin = async (data) => {
       total: total * 60 * 1000,
     };
 
-    data.counter = 1;
+    counter = 1;
 
     await countdown('starting in', 10);
 

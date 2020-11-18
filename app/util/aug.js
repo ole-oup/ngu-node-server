@@ -1,13 +1,7 @@
 const ga = (data) => {
-  /* 
-     todo scrollen einbauen?
-     muss immer nach oben gescrollt sein
-     außer letze beiden, dann ganz unten
-  */
-
   const result = {};
 
-  const aug = data.cfg.aug ?? 1;
+  const { aug } = data.cfg;
   switch (Number(aug)) {
     case 1:
       result.x = 538;

@@ -6,9 +6,7 @@ import idle from '../util/idle.js';
 import { button, positions } from '../util/uxpos.js';
 
 const towerIdle = async (data) => {
-  data.inf = true;
-
-  if (Number(data.cfg.ring) === 1) {
+  if (data.cfg.ring == 1) {
     await button(data, positions.Inventory.Menu);
     await click(data.crd, 358, 574);
     const ring = robot.getPixelColor(data.crd.x + 898, data.crd.y + 532);
@@ -18,7 +16,7 @@ const towerIdle = async (data) => {
   }
 
   await goToAdv(data);
-  await idle(data);
+  await idle(data, null, null, null, true);
 };
 
 export default towerIdle;
