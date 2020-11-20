@@ -128,20 +128,20 @@ const saveCfg = async (cfg) => {
 
   const { wishes } = cfg;
 
-  document.querySelectorAll('.wish').forEach((element) => {
+  document.querySelectorAll('.wish').forEach((el) => {
     wishes.forEach((wish) => {
-      if (wish === element.innerHTML) element.classList.add('selected-wish');
+      if (wish == el.id) el.classList.add('selected-wish');
     });
-    element.addEventListener('click', () => {
-      if (element.classList.contains('selected-wish')) {
-        element.classList.remove('selected-wish');
+    el.addEventListener('click', () => {
+      if (el.classList.contains('selected-wish')) {
+        el.classList.remove('selected-wish');
         let i = wishes.length;
         while (i--) {
-          if (wishes[i] === element.innerHTML) wishes.splice(i, 1);
+          if (wishes[i] == el.id) wishes.splice(i, 1);
         }
       } else {
-        element.classList.add('selected-wish');
-        wishes.push(element.innerHTML);
+        el.classList.add('selected-wish');
+        wishes.push(el.id);
       }
       if (wishes.length === 4) {
         document.documentElement.style.setProperty(
