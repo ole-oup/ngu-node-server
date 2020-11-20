@@ -186,8 +186,11 @@ export const positions = {
   Diggers: {
     Menu: [233, 346],
     Page1: [341, 110],
-    Page3: [468, 110],
     WandoosCap: [865, 185],
+    Page2: [405, 110],
+    ENGUCap: [548, 185],
+    MNGUCap: [865, 185],
+    Page3: [468, 110],
     BloodCap: [548, 376],
     CapSaved: [798, 113],
     ClearAllActive: [906, 98],

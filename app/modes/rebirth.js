@@ -30,6 +30,7 @@ const rebirth = async (data, rmode) => {
     if (rmode != 4) {
       // ngu
       await button(data, positions.NGU.Menu);
+      await button(data, positions.NGU.EvilCheck);
       await button(data, positions.NGU.CapAll);
       await button(data, positions.NGU.SwitchMode);
       await button(data, positions.NGU.CapAll);
@@ -108,6 +109,11 @@ const rebirth = async (data, rmode) => {
         await button(data, positions.Inputs.InputCustom4);
         break;
       case 4:
+        // ngu diggers
+        await button(data, positions.Diggers.Menu);
+        await button(data, positions.Diggers.Page2);
+        await button(data, positions.Diggers.ENGUCap);
+        await button(data, positions.Diggers.MNGUCap);
         // ngu
         await button(data, positions.NGU.Menu);
         await button(data, positions.NGU.SadCheck);
