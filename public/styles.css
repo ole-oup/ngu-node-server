@@ -26,6 +26,21 @@ html {
   font-size: 20px;
 }
 
+.container {
+  width: 650px;
+  margin: 1em;
+  padding: 1em 0.5em;
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 1px solid var(--sec-color);
+}
+
+.col {
+  border: 1px solid var(--sec-color);
+  width: 200px;
+  margin: 2px 3px;
+  padding-bottom: 20px;
+}
+
 #settings {
   position: fixed;
   float: left;
@@ -38,14 +53,6 @@ html {
 #settings:hover {
   cursor: pointer;
   filter: invert(0.5);
-}
-
-.container {
-  width: 650px;
-  margin: 1em;
-  padding: 1em 0.5em;
-  background-color: rgba(255, 255, 255, 0.15);
-  border: 1px solid var(--sec-color);
 }
 
 #alert {
@@ -63,18 +70,17 @@ html {
   opacity: 1;
 }
 
-.settings-container,
-.progress-container {
-  display: none;
-}
-.show {
-  display: block;
-}
-
 .flex-column {
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
+  align-items: center;
+}
+
+.flex-column-start {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: start;
   align-items: center;
 }
 
@@ -92,14 +98,25 @@ html {
   align-items: center;
 }
 
+.flex-fill {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.hide {
+  display: none;
+}
+
 .mode {
   background-color: var(--sec-color);
   border: 1px solid var(--prim-color);
   border-radius: 0;
-  font-size: 1.2rem;
-  height: 2.5em;
-  width: 6em;
-  margin: 10px;
+  font-size: 32px;
+  height: 100px;
+  width: 220px;
+  margin: 2px;
 }
 
 .mode:hover,
@@ -193,6 +210,13 @@ select#hack {
   .container {
     width: 80%;
   }
+
+  .mode {
+    height: 2.5em;
+    width: 6em;
+    margin: 10px;
+  }
+
   .wish {
     margin: 0;
   }

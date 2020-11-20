@@ -3,12 +3,18 @@
 const serverip = '192.168.178.35:3000';
 
 const alert = document.querySelector('#alert');
-const settingsContainer = document.querySelector('.settings-container');
+const settingsContainer = document.querySelector('#settings-container');
+const progressContainer = document.querySelector('#progress-container');
 const settings = document.querySelector('#settings');
-const progressContainer = document.querySelector('.progress-container');
 const timer = document.querySelector('#timer');
 const kills = document.querySelector('#kills');
 const kpm = document.querySelector('#kpm');
+
+const toggleVisibility = (el) => {
+  el.style.display === 'none'
+    ? (el.style.display = 'block')
+    : (el.style.display = 'none');
+};
 
 const getData = async (url) => {
   try {
@@ -53,7 +59,7 @@ const setProgress = (res) => {
   const now = new Date();
   const diff = now.getTime() - start.getTime();
 
-  progressContainer.classList.add('show');
+  progressContainer.style.display = 'block';
   if (timer.innerHTML === '') {
     const timerInterval = () => {
       const n = new Date();
@@ -117,7 +123,7 @@ const saveCfg = async (cfg) => {
   };
 
   settings.addEventListener('click', () => {
-    settingsContainer.classList.toggle('show');
+    toggleVisibility(settingsContainer);
   });
 
   const { wishes } = cfg;

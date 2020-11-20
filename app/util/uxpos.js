@@ -177,7 +177,11 @@ export const positions = {
   NGU: {
     Menu: [233, 293],
     SwitchMode: [378, 110],
+    CapModInput: [430, 136],
     CapAll: [628, 160],
+    NormalCheck: [780, 122],
+    EvilCheck: [780, 143],
+    SadCheck: [780, 164],
   },
   Diggers: {
     Menu: [233, 346],
@@ -301,13 +305,6 @@ Adv. Training				233	184
 	WandoosMPlus			891	388
 	WandoosMMinus			926	388
 
-NGU				233	293
-	SwitchMode			378	110
-	CapModInput			430	136
-	CapAll			628	160
-	NormalCheck			780	122
-	EvilCheck			780	143
-	SadCheck			780	164
 	Energy:				
 		AugCap		590	240
 		WandoosCap		590	275

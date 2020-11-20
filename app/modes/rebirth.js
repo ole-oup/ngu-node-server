@@ -27,11 +27,13 @@ const rebirth = async (data, rmode) => {
     await button(data, positions.Diggers.ClearAllActive);
     await button(data, positions.Diggers.CapSaved);
 
-    // ngu
-    await button(data, positions.NGU.Menu);
-    await button(data, positions.NGU.CapAll);
-    await button(data, positions.NGU.SwitchMode);
-    await button(data, positions.NGU.CapAll);
+    if (rmode != 4) {
+      // ngu
+      await button(data, positions.NGU.Menu);
+      await button(data, positions.NGU.CapAll);
+      await button(data, positions.NGU.SwitchMode);
+      await button(data, positions.NGU.CapAll);
+    }
 
     // max resources in input
     await button(data, positions.Inputs.InputCustom4);
@@ -104,6 +106,14 @@ const rebirth = async (data, rmode) => {
       case 3:
         await wishes(data);
         await button(data, positions.Inputs.InputCustom4);
+        break;
+      case 4:
+        // ngu
+        await button(data, positions.NGU.Menu);
+        await button(data, positions.NGU.SadCheck);
+        await button(data, positions.NGU.CapAll);
+        await button(data, positions.NGU.SwitchMode);
+        await button(data, positions.NGU.CapAll);
         break;
       default:
         throw 'Invalid rmode';

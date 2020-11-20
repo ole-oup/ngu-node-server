@@ -81,13 +81,13 @@ const startApp = async (config, mode, rmode, broadcast, response) => {
         await toweridle(state);
         break;
       case 3:
-        await thirtymin(state);
-        break;
-      case 4:
         await snipe(state);
         break;
-      case 5:
+      case 4:
         await quest(state);
+        break;
+      case 5:
+        await thirtymin(state);
         break;
       case 6:
         lazymode = true;

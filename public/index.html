@@ -12,125 +12,135 @@
       <img src="assets/settings.svg" alt="settings" id="settings" />
     </div>
     <div class="flex-column">
-      <div class="container settings-container">
-        <div class="flex-column">
-          <p>GENERAL</p>
-          <table class="settings-table">
-            <tbody>
-              <tr>
-                <td><input type="checkbox" id="fstop" /></td>
-                <td><label for="fstop">fstop</label></td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" id="lazystop" /></td>
-                <td><label for="lazystop">lazystop</label></td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" id="force" /></td>
-                <td><label for="force">force</label></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="flex-column">
-          <p>REBIRTH</p>
-          <table class="settings-table">
-            <tbody>
-              <tr>
-                <td><input type="number" id="aug" /></td>
-                <td><label for="aug">aug</label></td>
-              </tr>
-              <tr>
-                <td><input type="number" id="spell" /></td>
-                <td><label for="spell">spell</label></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="flex-column">
-          <p>ITOPOD</p>
-          <table class="settings-table">
-            <tbody>
-              <tr>
-                <td><input type="checkbox" id="ring" /></td>
-                <td><label for="ring">ring</label></td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" id="quest" /></td>
-                <td><label for="quest">quest</label></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="flex-column">
-          <p>GUFFS</p>
-          <table class="settings-table">
-            <tbody>
-              <tr>
-                <td><input type="number" id="dist1" /></td>
-                <td><label for="dist1">dist1</label></td>
-              </tr>
-              <tr>
-                <td><input type="number" id="dist2" /></td>
-                <td><label for="dist2">dist2</label></td>
-              </tr>
-              <tr>
-                <td><input type="number" id="dist3" /></td>
-                <td><label for="dist3">dist3</label></td>
-              </tr>
-              <tr>
-                <td><input type="number" id="dist4" /></td>
-                <td><label for="dist4">dist4</label></td>
-              </tr>
-              <tr>
-                <td><input type="number" id="total" /></td>
-                <td><label for="total">total</label></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="flex-column">
-          <p>SNIPE</p>
-          <table class="settings-table">
-            <tbody>
-              <tr>
-                <td><input type="checkbox" id="heal" /></td>
-                <td><label for="heal">heal</label></td>
-              </tr>
-              <tr>
-                <td><input type="number" id="zone" /></td>
-                <td><label for="zone">zone</label></td>
-              </tr>
-              <tr>
-                <td>
-                  <select id="move">
-                    <option value="1">charge</option>
-                    <option value="2">buff</option>
-                  </select>
-                </td>
-                <td><label for="move">move</label></td>
-              </tr>
-              <tr>
-                <td><input type="text" id="atk" /></td>
-                <td><label for="atk">atk</label></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="flex-column">
-          <p>QUEST</p>
-          <table class="settings-table">
-            <tbody>
-              <tr>
-                <td><input type="number" id="questdur" /></td>
-                <td><label for="questdur">questdur</label></td>
-              </tr>
-            </tbody>
-          </table>
+      <div id="settings-container" class="container hide">
+        <div class="flex-fill">
+          <div class="col flex-column-start">
+            <div class="flex-column">
+              <p>GENERAL</p>
+              <table class="settings-table">
+                <tbody>
+                  <tr>
+                    <td><input type="checkbox" id="fstop" /></td>
+                    <td><label for="fstop">fstop</label></td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" id="lazystop" /></td>
+                    <td><label for="lazystop">lazystop</label></td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" id="force" /></td>
+                    <td><label for="force">force</label></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="flex-column">
+                <p>REBIRTH</p>
+                <table class="settings-table">
+                  <tbody>
+                    <tr>
+                      <td><input type="number" id="aug" /></td>
+                      <td><label for="aug">aug</label></td>
+                    </tr>
+                    <tr>
+                      <td><input type="number" id="spell" /></td>
+                      <td><label for="spell">spell</label></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="col flex-column-start">
+            <div class="flex-column">
+              <p>ITOPOD</p>
+              <table class="settings-table">
+                <tbody>
+                  <tr>
+                    <td><input type="checkbox" id="ring" /></td>
+                    <td><label for="ring">ring</label></td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" id="quest" /></td>
+                    <td><label for="quest">quest</label></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="flex-column">
+              <p>SNIPE</p>
+              <table class="settings-table">
+                <tbody>
+                  <tr>
+                    <td><input type="checkbox" id="heal" /></td>
+                    <td><label for="heal">heal</label></td>
+                  </tr>
+                  <tr>
+                    <td><input type="number" id="zone" /></td>
+                    <td><label for="zone">zone</label></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <select id="move">
+                        <option value="1">charge</option>
+                        <option value="2">buff</option>
+                      </select>
+                    </td>
+                    <td><label for="move">move</label></td>
+                  </tr>
+                  <tr>
+                    <td><input type="text" id="atk" /></td>
+                    <td><label for="atk">atk</label></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="col flex-column-start">
+            <div class="flex-column">
+              <p>GUFFS</p>
+              <table class="settings-table">
+                <tbody>
+                  <tr>
+                    <td><input type="number" id="dist1" /></td>
+                    <td><label for="dist1">dist1</label></td>
+                  </tr>
+                  <tr>
+                    <td><input type="number" id="dist2" /></td>
+                    <td><label for="dist2">dist2</label></td>
+                  </tr>
+                  <tr>
+                    <td><input type="number" id="dist3" /></td>
+                    <td><label for="dist3">dist3</label></td>
+                  </tr>
+                  <tr>
+                    <td><input type="number" id="dist4" /></td>
+                    <td><label for="dist4">dist4</label></td>
+                  </tr>
+                  <tr>
+                    <td><input type="number" id="total" /></td>
+                    <td><label for="total">total</label></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="flex-column">
+              <p>QUEST</p>
+              <table class="settings-table">
+                <tbody>
+                  <tr>
+                    <td><input type="number" id="questdur" /></td>
+                    <td><label for="questdur">questdur</label></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="container progress-container">
+      <div id="progress-container" class="container hide">
         <div class="flex-column">
           <div id="timer"></div>
           <table class="settings-table">
@@ -153,6 +163,7 @@
           <button class="mode" id="rmode1">TM</button>
           <button class="mode" id="rmode2">AUGS</button>
           <button class="mode" id="rmode3">WISH</button>
+          <button class="mode" id="rmode4">NGU</button>
         </div>
         <div>
           <div class="flex-row" style="margin-top: 10px">
@@ -204,9 +215,9 @@
 
       <div class="container flex-wrap">
         <button class="mode" id="mode2">IDLE</button>
-        <button class="mode" id="mode3">GUFFS</button>
-        <button class="mode" id="mode4">SNIPE</button>
-        <button class="mode" id="mode5">QUEST</button>
+        <button class="mode" id="mode3">SNIPE</button>
+        <button class="mode" id="mode4">QUEST</button>
+        <button class="mode" id="mode5">GUFFS</button>
         <button class="mode" id="mode6">LAZY</button>
         <button class="mode" id="mode0">DEBUG</button>
       </div>
