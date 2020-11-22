@@ -5,5 +5,5 @@ try {
   const wins = alignWindows();
   if (wins) server();
 } catch (err) {
-  console.error(err);
+  console.log(err);
 }

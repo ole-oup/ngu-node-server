@@ -49,31 +49,44 @@ body {
 
 #settings {
   position: fixed;
-  float: left;
   top: 10px;
   left: 10px;
   width: 40px;
   height: 40px;
   filter: invert(0.85);
 }
-#settings:hover {
+
+#restart {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  filter: invert(0.85);
+}
+
+#settings:hover,
+#restart:hover {
   cursor: pointer;
   filter: invert(0.5);
 }
 
 #alert {
-  color: var(--err-color);
   position: fixed;
   max-width: 300px;
   top: 1vh;
-  right: 2vw;
+  right: 60px;
   font-size: 1.7em;
-  /* text-shadow: 10px 10px 2px #000000; */
   opacity: 0;
   transition: opacity 0.8s;
 }
 #alert.fade {
   opacity: 1;
+}
+
+.error {
+  color: var(--err-color);
+  font-weight: 600;
 }
 
 .flex-column {

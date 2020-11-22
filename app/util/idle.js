@@ -74,7 +74,7 @@ const idle = async (
     const idleStart = start ?? new Date();
     await loop(data, 0, idleStart, duration, wfm, infinite);
   } catch (err) {
-    cp(err, true);
+    cp(data, err, true);
   }
 };
 

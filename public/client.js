@@ -3,9 +3,10 @@
 const serverip = '192.168.178.35:3000';
 
 const alert = document.querySelector('#alert');
+const settings = document.querySelector('#settings');
+const restart = document.querySelector('#restart');
 const settingsContainer = document.querySelector('#settings-container');
 const progressContainer = document.querySelector('#progress-container');
-const settings = document.querySelector('#settings');
 const timer = document.querySelector('#timer');
 const kills = document.querySelector('#kills');
 const kpm = document.querySelector('#kpm');
@@ -45,13 +46,14 @@ const postData = async (url, data) => {
 };
 
 const setNotification = (res) => {
+  console.log(res);
   alert.classList.add('fade');
   setTimeout(() => {
     alert.classList.remove('fade');
   }, 3500);
   alert.innerHTML = res.msg;
-  if (res.status == 1) alert.style.color = 'var(--sec-color)';
-  else alert.style.color = 'var(--err-color)';
+  if (res.status == 0) alert.classList.add('error');
+  else alert.classList.remove('error');
 };
 
 const setProgress = (res) => {
@@ -115,15 +117,15 @@ const saveCfg = async (cfg) => {
     else setNotification(response);
   };
 
-  socket.onclose = () => {
-    console.warn('Lost websocket connection, reloading in 3 seconds');
-    setTimeout(() => {
-      location.reload();
-    }, 3000);
-  };
+  socket.onclose = () => location.reload();
 
   settings.addEventListener('click', () => {
     toggleVisibility(settingsContainer);
+  });
+
+  restart.addEventListener('click', async () => {
+    const resres = await getData('/app/restart');
+    setNotification(resres);
   });
 
   const { wishes } = cfg;

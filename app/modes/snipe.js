@@ -116,7 +116,7 @@ const snipe = async (data) => {
     await goToAdv(data);
     await snipeCycle(data, 0, data.cfg.move);
   } catch (err) {
-    cp(err);
+    cp(data, err);
   }
 };
 

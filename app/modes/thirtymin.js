@@ -15,7 +15,7 @@ let counter = 0;
 
 const countdown = async (str, sec) => {
   for (sec; sec > 0; sec--) {
-    cp(`${str} ${sec}...`);
+    cp(data, `${str} ${sec}...`);
     await wait(1);
   }
 };
@@ -45,7 +45,7 @@ const idleWaiting = async (data, start, dist) => {
 };
 
 const status = (data, action) => {
-  cp(`rb #${counter}, ${action}`);
+  cp(data, `rb #${counter}, ${action}`);
 };
 
 const loop = async (data) => {
@@ -128,7 +128,7 @@ const thirtyMin = async (data) => {
 
     loop(data);
   } catch (err) {
-    cp(err, true);
+    cp(data, err, true);
   }
 };
 

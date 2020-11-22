@@ -7,8 +7,7 @@ import thirtymin from './modes/thirtymin.js';
 import snipe from './modes/snipe.js';
 import quest from './modes/quest.js';
 import lazyshifter from './modes/lazyshifter.js';
-
-import cp from './util/print.js';
+import reserver from './modes/reserver.js';
 
 const { windowManager } = nwm;
 
@@ -29,17 +28,13 @@ const getGameCoords = () => {
     if (gameWin) break;
   }
 
-  try {
-    gameWin.setBounds({ x: 0, y: 0 });
-    const bounds = gameWin.getBounds();
-    // offset x & y b/c of window borders
-    bounds.x += 3;
-    bounds.y += 27;
+  gameWin.setBounds({ x: 0, y: 0 });
+  const bounds = gameWin.getBounds();
+  // offset x & y b/c of window borders
+  bounds.x += 3;
+  bounds.y += 27;
 
-    return { gameWin, coords: bounds };
-  } catch (err) {
-    return cp(err, true);
-  }
+  return { gameWin, coords: bounds };
 };
 
 const startApp = async (config, mode, rmode, broadcast, response) => {
@@ -92,12 +87,15 @@ const startApp = async (config, mode, rmode, broadcast, response) => {
       case 6:
         lazymode = true;
         break;
+      case 7:
+        reserver(state);
+        break;
       default:
         throw 'Invalid Mode';
     }
     if (lazymode) await lazyshifter(state, activeWindow, initWin);
   } catch (err) {
-    return cp(err, true);
+    console.log(err);
   }
 };
 

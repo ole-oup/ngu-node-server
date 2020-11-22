@@ -1,7 +1,6 @@
 import express from 'express';
 import WebSocket from 'ws';
 import fs from 'fs';
-import cp from '../app/util/print.js';
 
 import startApp from '../app/app-index.js';
 
@@ -61,7 +60,6 @@ const server = () => {
             response.status = 1;
             response.action = `m${data.mode}`;
             response.msg = `Starting mode ${data.mode}`;
-            cp(response.msg);
             isActive = true;
             broadcast(response);
             startApp(readCfg(), data.mode, 0, broadcast, createResponse);
@@ -78,7 +76,7 @@ const server = () => {
             broadcast(response);
         }
       } catch (err) {
-        cp(err, true);
+        console.log(err);
       }
     });
   });
@@ -98,7 +96,7 @@ const server = () => {
       isActive = false;
     } catch (err) {
       response.msg = err;
-      cp(err, true);
+      console.log(err);
     }
     res.send(JSON.stringify(response));
   });
@@ -113,13 +111,18 @@ const server = () => {
 
       response.status = 1;
       response.msg = 'Data written to file';
-      cp(response.msg);
       isActive = false;
     } catch (err) {
       response.msg = err;
-      cp(err, true);
+      console.log(err);
     }
     res.send(JSON.stringify(response));
+  });
+
+  app.get('/app/restart', async (req, res) => {
+    const response = createResponse('restart', 0, 'Restarting server');
+    res.send(response);
+    startApp({}, 7);
   });
 
   const ser = app.listen(port, () =>

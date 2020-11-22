@@ -195,7 +195,7 @@ const rebirth = async (data, rmode) => {
         throw 'invalid hack';
     }
   } catch (err) {
-    cp(err, true);
+    cp(data, err, true);
   }
 };
 

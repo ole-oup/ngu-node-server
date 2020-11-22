@@ -44,9 +44,9 @@ const wf = (data, trigger) => {
         data.win.bringToTop();
         if (data.cfg.force != 1) robot.keyTap('q');
 
-        currWin.bringToTop();
+        // currWin.bringToTop();
         if (data.cfg.fstop == 1) throw 'Game lost focus';
-        else cp('Game lost focus');
+        else cp(data, 'Game lost focus');
 
         if (data.cfg.force == 1) data.win.bringToTop();
 

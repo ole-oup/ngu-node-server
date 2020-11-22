@@ -1,7 +1,4 @@
-alle funktionen pure machen. an data darf nichts verändert werden
-
-terminal on exit (aus altem commit rauskramen oder google)
-  adventure und checken ob q an ist
+restart knopf -> bei server mit get -> process.exit(1)
 
 nicht nach lazyshifter wegklicken -> zu script-app
   option in cfg
@@ -11,3 +8,4 @@ automatisch moneypit
 tooltips für optionen
 
 favicon geht noch nicht
+
