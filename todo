@@ -1,4 +1,4 @@
-restart knopf -> bei server mit get -> process.exit(1)
+jede stunde floor neu setzen
 
 nicht nach lazyshifter wegklicken -> zu script-app
   option in cfg
@@ -6,6 +6,3 @@ nicht nach lazyshifter wegklicken -> zu script-app
 automatisch moneypit
 
 tooltips für optionen
-
-favicon geht noch nicht
-

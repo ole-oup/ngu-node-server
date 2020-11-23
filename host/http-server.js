@@ -31,7 +31,8 @@ const createResponse = (action = '', status = 0, msg = '') => {
 
 const server = () => {
   console.clear();
-  console.log('NGU script app local server');
+
+  console.log('Starting server');
 
   const app = express();
   const port = 3000;
@@ -98,6 +99,7 @@ const server = () => {
       response.msg = err;
       console.log(err);
     }
+    console.log(response.msg);
     res.send(JSON.stringify(response));
   });
 
@@ -116,18 +118,22 @@ const server = () => {
       response.msg = err;
       console.log(err);
     }
+    console.log(response.msg);
     res.send(JSON.stringify(response));
   });
 
   app.get('/app/restart', async (req, res) => {
     const response = createResponse('restart', 0, 'Restarting server');
+    console.log(response.msg);
     res.send(response);
     startApp({}, 7);
   });
 
-  const ser = app.listen(port, () =>
-    console.log(`Listening at http://localhost:${port}`)
-  );
+  // const ser = app.listen(port, () =>
+  //   console.log(`Listening at http://localhost:${port}`)
+  // );
+
+  const ser = app.listen(port);
 
   ser.on('upgrade', (request, socket, head) => {
     wss.handleUpgrade(request, socket, head, (socket) => {

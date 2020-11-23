@@ -73,7 +73,7 @@ body {
 
 #alert {
   position: fixed;
-  max-width: 300px;
+  max-width: calc(100vw-120px);
   top: 1vh;
   right: 60px;
   font-size: 1.7em;

@@ -1,7 +1,7 @@
 .vscode/
 node_modules/
 yarn.lock
-yarn-error.log
-debug.log
+
+*.log
 
 public/config.json
