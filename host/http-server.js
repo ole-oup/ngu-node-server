@@ -106,14 +106,9 @@ const server = () => {
   app.post('/app/config', (req, res) => {
     const response = createResponse('cfg');
     try {
-      if (isActive) throw 'Server not ready';
-      isActive = true;
-
       writeCfg(req.body);
-
       response.status = 1;
       response.msg = 'Data written to file';
-      isActive = false;
     } catch (err) {
       response.msg = err;
       console.log(err);

@@ -22,15 +22,13 @@ const alignWindows = () => {
     };
 
     terminal = checkWindows(terminalPath);
-    if (terminal === false) throw 'terminal not found';
-    else {
+    if (terminal) {
       terminal.bringToTop();
       terminal.setBounds({ x: -5, y: 626, height: 420, width: 974 });
     }
 
     gameWin = checkWindows(gamePath);
-    if (!gameWin) throw 'gameWin not found';
-    else {
+    if (gameWin) {
       gameWin.bringToTop();
       gameWin.setBounds({ x: 0, y: 0 });
     }
