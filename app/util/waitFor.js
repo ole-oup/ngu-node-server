@@ -7,7 +7,7 @@ import gd from './getDifference.js';
 
 const { windowManager } = nwm;
 
-const wf = (data, trigger) => {
+const wf = (data, trigger, fullhp) => {
   const timer = { start: new Date(), end: 3000 }; // 3 second timeout
   let x = null;
   let y = null;
@@ -25,7 +25,6 @@ const wf = (data, trigger) => {
     case 'hp':
       x = 514;
       y = 411;
-      // timer.end = 10000;
       break;
     default:
       throw 'WaitFor-Trigger Error';
@@ -36,6 +35,7 @@ const wf = (data, trigger) => {
 
   return new Promise((resolve) => {
     let onoff = true;
+    const end = fullhp ? 20000 : timer.end;
     while (onoff) {
       const hex = robot.getPixelColor(combinedX, combinedY);
 
@@ -48,15 +48,13 @@ const wf = (data, trigger) => {
         if (data.cfg.fstop == 1) throw 'Game lost focus';
         else cp(data, 'Game lost focus');
 
-        if (data.cfg.force == 1) data.win.bringToTop();
-
         while (currWin.getTitle() !== 'NGU Idle') {
           currWin = windowManager.getActiveWindow();
         }
 
         checkIdleBorder(data, 'disable');
       }
-      const diff = timer.end - gd(timer.start);
+      const diff = end - gd(timer.start);
       const timeout = diff < 0 ? true : false;
       if (hex !== color || timeout) {
         onoff = false;
