@@ -32,6 +32,15 @@ const waitForBoss = async (data) => {
   return crown(data);
 };
 
+const waitForCharge = async (data) => {
+  await wf(data, 'cd');
+  const charge = robot.getPixelColor(data.crd.x + 757, data.crd.y + 139);
+  if (charge !== '334452') {
+    return true;
+  }
+  waitForCharge(data);
+};
+
 const snipeCycle = async (data, killcount, wfm) => {
   // if we wait for a move -> start idle
   await button(data, positions.Adventure.EnterITOPOD.Button);
@@ -48,6 +57,7 @@ const snipeCycle = async (data, killcount, wfm) => {
     await wf(data, 'cd');
     robot.keyTap('r');
     await wf(data, 'hp');
+    if (data.cfg.charge2x == 1) waitForCharge(data);
   } else if (data.cfg.heal != 1 && wfm == 2) {
     // wait for charge if we wait for megabuff
     await wf(data, 'cd');

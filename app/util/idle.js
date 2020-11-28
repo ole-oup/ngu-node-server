@@ -22,7 +22,7 @@ const loop = async (data, killcount, start, duration, wfm, infinite) => {
   if (wfm !== null) {
     await wf(data, 'cd');
 
-    if (wfm == 1) {
+    if (wfm == 1 || data.cfg.charge2x == 1) {
       const charge = robot.getPixelColor(data.crd.x + 757, data.crd.y + 139);
       if (charge !== '334452') {
         const ultimate = robot.getPixelColor(
