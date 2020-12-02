@@ -1,6 +1,7 @@
 {
   "fstop": 0,
   "lazystop": 0,
+  "moneypit": 0,
   "aug": 3,
   "spell": 8,
   "ring": 0,
@@ -14,7 +15,7 @@
   "charge2x": 0,
   "zone": 0,
   "move": 1,
-  "atk": "ytewa",
+  "atk": "ytea",
   "questdur": 8,
   "wishes": ["11", "12", "13", "14"],
   "hack": "hack",

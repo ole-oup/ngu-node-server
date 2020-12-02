@@ -3,6 +3,7 @@ import robot from 'robotjs';
 import wf from './waitFor.js';
 import gd from './getDifference.js';
 import cp from './print.js';
+import checkPit from '../modes/moneypit.js';
 
 // setImmediate() to unblock the event loop and allow communication with clients
 function setImmediatePromise() {
@@ -55,6 +56,8 @@ const loop = async (data, killcount, start, duration, wfm, infinite) => {
     };
     data.broadcast(res);
   }
+
+  if (data.cfg.moneypit == 1) await checkPit(data);
 
   await setImmediatePromise();
   if (infinite ?? duration > diff)

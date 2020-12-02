@@ -4,6 +4,7 @@
 | -------- | ------------------------ | ------------------------------------------------------------------------------------ | --------- |
 | fstop    | 0                        | stop on focus lost                                                                   | waitFor   |
 | lazystop | 0                        | set lazy itopod shifter on stop                                                      | lazystop  |
+| moneypit | 0                        | throw money into moneypit                                                            | idle      |
 | aug      | 3                        | aug for rebirth                                                                      | rebirth   |
 | spell    | 8                        | spell # (1-8)                                                                        | rebirth   |
 | ring     | 0                        | equip RoM for respawn and cd reduction (bottom right corner of first inventory page) | toweridle |
