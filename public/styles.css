@@ -124,10 +124,6 @@ body {
   align-items: stretch;
 }
 
-.hide {
-  display: none;
-}
-
 .selected-wish {
   background-color: var(--wish-bg);
 }
@@ -207,7 +203,7 @@ input[type='number'] {
 
 input[type='text'] {
   text-align: center;
-  width: 100px;
+  width: 74px;
   height: 25px;
   border: 1px solid var(--sec-color);
   color: var(--sec-color);
@@ -218,7 +214,7 @@ input[type='text'] {
 
 /* select#hack { */
 select {
-  width: 90px;
+  width: 80px;
   height: 30px;
   border: 1px solid var(--sec-color);
   color: var(--sec-color);

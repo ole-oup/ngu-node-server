@@ -35,7 +35,7 @@ const wf = (data, trigger, fullhp) => {
 
   return new Promise((resolve) => {
     let onoff = true;
-    const end = fullhp ? 20000 : timer.end;
+    const end = fullhp === true ? 10000 : timer.end;
     while (onoff) {
       const hex = robot.getPixelColor(combinedX, combinedY);
 

@@ -41,6 +41,18 @@ const waitForCharge = async (data) => {
   waitForCharge(data);
 };
 
+const attack = async (data, arr) => {
+  await wf(data, 'cd');
+  if (arr.length !== 0) {
+    robot.keyTap(arr[0]);
+    arr.shift();
+  } else {
+    const e = robot.getPixelColor(data.crd.x + 541, data.crd.y + 109);
+    if (e !== '7c4e4e') robot.keyTap('e');
+    else robot.keyTap('w');
+  }
+};
+
 const snipeCycle = async (data, killcount, wfm) => {
   // if we wait for a move -> start idle
   await button(data, positions.Adventure.EnterITOPOD.Button);
@@ -68,8 +80,6 @@ const snipeCycle = async (data, killcount, wfm) => {
   const zonesBack = Number(data.cfg.zone);
   if (zonesBack !== 0) for (let i = 0; i < zonesBack; i++) robot.keyTap('left');
 
-  const atkarr = [...data.cfg.atk];
-
   await wf(data, 'cd');
   robot.keyTap('v');
 
@@ -83,18 +93,14 @@ const snipeCycle = async (data, killcount, wfm) => {
     if (wfm == 2 && gd(searchStart) > 13 * 1000) break; // reset snipe before megabuff runs out
   }
 
+  const atkarr = [...data.cfg.atk];
+
   let kc = killcount;
   while (c) {
     // only runs when there is a boss before the timeout
-    await wf(data, 'cd');
-
-    if (atkarr.length !== 0) {
-      robot.keyTap(atkarr[0]);
-      atkarr.shift();
-    } else robot.keyTap('w');
+    await attack(data, atkarr);
 
     c = crown(data);
-
     if (!c) {
       kc++;
       const res = {
