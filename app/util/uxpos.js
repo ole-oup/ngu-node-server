@@ -46,6 +46,8 @@ export const positions = {
     Menu: [233, 76],
     FeedMe: [430, 166],
     Yeah: [430, 318],
+    DailySpin: [821, 240],
+    NoBS: [724, 561],
   },
   Adventure: {
     Menu: [233, 104],
@@ -274,11 +276,6 @@ Settings				29	543
 Info				103	541
 Shop				233	556
 Basic Training				233	23
-Money Pit				233	76
-	Feed Me			430	166
-	Daily Spin			821	240
-		Spin Me		529	561
-		No BS		724	561
 
 Inventory				233	130
 	Item List			692	85

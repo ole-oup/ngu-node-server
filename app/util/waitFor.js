@@ -7,7 +7,14 @@ import gd from './getDifference.js';
 
 const { windowManager } = nwm;
 
-const wf = (data, trigger, fullhp) => {
+// setImmediate() to unblock the event loop and allow communication with clients
+const setImmediatePromise = () => {
+  return new Promise((resolve) => {
+    setImmediate(() => resolve());
+  });
+};
+
+const wf = async (data, trigger, fullhp) => {
   const timer = { start: new Date(), end: 3000 }; // 3 second timeout
   let x = null;
   let y = null;
@@ -33,6 +40,8 @@ const wf = (data, trigger, fullhp) => {
   const combinedX = data.crd.x + x;
   const combinedY = data.crd.y + y;
 
+  await setImmediatePromise();
+
   return new Promise((resolve) => {
     let onoff = true;
     const end = fullhp === true ? 10000 : timer.end;
@@ -44,7 +53,7 @@ const wf = (data, trigger, fullhp) => {
         data.win.bringToTop();
         if (data.cfg.force != 1) robot.keyTap('q');
 
-        // currWin.bringToTop();
+        currWin.bringToTop();
         if (data.cfg.fstop == 1) throw 'Game lost focus';
         else cp(data, 'Game lost focus');
 

@@ -5,13 +5,6 @@ import gd from './getDifference.js';
 import cp from './print.js';
 import checkPit from '../modes/moneypit.js';
 
-// setImmediate() to unblock the event loop and allow communication with clients
-function setImmediatePromise() {
-  return new Promise((resolve) => {
-    setImmediate(() => resolve());
-  });
-}
-
 robot.setKeyboardDelay(0);
 
 const loop = async (data, killcount, start, duration, wfm, infinite) => {
@@ -59,7 +52,7 @@ const loop = async (data, killcount, start, duration, wfm, infinite) => {
 
   if (data.cfg.moneypit == 1) await checkPit(data);
 
-  await setImmediatePromise();
+  // await setImmediatePromise();
   if (infinite ?? duration > diff)
     return loop(data, kc, start, duration, wfm, infinite);
 };
