@@ -2,7 +2,7 @@ import click from './click.js';
 
 export const button = (data, pos, rightclick) => {
   let p = { x: pos[0], y: pos[1] };
-  return click(data.crd, p.x, p.y, rightclick === 'rc' ? true : false);
+  return click(data, p.x, p.y, rightclick === 'rc' ? true : false);
 };
 
 export const positions = {

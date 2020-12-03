@@ -1,5 +1,3 @@
-import robot from 'robotjs';
-
 import rebirth from './rebirth.js';
 import cp from '../util/print.js';
 import idle from '../util/idle.js';
@@ -9,19 +7,20 @@ import goToAdv from '../util/goToAdv.js';
 import gd from '../util/getDifference.js';
 import checkIdleBorder from '../util/checkIdleBorder.js';
 import wait from '../util/wait.js';
+import getColor from '../util/getColor.js';
 
 let timings = {};
 let counter = 0;
 
 const countdown = async (str, sec) => {
   for (sec; sec > 0; sec--) {
-    cp(data, `${str} ${sec}...`);
+    console.log(`${str} ${sec}...`);
     await wait(1);
   }
 };
 
 const moneypit = async (data) => {
-  const mp = robot.getPixelColor(data.crd.x + 274, data.crd.y + 74);
+  const mp = getColor(data, 274, 74);
   if (mp !== 'ffffff') {
     await button(data, positions.MoneyPit.Menu);
     await button(data, positions.MoneyPit.FeedMe);

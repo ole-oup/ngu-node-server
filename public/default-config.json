@@ -1,4 +1,5 @@
 {
+  "res": 0,
   "fstop": 0,
   "lazystop": 0,
   "moneypit": 0,
@@ -18,6 +19,6 @@
   "atk": "ytea",
   "questdur": 8,
   "wishes": ["11", "12", "13", "14"],
-  "hack": "hack",
+  "hack": 13,
   "init": true
 }

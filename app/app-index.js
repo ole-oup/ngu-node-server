@@ -62,8 +62,23 @@ const startApp = async (config, mode, rmode, broadcast, response) => {
       response, //          response from http-server
       crd: coords, //       game bounds
       cfg: config, //       config
+      res: null, //         resolution
       win: gameWin, //      game's window object
     };
+
+    switch (state.cfg.res) {
+      case 1:
+        state.res = 1 + 1 / 3;
+        break;
+      case 2:
+        state.res = 1.5;
+        break;
+      case 3:
+        state.res = 1.75;
+        break;
+      default:
+        state.res = 1;
+    }
 
     switch (m) {
       case 0:

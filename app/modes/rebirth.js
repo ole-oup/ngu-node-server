@@ -98,8 +98,8 @@ const rebirth = async (data, rmode) => {
 
         aug = ga(data);
 
-        await click(data.crd, aug.x, aug.y); // aug +
-        await click(data.crd, aug.ux, aug.uy); // upgrade +
+        await click(data, aug.x, aug.y); // aug +
+        await click(data, aug.ux, aug.uy); // upgrade +
 
         // max resources in input
         await button(data, positions.Inputs.InputCustom4);
@@ -130,64 +130,64 @@ const rebirth = async (data, rmode) => {
 
     const { hack } = data.cfg;
 
-    switch (hack) {
-      case 'a/d':
+    switch (Number(hack)) {
+      case 0:
         await button(data, positions.Hacks.Page1.Menu);
         await button(data, positions.Hacks.Page1.ADPlus);
         break;
-      case 'adv':
+      case 1:
         await button(data, positions.Hacks.Page1.Menu);
         await button(data, positions.Hacks.Page1.AdvPlus);
         break;
-      case 'tm':
+      case 2:
         await button(data, positions.Hacks.Page1.Menu);
         await button(data, positions.Hacks.Page1.TMPlus);
         break;
-      case 'drop':
+      case 3:
         await button(data, positions.Hacks.Page1.Menu);
         await button(data, positions.Hacks.Page1.DCPlus);
         break;
-      case 'aug':
+      case 4:
         await button(data, positions.Hacks.Page1.Menu);
         await button(data, positions.Hacks.Page1.AugPlus);
         break;
-      case 'engu':
+      case 5:
         await button(data, positions.Hacks.Page1.Menu);
         await button(data, positions.Hacks.Page1.ENGUPlus);
         break;
-      case 'mgnu':
+      case 6:
         await button(data, positions.Hacks.Page1.Menu);
         await button(data, positions.Hacks.Page1.MNGUPlus);
         break;
-      case 'blood':
+      case 7:
         await button(data, positions.Hacks.Page1.Menu);
         await button(data, positions.Hacks.Page1.BloodPlus);
         break;
-      case 'qp':
+      case 8:
         await button(data, positions.Hacks.Page2.Menu);
         await button(data, positions.Hacks.Page2.QPPlus);
         break;
-      case 'dc':
+      case 9:
         await button(data, positions.Hacks.Page2.Menu);
         await button(data, positions.Hacks.Page2.DaycarePlus);
         break;
-      case 'xp':
+      case 10:
         await button(data, positions.Hacks.Page2.Menu);
         await button(data, positions.Hacks.Page2.EXPPlus);
         break;
-      case 'number':
+      case 11:
         await button(data, positions.Hacks.Page2.Menu);
         await button(data, positions.Hacks.Page2.NumberPlus);
         break;
-      case 'pp':
+      case 12:
         await button(data, positions.Hacks.Page2.Menu);
         await button(data, positions.Hacks.Page2.PPPlus);
         break;
-      case 'hack':
+      case 13:
         await button(data, positions.Hacks.Page2.Menu);
         await button(data, positions.Hacks.Page2.HackPlus);
         break;
-      case 'wish':
+      case 14:
         await button(data, positions.Hacks.Page2.Menu);
         await button(data, positions.Hacks.Page2.WishPlus);
         break;

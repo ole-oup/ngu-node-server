@@ -3,6 +3,7 @@ import robot from 'robotjs';
 
 import { button, positions } from './uxpos.js';
 import checkIdleBorder from './checkIdleBorder.js';
+import getColor from './getColor.js';
 
 const goToAdv = async (data, zone) => {
   await button(data, positions.Adventure.Menu);
@@ -16,7 +17,7 @@ const goToAdv = async (data, zone) => {
     await button(data, positions.Adventure.EnterITOPOD.Enter);
     await button(data, positions.Adventure.EnterITOPOD.Button);
 
-    const shifter = robot.getPixelColor(data.crd.x + 550, data.crd.y + 389);
+    const shifter = getColor(data, 550, 389);
     if (shifter === '000000')
       await button(data, positions.Adventure.EnterITOPOD.Shifter);
 

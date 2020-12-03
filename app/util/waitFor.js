@@ -15,7 +15,7 @@ const setImmediatePromise = () => {
 };
 
 const wf = async (data, trigger, fullhp) => {
-  const timer = { start: new Date(), end: 3000 }; // 3 second timeout
+  const timer = { start: new Date(), end: 3000, timeout: false }; // 3 second timeout
   let x = null;
   let y = null;
   let color = 'ffffff';
@@ -37,40 +37,41 @@ const wf = async (data, trigger, fullhp) => {
       throw 'WaitFor-Trigger Error';
   }
 
-  const combinedX = data.crd.x + x;
-  const combinedY = data.crd.y + y;
+  const combinedX = data.crd.x + x * data.res;
+  const combinedY = data.crd.y + y * data.res;
 
-  await setImmediatePromise();
+  let onoff = true;
+  const end = fullhp === true ? 10000 : timer.end;
+  while (onoff) {
+    const hex = robot.getPixelColor(combinedX, combinedY);
+
+    let currWin = windowManager.getActiveWindow();
+    if (currWin.getTitle() !== 'NGU Idle') {
+      data.win.bringToTop();
+      if (data.cfg.force != 1) robot.keyTap('q');
+
+      currWin.bringToTop();
+      if (data.cfg.fstop == 1) throw 'Game lost focus';
+      else cp(data, 'Game lost focus');
+
+      while (currWin.getTitle() !== 'NGU Idle') {
+        currWin = windowManager.getActiveWindow();
+      }
+
+      checkIdleBorder(data, 'disable');
+    }
+    const diff = end - gd(timer.start);
+    timer.timeout = diff < 0 ? true : false;
+    if (hex !== color || timer.timeout) {
+      onoff = false;
+      break;
+    }
+
+    await setImmediatePromise();
+  }
 
   return new Promise((resolve) => {
-    let onoff = true;
-    const end = fullhp === true ? 10000 : timer.end;
-    while (onoff) {
-      const hex = robot.getPixelColor(combinedX, combinedY);
-
-      let currWin = windowManager.getActiveWindow();
-      if (currWin.getTitle() !== 'NGU Idle') {
-        data.win.bringToTop();
-        if (data.cfg.force != 1) robot.keyTap('q');
-
-        currWin.bringToTop();
-        if (data.cfg.fstop == 1) throw 'Game lost focus';
-        else cp(data, 'Game lost focus');
-
-        while (currWin.getTitle() !== 'NGU Idle') {
-          currWin = windowManager.getActiveWindow();
-        }
-
-        checkIdleBorder(data, 'disable');
-      }
-      const diff = end - gd(timer.start);
-      const timeout = diff < 0 ? true : false;
-      if (hex !== color || timeout) {
-        onoff = false;
-        resolve(timeout); // return true if we time out
-        break;
-      }
-    }
+    resolve(timer.timeout);
   });
 };
 

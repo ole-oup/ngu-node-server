@@ -37,48 +37,48 @@ const wishes = async (data) => {
   // set e
   await button(data, positions.Inputs.EIdleQuarter);
 
-  await click(data.crd, wishes.crd.one.x, wishes.crd.one.y); // wish 1
+  await click(data, wishes.crd.one.x, wishes.crd.one.y); // wish 1
   await button(data, positions.Wishes.Eplus);
 
-  await click(data.crd, wishes.crd.two.x, wishes.crd.two.y); // wish 2
+  await click(data, wishes.crd.two.x, wishes.crd.two.y); // wish 2
   await button(data, positions.Wishes.Eplus);
 
-  await click(data.crd, wishes.crd.tri.x, wishes.crd.tri.y); // wish 3
+  await click(data, wishes.crd.tri.x, wishes.crd.tri.y); // wish 3
   await button(data, positions.Wishes.Eplus);
 
   await button(data, positions.Inputs.InputCustom4);
-  await click(data.crd, wishes.crd.foa.x, wishes.crd.foa.y); // wish 4
+  await click(data, wishes.crd.foa.x, wishes.crd.foa.y); // wish 4
   await button(data, positions.Wishes.Eplus);
 
   // set m
   await button(data, positions.Inputs.MIdleQuarter);
 
-  await click(data.crd, wishes.crd.one.x, wishes.crd.one.y); // wish 1
+  await click(data, wishes.crd.one.x, wishes.crd.one.y); // wish 1
   await button(data, positions.Wishes.Mplus);
 
-  await click(data.crd, wishes.crd.two.x, wishes.crd.two.y); // wish 2
+  await click(data, wishes.crd.two.x, wishes.crd.two.y); // wish 2
   await button(data, positions.Wishes.Mplus);
 
-  await click(data.crd, wishes.crd.tri.x, wishes.crd.tri.y); // wish 3
+  await click(data, wishes.crd.tri.x, wishes.crd.tri.y); // wish 3
   await button(data, positions.Wishes.Mplus);
 
   await button(data, positions.Inputs.InputCustom4);
-  await click(data.crd, wishes.crd.foa.x, wishes.crd.foa.y); // wish 4
+  await click(data, wishes.crd.foa.x, wishes.crd.foa.y); // wish 4
   await button(data, positions.Wishes.Mplus);
 
   // r3
   await button(data, positions.Inputs.R3CapCustom1);
 
-  await click(data.crd, wishes.crd.one.x, wishes.crd.one.y); // wish 1
+  await click(data, wishes.crd.one.x, wishes.crd.one.y); // wish 1
   await button(data, positions.Wishes.Rplus);
 
-  await click(data.crd, wishes.crd.two.x, wishes.crd.two.y); // wish 2
+  await click(data, wishes.crd.two.x, wishes.crd.two.y); // wish 2
   await button(data, positions.Wishes.Rplus);
 
-  await click(data.crd, wishes.crd.tri.x, wishes.crd.tri.y); // wish 3
+  await click(data, wishes.crd.tri.x, wishes.crd.tri.y); // wish 3
   await button(data, positions.Wishes.Rplus);
 
-  await click(data.crd, wishes.crd.foa.x, wishes.crd.foa.y); // wish 4
+  await click(data, wishes.crd.foa.x, wishes.crd.foa.y); // wish 4
   await button(data, positions.Wishes.Rplus);
 };
 

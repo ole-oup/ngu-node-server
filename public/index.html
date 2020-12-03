@@ -24,6 +24,17 @@
               <table class="settings-table">
                 <tbody>
                   <tr>
+                    <td>
+                      <select id="res">
+                        <option value="0">960*600</option>
+                        <option value="1">1280*800</option>
+                        <option value="2">1440*900</option>
+                        <option value="3">1680*1050</option>
+                      </select>
+                    </td>
+                    <td><label for="res">resolution</label></td>
+                  </tr>
+                  <tr>
                     <td><input type="checkbox" id="fstop" /></td>
                     <td><label for="fstop">fstop</label></td>
                   </tr>
@@ -82,7 +93,9 @@
                   <td><input type="checkbox" id="charge2x" /></td>
                   <td><label for="charge2x">charge2x</label></td>
                   <tr>
-                    <td><input type="number" id="zone" /></td>
+                    <td>
+                      <input type="number" id="zone" min="0" />
+                    </td>
                     <td><label for="zone">zone</label></td>
                   </tr>
                   <tr>
@@ -202,21 +215,21 @@
           </div>
         </div>
         <select id="hack">
-          <option value="a/d">a/d</option>
-          <option value="adv">adv</option>
-          <option value="tm">tm</option>
-          <option value="drop">drop</option>
-          <option value="aug">aug</option>
-          <option value="engu">engu</option>
-          <option value="mngu">mgnu</option>
-          <option value="blood">blood</option>
-          <option value="qp">qp</option>
-          <option value="dc">dc</option>
-          <option value="xp">xp</option>
-          <option value="number">number</option>
-          <option value="pp">pp</option>
-          <option selected value="hack">hack</option>
-          <option value="wish">wish</option>
+          <option value="0">a/d</option>
+          <option value="1">adv</option>
+          <option value="2">tm</option>
+          <option value="3">drop</option>
+          <option value="4">aug</option>
+          <option value="5">engu</option>
+          <option value="6">mgnu</option>
+          <option value="7">blood</option>
+          <option value="8">qp</option>
+          <option value="9">dc</option>
+          <option value="10">xp</option>
+          <option value="11">number</option>
+          <option value="12">pp</option>
+          <option selected value="13">hack</option>
+          <option value="14">wish</option>
         </select>
         <br />
         <div class="flex-wrap">

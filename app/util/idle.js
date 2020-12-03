@@ -4,6 +4,7 @@ import wf from './waitFor.js';
 import gd from './getDifference.js';
 import cp from './print.js';
 import checkPit from '../modes/moneypit.js';
+import getColor from './getColor.js';
 
 robot.setKeyboardDelay(0);
 
@@ -17,18 +18,15 @@ const loop = async (data, killcount, start, duration, wfm, infinite) => {
     await wf(data, 'cd');
 
     if (wfm == 1 || data.cfg.charge2x == 1) {
-      const charge = robot.getPixelColor(data.crd.x + 757, data.crd.y + 139);
+      const charge = getColor(data, 757, 139);
       if (charge !== '334452') {
-        const ultimate = robot.getPixelColor(
-          data.crd.x + 858,
-          data.crd.y + 105
-        );
+        const ultimate = getColor(data, 858, 105);
         if (ultimate !== '7c4e4e') return robot.keyTap('g'); // only return charge when ult is ready too
       }
     }
 
     if (wfm == 2) {
-      const megabuff = robot.getPixelColor(data.crd.x + 664, data.crd.y + 175);
+      const megabuff = getColor(data, 664, 175);
       if (megabuff !== '624a4a') return;
     }
   }

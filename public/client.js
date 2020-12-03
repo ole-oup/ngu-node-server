@@ -173,7 +173,8 @@ const saveCfg = async (cfg) => {
     .forEach((input) => {
       input.value = cfg[input.id];
       input.addEventListener('change', () => {
-        cfg[input.id] = input.value;
+        cfg[input.id] =
+          input.type == 'text' ? input.value : Number(input.value);
         saveCfg(cfg);
       });
     });

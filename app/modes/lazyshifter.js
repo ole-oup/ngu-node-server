@@ -1,4 +1,4 @@
-import robot from 'robotjs';
+import getColor from '../util/getColor.js';
 
 import { button, positions } from '../util/uxpos.js';
 
@@ -12,7 +12,7 @@ const lazyshifter = async (data, activeWindow, initWin) => {
   await button(data, positions.Adventure.Menu);
   await button(data, positions.Adventure.EnterITOPOD.Button);
 
-  const shifter = robot.getPixelColor(data.crd.x + 550, data.crd.y + 389);
+  const shifter = getColor(data, 550, 389);
   if (shifter !== '000000')
     await button(data, positions.Adventure.EnterITOPOD.Shifter);
 

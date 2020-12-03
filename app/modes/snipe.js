@@ -7,34 +7,33 @@ import cp from '../util/print.js';
 import { positions, button } from '../util/uxpos.js';
 import goToAdv from '../util/goToAdv.js';
 import gd from '../util/getDifference.js';
+import getColor from '../util/getColor.js';
 
 robot.setKeyboardDelay(0);
 
 let start = null;
 
 const crown = (data) => {
-  return robot.getPixelColor(data.crd.x + 735, data.crd.y + 280) === 'f7ef29'
-    ? true
-    : false;
+  return getColor(data, 735, 280) === 'f7ef29' ? true : false;
 };
 
 const waitForBoss = async (data) => {
   robot.keyTap('left');
   robot.keyTap('right');
 
-  const charge = robot.getPixelColor(data.crd.x + 757, data.crd.y + 139);
+  const charge = getColor(data, 757, 139);
   if (data.cfg.heal != 1 && charge === '6687a3') {
     robot.keyTap('g');
   }
 
   const enemyto = await wf(data, 'enemy');
-  if (enemyto) await click(data.crd, 937, 210, true); // right arrow
+  if (enemyto) await click(data, 937, 210, true); // right arrow
   return crown(data);
 };
 
 const waitForCharge = async (data) => {
   await wf(data, 'cd');
-  const charge = robot.getPixelColor(data.crd.x + 757, data.crd.y + 139);
+  const charge = getColor(data, 757, 139);
   if (charge !== '334452') {
     return true;
   }
@@ -47,7 +46,7 @@ const attack = async (data, arr) => {
     robot.keyTap(arr[0]);
     arr.shift();
   } else {
-    const e = robot.getPixelColor(data.crd.x + 541, data.crd.y + 109);
+    const e = getColor(data, 541, 109);
     if (e !== '7c4e4e') robot.keyTap('e');
     else robot.keyTap('w');
   }
@@ -61,7 +60,7 @@ const snipeCycle = async (data, killcount, wfm) => {
   await idle(data, null, 60, wfm, true);
 
   if (data.cfg.heal == 1) {
-    await click(data.crd, 735, 210, true); // left arrow
+    await click(data, 735, 210, true); // left arrow
     await wf(data, 'cd');
     robot.keyTap('b');
     await wf(data, 'cd');
@@ -76,7 +75,7 @@ const snipeCycle = async (data, killcount, wfm) => {
     robot.keyTap('g');
   }
 
-  await click(data.crd, 937, 210, true); // right arrow
+  await click(data, 937, 210, true); // right arrow
   const zonesBack = Number(data.cfg.zone);
   if (zonesBack !== 0) for (let i = 0; i < zonesBack; i++) robot.keyTap('left');
 
