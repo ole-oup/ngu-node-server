@@ -2,7 +2,7 @@
 
 | option     | default                  | description                                                                          | location  |
 | ---------- | ------------------------ | ------------------------------------------------------------------------------------ | --------- |
-| resolution | 960\*600                 | see [resolution](##resolution)                                                       | index     |
+| resolution | 960\*600                 | see [resolution](#resolution)                                                        | index     |
 | fstop      | 0                        | stop on focus lost                                                                   | waitFor   |
 | lazystop   | 0                        | set lazy itopod shifter on stop                                                      | lazystop  |
 | moneypit   | 0                        | throw money into moneypit                                                            | idle      |
