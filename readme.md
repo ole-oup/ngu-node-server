@@ -4,6 +4,7 @@
 | ---------- | ------------------------ | ------------------------------------------------------------------------------------ | --------- |
 | resolution | 960\*600                 | see [resolution](#resolution)                                                        | index     |
 | fstop      | 0                        | stop on focus lost                                                                   | waitFor   |
+| exit       | 0                        | exit on error                                                                        | print     |
 | lazystop   | 0                        | set lazy itopod shifter on stop                                                      | lazystop  |
 | moneypit   | 0                        | throw money into moneypit                                                            | idle      |
 | aug        | 3                        | aug for rebirth                                                                      | rebirth   |

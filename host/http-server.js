@@ -43,7 +43,7 @@ const server = () => {
   const wss = new WebSocket.Server({ noServer: true });
 
   wss.on('connection', (ws) => {
-    ws.on('message', (message) => {
+    ws.on('message', async (message) => {
       try {
         const data = JSON.parse(message);
         const response = createResponse();
@@ -60,8 +60,11 @@ const server = () => {
             response.action = `m${data.mode}`;
             response.msg = `Starting mode ${data.mode}`;
             isActive = true;
+            console.log('Starting script');
             broadcast(response);
-            startApp(readCfg(), data.mode, 0, broadcast, createResponse);
+            await startApp(readCfg(), data.mode, 0, broadcast, createResponse);
+            isActive = false;
+            console.log('Server ready');
             break;
           case 'status':
             response.status = 1;

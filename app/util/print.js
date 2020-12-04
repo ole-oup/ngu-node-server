@@ -3,7 +3,7 @@ const cp = (data, msg, err) => {
   if (err === true) {
     const res = { ...data.response('error', 0, msg) };
     data.broadcast(res);
-    process.exit();
+    if (data.cfg.exit == 1) process.exit();
   }
 };
 

@@ -52,18 +52,25 @@ const setNotification = (res) => {
     alert.classList.remove('fade');
   }, 3500);
   alert.innerHTML = res.msg;
-  if (res.status == 0) alert.classList.add('error');
-  else alert.classList.remove('error');
+  if (res.status == 0) {
+    alert.classList.add('error');
+    // reset progress
+    progressContainer.style.display = 'none';
+    timer.innerHTML = '';
+    kills.innerHTML = '';
+    kpm.innerHTML = '';
+  } else alert.classList.remove('error');
 };
 
-const setProgress = (res) => {
-  const start = new Date(res.start);
+const setProgress = (res = { start: null, kills: null }) => {
+  const start = new Date(res.start ?? '');
   const now = new Date();
   const diff = now.getTime() - start.getTime();
 
   progressContainer.style.display = 'block';
+
   if (timer.innerHTML === '') {
-    const timerInterval = () => {
+    const timerTick = () => {
       const n = new Date();
       const d = n.getTime() - start.getTime();
       const td = { d };
@@ -77,7 +84,7 @@ const setProgress = (res) => {
       const time = `${td.hrs}:${td.min}:${td.sec}`;
       timer.innerHTML = time;
     };
-    setInterval(timerInterval, 1000);
+    setInterval(timerTick, 1000);
   }
 
   const min = diff / 1000 / 60;
