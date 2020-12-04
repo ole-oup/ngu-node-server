@@ -1,7 +1,14 @@
+import getColor from '../util/getColor.js';
+
 const ga = (data) => {
   const result = {};
 
   const { aug } = data.cfg;
+  const lower = aug > 5;
+
+  const scrolledUp = getColor(data, 326, 576) === 'ffffff';
+  if (scrolledUp && lower) throw 'Aug Window not scrolled up';
+
   switch (Number(aug)) {
     case 1:
       result.x = 538;

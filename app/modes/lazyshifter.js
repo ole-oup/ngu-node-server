@@ -14,9 +14,8 @@ const lazyshifter = async (data, activeWindow, initWin) => {
   await button(data, positions.Adventure.Menu);
   await button(data, positions.Adventure.EnterITOPOD.Button);
 
-  const shifter = getColor(data, 550, 389);
-  if (shifter !== '000000')
-    await button(data, positions.Adventure.EnterITOPOD.Shifter);
+  const shifter = getColor(data, 550, 389) !== '000000';
+  if (shifter) await button(data, positions.Adventure.EnterITOPOD.Shifter);
 
   await button(data, positions.Adventure.EnterITOPOD.Enter);
 
