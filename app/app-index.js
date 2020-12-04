@@ -8,6 +8,7 @@ import snipe from './modes/snipe.js';
 import quest from './modes/quest.js';
 import lazyshifter from './modes/lazyshifter.js';
 import reserver from './modes/reserver.js';
+import { setImmediatePromise } from './util/waitFor.js';
 
 const { windowManager } = nwm;
 
@@ -15,7 +16,7 @@ const activeWindow = () => {
   return windowManager.getActiveWindow();
 };
 
-const getGameCoords = () => {
+const getGame = () => {
   let gameWin = false;
 
   const windows = windowManager.getWindows();
@@ -25,16 +26,10 @@ const getGameCoords = () => {
 
   for (let i = 0; i < windows.length; i++) {
     gameWin = windows[i].path === gamePath ? windows[i] : false;
-    if (gameWin) break;
+    if (gameWin) return gameWin;
   }
 
-  gameWin.setBounds({ x: 0, y: 0 });
-  const bounds = gameWin.getBounds();
-  // offset x & y b/c of window borders
-  bounds.x += 3;
-  bounds.y += 27;
-
-  return { gameWin, coords: bounds };
+  return false;
 };
 
 const startApp = async (config, mode, rmode, broadcast, response) => {
@@ -42,16 +37,16 @@ const startApp = async (config, mode, rmode, broadcast, response) => {
     const m = Number(mode);
     let lazymode = config.lazystop == 1;
 
-    const ggc = getGameCoords();
-    const { coords, gameWin } = ggc;
+    const gameWin = getGame();
 
-    if (!ggc) throw 'Game not found';
+    if (!gameWin) throw 'Game not found';
 
     const initWin = activeWindow();
     gameWin.bringToTop();
     let currWin = activeWindow();
     while (currWin.getTitle() !== 'NGU Idle') {
       currWin = activeWindow();
+      await setImmediatePromise();
     }
 
     // data (state) for modules
@@ -60,7 +55,6 @@ const startApp = async (config, mode, rmode, broadcast, response) => {
       start: new Date(), // start of current mode
       broadcast, //         broadcast() from http-server
       response, //          response from http-server
-      crd: coords, //       game bounds
       cfg: config, //       config
       res: null, //         resolution
       win: gameWin, //      game's window object
@@ -82,7 +76,7 @@ const startApp = async (config, mode, rmode, broadcast, response) => {
 
     switch (m) {
       case 0:
-        await db(state);
+        await db();
         break;
       case 1:
         await rebirth(state, rmode);

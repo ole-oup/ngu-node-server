@@ -1,6 +1,7 @@
 import getColor from '../util/getColor.js';
 
 import { button, positions } from '../util/uxpos.js';
+import { setImmediatePromise } from '../util/waitFor.js';
 
 const lazyshifter = async (data, activeWindow, initWin) => {
   let currWin = activeWindow();
@@ -8,6 +9,7 @@ const lazyshifter = async (data, activeWindow, initWin) => {
   data.win.bringToTop();
   while (currWin.getTitle() !== 'NGU Idle') {
     currWin = activeWindow();
+    await setImmediatePromise();
   }
   await button(data, positions.Adventure.Menu);
   await button(data, positions.Adventure.EnterITOPOD.Button);

@@ -1,8 +1,8 @@
 import robot from 'robotjs';
 
 const click = (data, x, y, right, delay) => {
-  const combinedX = data.crd.x + x * data.res;
-  const combinedY = data.crd.y + y * data.res;
+  const combinedX = x * data.res;
+  const combinedY = y * data.res;
 
   return new Promise((resolve) => {
     robot.moveMouse(combinedX, combinedY);

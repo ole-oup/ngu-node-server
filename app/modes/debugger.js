@@ -1,10 +1,8 @@
 import robot from 'robotjs';
 
-const db = async (data) => {
+const db = async () => {
   const mp = robot.getMousePos();
-  const xxx = mp.x - data.crd.x;
-  const yyy = mp.y - data.crd.y;
-  console.log(`${xxx} ${yyy}`);
+  console.log(`${mp.x} ${mp.y}`);
   console.log(robot.getPixelColor(mp.x, mp.y));
 };
 

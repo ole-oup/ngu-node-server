@@ -30,7 +30,7 @@ const alignWindows = () => {
     gameWin = checkWindows(gamePath);
     if (gameWin) {
       gameWin.bringToTop();
-      gameWin.setBounds({ x: 0, y: 0 });
+      gameWin.setBounds({ x: -3, y: -27 });
     }
 
     return true;

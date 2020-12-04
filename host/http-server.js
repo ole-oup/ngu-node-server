@@ -32,8 +32,6 @@ const createResponse = (action = '', status = 0, msg = '') => {
 const server = () => {
   console.clear();
 
-  console.log('Starting server');
-
   const app = express();
   const port = 3000;
 
@@ -121,14 +119,11 @@ const server = () => {
     const response = createResponse('restart', 0, 'Restarting server');
     console.log(response.msg);
     res.send(response);
-    startApp({}, 7);
+    const cfg = readCfg();
+    startApp(cfg, 7);
   });
 
-  // const ser = app.listen(port, () =>
-  //   console.log(`Listening at http://localhost:${port}`)
-  // );
-
-  const ser = app.listen(port);
+  const ser = app.listen(port, () => console.log(`Server ready`));
 
   ser.on('upgrade', (request, socket, head) => {
     wss.handleUpgrade(request, socket, head, (socket) => {

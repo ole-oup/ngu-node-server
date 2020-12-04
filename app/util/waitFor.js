@@ -1,14 +1,14 @@
-import robot from 'robotjs';
 import nwm from 'node-window-manager';
 
 import checkIdleBorder from './checkIdleBorder.js';
 import cp from './print.js';
 import gd from './getDifference.js';
+import getColor from './getColor.js';
 
 const { windowManager } = nwm;
 
 // setImmediate() to unblock the event loop and allow communication with clients
-const setImmediatePromise = () => {
+export const setImmediatePromise = () => {
   return new Promise((resolve) => {
     setImmediate(() => resolve());
   });
@@ -37,18 +37,15 @@ const wf = async (data, trigger, fullhp) => {
       throw 'WaitFor-Trigger Error';
   }
 
-  const combinedX = data.crd.x + x * data.res;
-  const combinedY = data.crd.y + y * data.res;
-
   let onoff = true;
   const end = fullhp === true ? 10000 : timer.end;
   while (onoff) {
-    const hex = robot.getPixelColor(combinedX, combinedY);
+    const hex = getColor(data, x, y);
 
     let currWin = windowManager.getActiveWindow();
     if (currWin.getTitle() !== 'NGU Idle') {
       data.win.bringToTop();
-      if (data.cfg.force != 1) robot.keyTap('q');
+      if (data.cfg.force != 1) checkIdleBorder(data);
 
       currWin.bringToTop();
       if (data.cfg.fstop == 1) throw 'Game lost focus';
@@ -56,15 +53,17 @@ const wf = async (data, trigger, fullhp) => {
 
       while (currWin.getTitle() !== 'NGU Idle') {
         currWin = windowManager.getActiveWindow();
+        await setImmediatePromise();
       }
 
       checkIdleBorder(data, 'disable');
     }
+
     const diff = end - gd(timer.start);
-    timer.timeout = diff < 0 ? true : false;
+    timer.timeout = diff < 0;
+
     if (hex !== color || timer.timeout) {
       onoff = false;
-      break;
     }
 
     await setImmediatePromise();

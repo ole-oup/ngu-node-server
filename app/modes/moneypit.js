@@ -7,11 +7,9 @@ const checkPit = async (data) => {
   if (pitLight !== 'ffffff') {
     await button(data, positions.MoneyPit.Menu);
     if (pitLight === 'ffd23b') {
-      console.log('daily spin');
       await button(data, positions.MoneyPit.DailySpin);
       await button(data, positions.MoneyPit.NoBS);
     } else {
-      console.log('moneypit');
       await button(data, positions.MoneyPit.FeedMe);
       await button(data, positions.MoneyPit.Yeah);
     }
