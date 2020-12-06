@@ -9,10 +9,8 @@ const towerIdle = async (data) => {
   if (data.cfg.ring == 1) {
     await button(data, positions.Inventory.Menu);
     await click(data, 358, 574);
-    const ring = getColor(data, 898, 532);
-    if (ring === 'cfbfe7') {
-      await click(data, 898, 532, true);
-    }
+    const ring = getColor(data, 898, 532) === 'cfbfe7';
+    if (ring) await click(data, 898, 532, true);
   }
 
   await goToAdv(data);

@@ -18,16 +18,16 @@ const loop = async (data, killcount, start, duration, wfm, infinite) => {
     await wf(data, 'cd');
 
     if (wfm == 1 || data.cfg.charge2x == 1) {
-      const charge = getColor(data, 757, 139);
-      if (charge !== '334452') {
-        const ultimate = getColor(data, 858, 105);
-        if (ultimate !== '7c4e4e') return robot.keyTap('g'); // only return charge when ult is ready too
+      const charge = getColor(data, 757, 139) !== '334452';
+      if (charge) {
+        const ultimate = getColor(data, 858, 105) !== '7c4e4e';
+        if (ultimate) return robot.keyTap('g'); // only return charge when ult is ready too
       }
     }
 
     if (wfm == 2) {
-      const megabuff = getColor(data, 664, 175);
-      if (megabuff !== '624a4a') return;
+      const megabuff = getColor(data, 664, 175) !== '624a4a';
+      if (megabuff) return;
     }
   }
 

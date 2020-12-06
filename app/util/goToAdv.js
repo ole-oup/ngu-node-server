@@ -17,9 +17,9 @@ const goToAdv = async (data, zone) => {
     await button(data, positions.Adventure.EnterITOPOD.Enter);
     await button(data, positions.Adventure.EnterITOPOD.Button);
 
-    const shifter = getColor(data, 550, 389);
-    if (shifter === '000000')
-      await button(data, positions.Adventure.EnterITOPOD.Shifter);
+    const shifter = getColor(data, 550, 389) !== 'ffffff';
+    console.log(shifter);
+    if (shifter) await button(data, positions.Adventure.EnterITOPOD.Shifter);
 
     await button(data, positions.Adventure.EnterITOPOD.Optimal);
     await button(data, positions.Adventure.EnterITOPOD.StartFloor);
@@ -42,6 +42,8 @@ const goToAdv = async (data, zone) => {
 
     checkIdleBorder(data, 'disable');
   }
+
+  robot.moveMouse(232 * data.res, 481 * data.res); // move to cards for chonk timer
 };
 
 export default goToAdv;

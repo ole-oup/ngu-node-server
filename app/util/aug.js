@@ -7,7 +7,7 @@ const ga = (data) => {
   const lower = aug > 5;
 
   const scrolledUp = getColor(data, 326, 576) === 'ffffff';
-  if (scrolledUp && lower) throw 'Aug Window not scrolled up';
+  if (scrolledUp && lower) throw 'Aug Window scrolled up';
 
   switch (Number(aug)) {
     case 1:

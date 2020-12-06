@@ -14,7 +14,7 @@ robot.setKeyboardDelay(0);
 let start = null;
 
 const crown = (data) => {
-  return getColor(data, 735, 280) === 'f7ef29' ? true : false;
+  return getColor(data, 735, 280) === 'f7ef29';
 };
 
 const waitForBoss = async (data) => {
@@ -33,10 +33,8 @@ const waitForBoss = async (data) => {
 
 const waitForCharge = async (data) => {
   await wf(data, 'cd');
-  const charge = getColor(data, 757, 139);
-  if (charge !== '334452') {
-    return true;
-  }
+  const charge = getColor(data, 757, 139) !== '334452';
+  if (charge) return true;
   waitForCharge(data);
 };
 
@@ -46,8 +44,8 @@ const attack = async (data, arr) => {
     robot.keyTap(arr[0]);
     arr.shift();
   } else {
-    const e = getColor(data, 541, 109);
-    if (e !== '7c4e4e') robot.keyTap('e');
+    const e = getColor(data, 541, 109) !== '7c4e4e';
+    if (e) robot.keyTap('e');
     else robot.keyTap('w');
   }
 };

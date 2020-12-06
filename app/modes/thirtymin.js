@@ -20,8 +20,8 @@ const countdown = async (str, sec) => {
 };
 
 const moneypit = async (data) => {
-  const mp = getColor(data, 274, 74);
-  if (mp !== 'ffffff') {
+  const mp = getColor(data, 274, 74) !== 'ffffff';
+  if (mp) {
     await button(data, positions.MoneyPit.Menu);
     await button(data, positions.MoneyPit.FeedMe);
     await button(data, positions.MoneyPit.Yeah);
