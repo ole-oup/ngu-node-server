@@ -31,21 +31,14 @@ const waitForBoss = async (data) => {
   return crown(data);
 };
 
-const waitForParry = async (data) => {
-  await wf(data, 'cd');
-  const parry = getColor(data, 644, 100) !== '7c4e4e';
-  if (parry) return true;
-  waitForParry(data);
-};
-
 const attack = async (data, arr) => {
   await wf(data, 'cd');
   if (arr.length !== 0) {
     robot.keyTap(arr[0]);
     arr.shift();
   } else {
-    const e = getColor(data, 541, 109) !== '7c4e4e';
-    if (e) robot.keyTap('e');
+    if (getColor(data, 541, 109) !== '7c4e4e') robot.keyTap('e');
+    else if (getColor(data, 749, 102) !== '7c4e4e') robot.keyTap('t');
     else robot.keyTap('w');
   }
 };
@@ -64,9 +57,8 @@ const snipeCycle = async (data, killcount, wfm) => {
     await wf(data, 'cd');
     robot.keyTap('g');
     await wf(data, 'cd');
-    robot.keyTap('r');
+    if (data.cfg.parry2x != 1) robot.keyTap('r');
     await wf(data, 'hp');
-    if (data.cfg.parry2x == 1) waitForParry(data);
   } else if (data.cfg.heal != 1 && wfm == 2) {
     // wait for charge if we wait for megabuff
     await wf(data, 'cd');
@@ -77,8 +69,10 @@ const snipeCycle = async (data, killcount, wfm) => {
   const zonesBack = Number(data.cfg.zone);
   if (zonesBack !== 0) for (let i = 0; i < zonesBack; i++) robot.keyTap('left');
 
-  await wf(data, 'cd');
-  robot.keyTap('v');
+  if (data.cfg.prebuff == 1) {
+    await wf(data, 'cd');
+    robot.keyTap('v');
+  }
 
   const searchStart = new Date();
 
@@ -87,7 +81,7 @@ const snipeCycle = async (data, killcount, wfm) => {
 
   while (!c) {
     c = await waitForBoss(data);
-    if (wfm == 2 && gd(searchStart) > 13 * 1000) break; // reset snipe before megabuff runs out
+    if (wfm == 2 && data.cfg.prebuff == 1 && gd(searchStart) > 13 * 1000) break; // reset snipe before megabuff runs out
   }
 
   const atkarr = [...data.cfg.atk];

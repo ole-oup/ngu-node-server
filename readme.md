@@ -18,6 +18,7 @@
 | total      | 30                       | total minutes until rebirth                                                          | thirtyMin |
 | heal       | 0                        | heal in safe zone                                                                    | snipe     |
 | parry2x    | 0                        | wait for second parry                                                                | snipe     |
+| prebuff    | 0                        | cast v immediately when searching for enemy                                          | snipe     |
 | zone       | 0                        | zones to go back                                                                     | snipe     |
 | move       | 1                        | move to wait for: 0 = none, 1 = charge, 2 = megabuff                                 | snipe     |
 | atk        | ytewa                    | attack order                                                                         | snipe     |

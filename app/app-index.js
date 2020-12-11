@@ -35,12 +35,9 @@ const getGame = () => {
 const startApp = async (config, mode, rmode, broadcast, response) => {
   try {
     const m = Number(mode);
-    let lazymode = config.lazystop == 1;
 
     const gameWin = getGame();
-
     if (!gameWin) throw 'Game not found';
-
     const initWin = activeWindow();
     gameWin.bringToTop();
     let currWin = activeWindow();
@@ -94,7 +91,7 @@ const startApp = async (config, mode, rmode, broadcast, response) => {
         await thirtymin(state);
         break;
       case 6:
-        lazymode = true;
+        await lazyshifter(state, initWin);
         break;
       case 7:
         reserver(state);
@@ -102,7 +99,6 @@ const startApp = async (config, mode, rmode, broadcast, response) => {
       default:
         throw 'Invalid Mode';
     }
-    if (lazymode) await lazyshifter(state, activeWindow, initWin);
   } catch (err) {
     console.log(err);
   }

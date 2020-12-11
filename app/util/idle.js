@@ -17,8 +17,13 @@ const loop = async (data, killcount, start, duration, wfm, infinite) => {
   if (wfm !== null) {
     await wf(data, 'cd');
 
+    if (data.cfg.parry2x == 1) {
+      const parry = getColor(data, 644, 100) !== '7c4e4e';
+      const parryBorder = getColor(data, 631, 86) === 'ffeb04';
+      if (parry && !parryBorder) robot.keyTap('r');
+    }
+
     if (wfm == 1) {
-      //  || data.cfg.parry2x == 1
       const charge = getColor(data, 757, 139) !== '334452';
       if (charge) {
         const ultimate = getColor(data, 858, 105) !== '7c4e4e';

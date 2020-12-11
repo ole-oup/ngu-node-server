@@ -14,6 +14,7 @@
   "total": 30,
   "heal": 0,
   "parry2x": 0,
+  "prebuff": 0,
   "zone": 0,
   "move": 1,
   "atk": "ytea",
