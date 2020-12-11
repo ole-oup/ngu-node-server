@@ -1,11 +1,5 @@
-import nwm from 'node-window-manager';
-
-import checkIdleBorder from './checkIdleBorder.js';
-import cp from './print.js';
 import gd from './getDifference.js';
 import getColor from './getColor.js';
-
-const { windowManager } = nwm;
 
 // setImmediate() to unblock the event loop and allow communication with clients
 export const setImmediatePromise = () => {
@@ -39,25 +33,9 @@ const wf = async (data, trigger, fullhp) => {
 
   let onoff = true;
   const end = fullhp === true ? 10000 : timer.end;
+
   while (onoff) {
     const hex = getColor(data, x, y);
-
-    let currWin = windowManager.getActiveWindow();
-    if (currWin.getTitle() !== 'NGU Idle') {
-      data.win.bringToTop();
-      if (data.cfg.force != 1) checkIdleBorder(data);
-
-      currWin.bringToTop();
-      if (data.cfg.fstop == 1) throw 'Game lost focus';
-      else cp(data, 'Game lost focus');
-
-      while (currWin.getTitle() !== 'NGU Idle') {
-        currWin = windowManager.getActiveWindow();
-        await setImmediatePromise();
-      }
-
-      checkIdleBorder(data, 'disable');
-    }
 
     const diff = end - gd(timer.start);
     timer.timeout = diff < 0;

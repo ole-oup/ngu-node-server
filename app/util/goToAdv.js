@@ -18,7 +18,6 @@ const goToAdv = async (data, zone) => {
     await button(data, positions.Adventure.EnterITOPOD.Button);
 
     const shifter = getColor(data, 550, 389) !== 'ffffff';
-    console.log(shifter);
     if (shifter) await button(data, positions.Adventure.EnterITOPOD.Shifter);
 
     await button(data, positions.Adventure.EnterITOPOD.Optimal);

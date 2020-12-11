@@ -3,7 +3,7 @@ import robot from 'robotjs';
 import wf from './waitFor.js';
 import gd from './getDifference.js';
 import cp from './print.js';
-import checkPit from '../modes/moneypit.js';
+import checkPit from './moneypit.js';
 import getColor from './getColor.js';
 
 robot.setKeyboardDelay(0);
@@ -17,7 +17,8 @@ const loop = async (data, killcount, start, duration, wfm, infinite) => {
   if (wfm !== null) {
     await wf(data, 'cd');
 
-    if (wfm == 1 || data.cfg.charge2x == 1) {
+    if (wfm == 1) {
+      //  || data.cfg.parry2x == 1
       const charge = getColor(data, 757, 139) !== '334452';
       if (charge) {
         const ultimate = getColor(data, 858, 105) !== '7c4e4e';

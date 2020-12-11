@@ -1,6 +1,5 @@
 {
   "res": 0,
-  "fstop": 0,
   "exit": 0,
   "lazystop": 0,
   "moneypit": 0,
@@ -14,7 +13,7 @@
   "dist4": 20,
   "total": 30,
   "heal": 0,
-  "charge2x": 0,
+  "parry2x": 0,
   "zone": 0,
   "move": 1,
   "atk": "ytea",

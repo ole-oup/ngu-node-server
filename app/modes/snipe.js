@@ -31,11 +31,11 @@ const waitForBoss = async (data) => {
   return crown(data);
 };
 
-const waitForCharge = async (data) => {
+const waitForParry = async (data) => {
   await wf(data, 'cd');
-  const charge = getColor(data, 757, 139) !== '334452';
-  if (charge) return true;
-  waitForCharge(data);
+  const parry = getColor(data, 644, 100) !== '7c4e4e';
+  if (parry) return true;
+  waitForParry(data);
 };
 
 const attack = async (data, arr) => {
@@ -57,7 +57,7 @@ const snipeCycle = async (data, killcount, wfm) => {
 
   await idle(data, null, 60, wfm, true);
 
-  if (data.cfg.heal == 1) {
+  if (data.cfg.heal == 1 || data.cfg.parry2x == 1) {
     await click(data, 735, 210, true); // left arrow
     await wf(data, 'cd');
     robot.keyTap('b');
@@ -66,7 +66,7 @@ const snipeCycle = async (data, killcount, wfm) => {
     await wf(data, 'cd');
     robot.keyTap('r');
     await wf(data, 'hp');
-    if (data.cfg.charge2x == 1) waitForCharge(data);
+    if (data.cfg.parry2x == 1) waitForParry(data);
   } else if (data.cfg.heal != 1 && wfm == 2) {
     // wait for charge if we wait for megabuff
     await wf(data, 'cd');

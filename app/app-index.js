@@ -12,7 +12,7 @@ import { setImmediatePromise } from './util/waitFor.js';
 
 const { windowManager } = nwm;
 
-const activeWindow = () => {
+export const activeWindow = () => {
   return windowManager.getActiveWindow();
 };
 
