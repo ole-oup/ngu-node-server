@@ -1,11 +1,6 @@
-auto-pen bei chonker
+https://github.com/zapolnoch/node-tesseract-ocr
+für gotoadv statt clipboard
 
-nicht nach lazyshifter wegklicken -> zu script-app
-option in cfg
-
-tooltips für optionen
-
-iwie nach kill gucken ob window?
-aktuell denkt er die ganze zeit es wäre moneypit
-
-die container ohne feste breite immer % bis mobile
+resolution an client -> dementsprechend ui
+immer rechtsbündig und dann mit absoluten pixeln bis stop
+ui passt immer egal wie groß das fenster ist

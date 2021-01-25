@@ -12,7 +12,7 @@ const goToAdv = async (data, zone) => {
 
   // todo check beastmode
 
-  if (data.cfg.quest != 1 || zone !== 'quest') {
+  if (data.cfg.quest != 1 || data.mode != 2) {
     await button(data, positions.Adventure.EnterITOPOD.Button);
     await button(data, positions.Adventure.EnterITOPOD.Enter);
     await button(data, positions.Adventure.EnterITOPOD.Button);
@@ -32,16 +32,13 @@ const goToAdv = async (data, zone) => {
     await button(data, positions.Adventure.EnterITOPOD.EndFloor);
     robot.keyTap('v', 'control');
 
-    checkIdleBorder(data, 'disable');
-
     await button(data, positions.Adventure.EnterITOPOD.Enter);
-  } else {
+  } else if (data.cfg.quest == 1 || zone === 'quest') {
     await button(data, positions.Questing.Menu);
     await button(data, positions.Questing.GoToQuestZone);
-
-    checkIdleBorder(data, 'disable');
   }
 
+  checkIdleBorder(data, 'disable');
   robot.moveMouse(232 * data.res, 481 * data.res); // move to cards for chonk timer
 };
 

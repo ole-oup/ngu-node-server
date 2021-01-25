@@ -1,8 +1,8 @@
 import click from './click.js';
 
-export const button = (data, pos, rightclick) => {
+export const button = (data, pos) => {
   let p = { x: pos[0], y: pos[1] };
-  return click(data, p.x, p.y, rightclick === 'rc' ? true : false);
+  return click(data, p.x, p.y);
 };
 
 export const positions = {
@@ -184,6 +184,15 @@ export const positions = {
     NormalCheck: [780, 122],
     EvilCheck: [780, 143],
     SadCheck: [780, 164],
+    ngu1: [590, 240], // AugCap YggCap
+    ngu2: [590, 275], // WandoosCap EXPCap
+    ngu3: [590, 310], // RespawnCap PowBCap
+    ngu4: [590, 345], // GoldCap NumberCap
+    ngu5: [590, 380], // AdvACap TMCap
+    ngu6: [590, 415], // PowACap EnergyCap
+    ngu7: [590, 450], // DCCap AdvBCap
+    ngu8: [590, 485], // MagicCap
+    ngu9: [590, 520], // PPCap
   },
   Diggers: {
     Menu: [233, 346],
@@ -305,24 +314,6 @@ Adv. Training				233	184
 	WandoosMPlus			891	388
 	WandoosMMinus			926	388
 
-	Energy:				
-		AugCap		590	240
-		WandoosCap		590	275
-		RespawnCap		590	310
-		GoldCap		590	345
-		AdvACap		590	380
-		PowACap		590	415
-		DCCap		590	450
-		MagicCap		590	485
-		PPCap		590	520
-	Magic:				
-		YggCap		590	240
-		EXPCap		590	275
-		PowBCap		590	310
-		NumberCap		590	345
-		TMCap		590	380
-		EnergyCap		590	415
-		AdvBCap		590	450
 Ygg				233	319
 	Page1			344	113
 		FoG_Eat		351	176
@@ -476,37 +467,4 @@ Beards				233	375
 	CageBeard			338	343
 	BEARd			338	366
 	GoldBeard			326	392
-Hacks				233	427
-	Page1			345	183
-		ADPlus		566	234
-		ADMinus		600	234
-		AdvPlus		891	234
-		AdvMinus		926	234
-		TMPlus		566	328
-		TMMinus		600	328
-		DCPlus		891	328
-		DCMinus		926	328
-		AugPlus		566	420
-		AugMinus		600	420
-		ENGUPlus		891	420
-		ENGUMinus		926	420
-		MNGUPlus		566	513
-		MNGUMinus		600	513
-		BloodPlus		891	513
-		BloodMinus		926	513
-	Page2			399	183
-		QPPlus		566	234
-		QPMinus		600	234
-		DaycarePlus		891	234
-		DaycareMinus		926	234
-		EXPPlus		566	328
-		EXPMinus		600	328
-		NumberPlus		891	328
-		NumberMinus		926	328
-		PPPlus		566	420
-		PPMInus		600	420
-		HackPlus		891	420
-		HackMinus		926	420
-		WishPlus		566	513
-		WishMinus		600	513
 */

@@ -37,7 +37,7 @@ const loop = async (data, killcount, start, duration, wfm, infinite) => {
     }
   }
 
-  await wf(data, 'enemy');
+  await wf(data, data.cfg.slowcd == 0 ? 'enemy' : 'cd');
 
   robot.keyTap('w');
 
@@ -55,6 +55,10 @@ const loop = async (data, killcount, start, duration, wfm, infinite) => {
   }
 
   if (data.cfg.moneypit == 1) await checkPit(data);
+
+  // wenn cd und res zu weit auseinander sind dann läuft das loop doppelt
+  let isDead = getColor(data, 736, 415) === 'ffffff';
+  if (!isDead) console.log('Warning: Check slowcd');
 
   // await setImmediatePromise();
   if (infinite ?? duration > diff)

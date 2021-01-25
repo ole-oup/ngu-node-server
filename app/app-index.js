@@ -1,6 +1,6 @@
 import nwm from 'node-window-manager';
 
-import db from './modes/debugger.js';
+// import db from './modes/debugger.js';
 import rebirth from './modes/rebirth.js';
 import toweridle from './modes/toweridle.js';
 import thirtymin from './modes/thirtymin.js';
@@ -8,6 +8,7 @@ import snipe from './modes/snipe.js';
 import quest from './modes/quest.js';
 import lazyshifter from './modes/lazyshifter.js';
 import reserver from './modes/reserver.js';
+import tab from './modes/tab.js';
 import { setImmediatePromise } from './util/waitFor.js';
 
 const { windowManager } = nwm;
@@ -35,11 +36,31 @@ const getGame = () => {
 const startApp = async (config, mode, rmode, broadcast, response) => {
   try {
     const m = Number(mode);
+    let resolution = 0;
 
     const gameWin = getGame();
     if (!gameWin) throw 'Game not found';
     const initWin = activeWindow();
     gameWin.bringToTop();
+
+    const bounds = gameWin.getBounds();
+    switch (bounds.width) {
+      case 966:
+        resolution = 0;
+        break;
+      case 1286:
+        resolution = 1;
+        break;
+      case 1446:
+        resolution = 2;
+        break;
+      case 1686:
+        resolution = 3;
+        break;
+      default:
+        throw new Error('Resolution not found');
+    }
+
     let currWin = activeWindow();
     while (currWin.getTitle() !== 'NGU Idle') {
       currWin = activeWindow();
@@ -57,7 +78,7 @@ const startApp = async (config, mode, rmode, broadcast, response) => {
       win: gameWin, //      game's window object
     };
 
-    switch (state.cfg.res) {
+    switch (resolution) {
       case 1:
         state.res = 1 + 1 / 3;
         break;
@@ -73,7 +94,8 @@ const startApp = async (config, mode, rmode, broadcast, response) => {
 
     switch (m) {
       case 0:
-        await db();
+        // await db();
+        await tab();
         break;
       case 1:
         await rebirth(state, rmode);
