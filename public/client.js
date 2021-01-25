@@ -10,6 +10,7 @@ const progressContainer = document.querySelector('#progress-container');
 const timer = document.querySelector('#timer');
 const kills = document.querySelector('#kills');
 const kpm = document.querySelector('#kpm');
+const spk = document.querySelector('#spk');
 
 const toggleVisibility = (el) => {
   el.style.display === 'none'
@@ -87,11 +88,14 @@ const setProgress = (res = { start: null, kills: null }) => {
     setInterval(timerTick, 1000);
   }
 
-  const min = diff / 1000 / 60;
+  const sec = diff / 1000;
+  const min = sec / 60;
   const perMin = res.kills / min;
+  const secPerKill = sec / res.kills;
 
   kills.innerHTML = res.kills;
   kpm.innerHTML = perMin.toFixed(2);
+  spk.innerHTML = secPerKill.toFixed(2);
 };
 
 const saveCfg = async (cfg) => {

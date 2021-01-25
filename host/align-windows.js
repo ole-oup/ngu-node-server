@@ -24,7 +24,7 @@ const alignWindows = () => {
     terminal = checkWindows(terminalPath);
     if (terminal) {
       terminal.bringToTop();
-      terminal.setBounds({ x: -5, y: 626, height: 420, width: 974 });
+      terminal.setBounds({ x: -5, y: 586, height: 460, width: 974 });
     }
 
     gameWin = checkWindows(gamePath);

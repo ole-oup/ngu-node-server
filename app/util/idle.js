@@ -56,9 +56,10 @@ const loop = async (data, killcount, start, duration, wfm, infinite) => {
 
   if (data.cfg.moneypit == 1) await checkPit(data);
 
-  // wenn cd und res zu weit auseinander sind dann läuft das loop doppelt
+  // wenn cd und res zu weit auseinander sind dann läuft das loop doppelt?
+  // kommt ca jede stunde bei wenig cd und respawn? slowcd anpassen?
   let isDead = getColor(data, 736, 415) === 'ffffff';
-  if (!isDead) console.log('Warning: Check slowcd');
+  if (!isDead) console.log('enemy != ded');
 
   // await setImmediatePromise();
   if (infinite ?? duration > diff)
