@@ -3,20 +3,18 @@
 const serverip = '192.168.178.35:3000';
 
 const alert = document.querySelector('#alert');
-const settings = document.querySelector('#settings');
 const restart = document.querySelector('#restart');
-const settingsContainer = document.querySelector('#settings-container');
 const progressContainer = document.querySelector('#progress-container');
 const timer = document.querySelector('#timer');
 const kills = document.querySelector('#kills');
 const kpm = document.querySelector('#kpm');
 const spk = document.querySelector('#spk');
 
-const toggleVisibility = (el) => {
-  el.style.display === 'none'
-    ? (el.style.display = 'block')
-    : (el.style.display = 'none');
-};
+// const toggleVisibility = (el) => {
+//   el.style.display === 'none'
+//     ? (el.style.display = 'block')
+//     : (el.style.display = 'none');
+// };
 
 const getData = async (url) => {
   try {
@@ -129,10 +127,6 @@ const saveCfg = async (cfg) => {
   };
 
   socket.onclose = () => location.reload();
-
-  settings.addEventListener('click', () => {
-    toggleVisibility(settingsContainer);
-  });
 
   restart.addEventListener('click', async () => {
     const resres = await getData('/app/restart');

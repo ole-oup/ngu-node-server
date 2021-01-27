@@ -62,7 +62,7 @@ const server = () => {
             isActive = true;
             console.log('Starting script');
             broadcast(response);
-            await startApp(readCfg(), data.mode, 0, broadcast, createResponse);
+            await startApp(readCfg(), data.mode, broadcast, createResponse);
             isActive = false;
             console.log('Server ready');
             break;
@@ -81,27 +81,6 @@ const server = () => {
         console.log(err);
       }
     });
-  });
-
-  app.get('/app/rebirth/:rmode', async (req, res) => {
-    const { rmode } = req.params;
-    const response = createResponse(`rebirth ${rmode}`);
-    try {
-      if (isActive) throw 'Server not ready';
-      isActive = true;
-
-      const cfg = readCfg();
-      await startApp(cfg, 1, rmode);
-
-      response.status = 1;
-      response.msg = `Finished Rebirth ${rmode}`;
-      isActive = false;
-    } catch (err) {
-      response.msg = err;
-      console.log(err);
-    }
-    console.log(response.msg);
-    res.send(JSON.stringify(response));
   });
 
   app.post('/app/config', (req, res) => {
@@ -123,7 +102,7 @@ const server = () => {
     console.log(response.msg);
     res.send(response);
     const cfg = readCfg();
-    startApp(cfg, 7);
+    startApp(cfg, 99);
   });
 
   const ser = app.listen(port, () => console.log(`Server ready`));

@@ -32,28 +32,22 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
+.root-container {
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  width: 600px;
+}
+
 .container {
-  width: 650px;
-  margin: 50px 0 20px;
-  padding: 1em 0.5em;
-  /* background-color: rgba(255, 255, 255, 0.15); */
-  /* border: 1px solid var(--sec-color); */
+  margin: 10px;
 }
 
 .col {
-  border: 1px solid var(--sec-color);
+  /* border: 1px solid var(--sec-color); */
   width: 200px;
   margin: 2px 6px;
   padding-bottom: 20px;
-}
-
-#settings {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  width: 40px;
-  height: 40px;
-  filter: invert(0.85);
 }
 
 #restart {
@@ -88,6 +82,8 @@ body {
   color: var(--err-color);
   font-weight: 600;
 }
+
+/* todo success */
 
 .flex-column {
   display: flex;
@@ -146,14 +142,14 @@ td {
 }
 
 .mode {
-  height: 100px;
-  width: 250px;
-  margin: 5px 12px;
+  height: 30px;
+  width: 180px;
+  margin: 10px;
   color: var(--sec-color);
   background-color: var(--transparent);
   border: 1px solid var(--sec-color);
   border-radius: 0;
-  font-size: 32px;
+  font-size: 20px;
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -212,7 +208,6 @@ input[type='text'] {
   font-family: 'Montserrat', sans-serif;
 }
 
-/* select#hack { */
 select {
   width: 80px;
   height: 30px;
@@ -226,24 +221,11 @@ select option {
   background: var(--prim-color);
   font-family: 'Montserrat', sans-serif;
 }
-select#hack {
-  width: 100px;
-  margin-top: 10px;
-}
 
 @media only screen and (max-width: 700px) {
-  .container {
-    margin-top: 3vh;
-    width: 80%;
-  }
-
-  .mode {
-    height: 2.5em;
-    width: 4.3em;
-    margin: 3px;
-  }
-
-  .wish {
-    margin: 0;
+  .root-container {
+    margin-top: 30px;
+    position: static;
+    width: 100%;
   }
 }

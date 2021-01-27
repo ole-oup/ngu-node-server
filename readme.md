@@ -2,20 +2,13 @@
 
 | option   | default                  | description                                                                          | location  |
 | -------- | ------------------------ | ------------------------------------------------------------------------------------ | --------- |
-| fstop    | 0                        | stop on focus lost                                                                   | waitFor   |
 | exit     | 0                        | exit on error                                                                        | print     |
-| lazystop | 0                        | set lazy itopod shifter on stop                                                      | lazystop  |
 | moneypit | 0                        | throw money into moneypit                                                            | idle      |
+| rmode    | 1                        | rebirth mode: 1 = tm, 2 = augs, 3 = wish, 4 = ngu)                                   | rebirth   |
 | aug      | 3                        | aug for rebirth                                                                      | rebirth   |
-| spell    | 8                        | spell # (1-8)                                                                        | rebirth   |
 | slowcd   | 0                        | 1 if attack is off cd before enemy spawns                                            | toweridle |
 | ring     | 0                        | equip RoM for respawn and cd reduction (bottom right corner of first inventory page) | toweridle |
 | quest    | 0                        | do quests instead of itopod                                                          | goToAdv   |
-| dist1    | 1                        | minutes until first distribution (tm)                                                | thirtyMin |
-| dist2    | 4                        | minutes until second distribution (tm)                                               | thirtyMin |
-| dist3    | 7                        | minutes until third distribution (augs)                                              | thirtyMin |
-| dist4    | 20                       | minutes until fourth distribution (augs)                                             | thirtyMin |
-| total    | 30                       | total minutes until rebirth                                                          | thirtyMin |
 | heal     | 0                        | heal in safe zone                                                                    | snipe     |
 | parry2x  | 0                        | wait for second parry                                                                | snipe     |
 | prebuff  | 0                        | cast v immediately when searching for enemy                                          | snipe     |
@@ -33,10 +26,3 @@
 | 0      | Error       |
 | 1      | Success     |
 | 2      | Running     |
-
-cd muss immer kleiner als respawn sein also cd immer >1s ohne cd reduction oder >0.85s mit
-
-guff run: (thirtym)
-neuen rb starten
-loadout equippen, möglichst 1 min max res (ansonsten dist1 anpassen?)
-autospell number boost!

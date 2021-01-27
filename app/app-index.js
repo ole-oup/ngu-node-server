@@ -3,7 +3,6 @@ import nwm from 'node-window-manager';
 // import db from './modes/debugger.js';
 import rebirth from './modes/rebirth.js';
 import toweridle from './modes/toweridle.js';
-import thirtymin from './modes/thirtymin.js';
 import snipe from './modes/snipe.js';
 import quest from './modes/quest.js';
 import lazyshifter from './modes/lazyshifter.js';
@@ -33,7 +32,7 @@ const getGame = () => {
   return false;
 };
 
-const startApp = async (config, mode, rmode, broadcast, response) => {
+const startApp = async (config, mode, broadcast, response) => {
   try {
     const m = Number(mode);
     let resolution = 0;
@@ -98,7 +97,7 @@ const startApp = async (config, mode, rmode, broadcast, response) => {
         await tab();
         break;
       case 1:
-        await rebirth(state, rmode);
+        await rebirth(state);
         break;
       case 2:
         await toweridle(state);
@@ -110,12 +109,9 @@ const startApp = async (config, mode, rmode, broadcast, response) => {
         await quest(state);
         break;
       case 5:
-        await thirtymin(state);
-        break;
-      case 6:
         await lazyshifter(state, initWin);
         break;
-      case 7:
+      case 99:
         reserver(state);
         break;
       default:

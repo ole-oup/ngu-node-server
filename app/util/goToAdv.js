@@ -12,7 +12,7 @@ const goToAdv = async (data, zone) => {
 
   // todo check beastmode
 
-  if (data.cfg.quest != 1 || data.mode != 2) {
+  if (zone !== 'quest') {
     await button(data, positions.Adventure.EnterITOPOD.Button);
     await button(data, positions.Adventure.EnterITOPOD.Enter);
     await button(data, positions.Adventure.EnterITOPOD.Button);
@@ -33,7 +33,7 @@ const goToAdv = async (data, zone) => {
     robot.keyTap('v', 'control');
 
     await button(data, positions.Adventure.EnterITOPOD.Enter);
-  } else if (data.cfg.quest == 1 || zone === 'quest') {
+  } else {
     await button(data, positions.Questing.Menu);
     await button(data, positions.Questing.GoToQuestZone);
   }

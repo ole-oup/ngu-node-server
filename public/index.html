@@ -10,26 +10,42 @@
   <body>
     <div id="alert"></div>
     <div>
-      <img src="assets/settings.svg" alt="settings" id="settings" />
-    </div>
-    <div>
       <img src="assets/restart.svg" alt="restart" id="restart" />
     </div>
-    <div class="flex-column">
-      <div id="settings-container" style="display: none" class="container">
+    <div class="root-container flex-column">
+      <div id="progress-container" style="display: none" class="container">
+        <div class="flex-column">
+          <div id="timer"></div>
+          <table class="settings-table">
+            <tbody>
+              <tr>
+                <td>kills</td>
+                <td id="kills"></td>
+              </tr>
+              <tr>
+                <td>kpm</td>
+                <td id="kpm"></td>
+              </tr>
+              <tr>
+                <td>spk</td>
+                <td id="spk"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="container">
         <div class="flex-fill">
           <div class="col flex-column-start">
             <div class="flex-column">
-              <p>GENERAL</p>
+              <button class="mode" id="mode5">LAZY</button>
+              <button class="mode" id="mode0">TAB</button>
               <table class="settings-table">
                 <tbody>
                   <tr>
                     <td><input type="checkbox" id="exit" /></td>
                     <td><label for="exit">exit</label></td>
-                  </tr>
-                  <tr>
-                    <td><input type="checkbox" id="lazystop" /></td>
-                    <td><label for="lazystop">lazystop</label></td>
                   </tr>
                   <tr>
                     <td><input type="checkbox" id="moneypit" /></td>
@@ -38,7 +54,7 @@
                 </tbody>
               </table>
               <div class="flex-column">
-                <p>REBIRTH</p>
+                <button class="mode" id="mode1">RB</button>
                 <table class="settings-table">
                   <tbody>
                     <tr>
@@ -46,18 +62,45 @@
                       <td><label for="aug">aug</label></td>
                     </tr>
                     <tr>
-                      <td><input type="number" id="spell" /></td>
-                      <td><label for="spell">spell</label></td>
+                      <td>
+                        <select id="hack">
+                          <option value="0">a/d</option>
+                          <option value="1">adv</option>
+                          <option value="2">tm</option>
+                          <option value="3">drop</option>
+                          <option value="4">aug</option>
+                          <option value="5">engu</option>
+                          <option value="6">mgnu</option>
+                          <option value="7">blood</option>
+                          <option value="8">qp</option>
+                          <option value="9">dc</option>
+                          <option value="10">xp</option>
+                          <option value="11">number</option>
+                          <option value="12">pp</option>
+                          <option value="13">hack</option>
+                          <option value="14">wish</option>
+                        </select>
+                      </td>
+                      <td><label for="hack">hack</label></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <select id="rmode">
+                          <option value="1">tm</option>
+                          <option value="2">augs</option>
+                          <option value="3">wish</option>
+                          <option value="4">ngu</option>
+                        </select>
+                      </td>
+                      <td><label for="rmode">rmode</label></td>
                     </tr>
                   </tbody>
                 </table>
               </div>
             </div>
-          </div>
 
-          <div class="col flex-column-start">
             <div class="flex-column">
-              <p>ITOPOD</p>
+              <button class="mode" id="mode2">IDLE</button>
               <table class="settings-table">
                 <tbody>
                   <tr>
@@ -68,15 +111,14 @@
                     <td><input type="checkbox" id="ring" /></td>
                     <td><label for="ring">ring</label></td>
                   </tr>
-                  <tr>
-                    <td><input type="checkbox" id="quest" /></td>
-                    <td><label for="quest">quest</label></td>
-                  </tr>
                 </tbody>
               </table>
             </div>
+          </div>
+
+          <div class="col flex-column-start">
             <div class="flex-column">
-              <p>SNIPE</p>
+              <button class="mode" id="mode3">SNIPE</button>
               <table class="settings-table">
                 <tbody>
                   <tr>
@@ -113,38 +155,8 @@
                 </tbody>
               </table>
             </div>
-          </div>
-
-          <div class="col flex-column-start">
             <div class="flex-column">
-              <p>GUFFS</p>
-              <table class="settings-table">
-                <tbody>
-                  <tr>
-                    <td><input type="number" id="dist1" /></td>
-                    <td><label for="dist1">dist1</label></td>
-                  </tr>
-                  <tr>
-                    <td><input type="number" id="dist2" /></td>
-                    <td><label for="dist2">dist2</label></td>
-                  </tr>
-                  <tr>
-                    <td><input type="number" id="dist3" /></td>
-                    <td><label for="dist3">dist3</label></td>
-                  </tr>
-                  <tr>
-                    <td><input type="number" id="dist4" /></td>
-                    <td><label for="dist4">dist4</label></td>
-                  </tr>
-                  <tr>
-                    <td><input type="number" id="total" /></td>
-                    <td><label for="total">total</label></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="flex-column">
-              <p>QUEST</p>
+              <button class="mode" id="mode4">QUEST</button>
               <table class="settings-table">
                 <tbody>
                   <tr>
@@ -158,90 +170,33 @@
         </div>
       </div>
 
-      <div id="progress-container" style="display: none" class="container">
-        <div class="flex-column">
-          <div id="timer"></div>
-          <table class="settings-table">
-            <tbody>
-              <tr>
-                <td>kills</td>
-                <td id="kills"></td>
-              </tr>
-              <tr>
-                <td>kpm</td>
-                <td id="kpm"></td>
-              </tr>
-              <tr>
-                <td>spk</td>
-                <td id="spk"></td>
-              </tr>
-            </tbody>
-          </table>
+      <div class="container">
+        <div class="flex-row" style="margin-top: 10px">
+          <div id="11" class="wish flex-column"></div>
+          <div id="12" class="wish flex-column"></div>
+          <div id="13" class="wish flex-column"></div>
+          <div id="14" class="wish flex-column"></div>
+          <div id="15" class="wish flex-column"></div>
+          <div id="16" class="wish flex-column"></div>
+          <div id="17" class="wish flex-column"></div>
         </div>
-      </div>
-
-      <div class="container flex-column">
-        <div class="flex-wrap">
-          <button class="mode" id="rmode1">TM</button>
-          <button class="mode" id="rmode2">AUGS</button>
-          <button class="mode" id="rmode3">WISH</button>
-          <button class="mode" id="rmode4">NGU</button>
+        <div class="flex-row">
+          <div id="21" class="wish flex-column"></div>
+          <div id="22" class="wish flex-column"></div>
+          <div id="23" class="wish flex-column"></div>
+          <div id="24" class="wish flex-column"></div>
+          <div id="25" class="wish flex-column"></div>
+          <div id="26" class="wish flex-column"></div>
+          <div id="27" class="wish flex-column"></div>
         </div>
-        <br />
-        <div>
-          <div class="flex-row" style="margin-top: 10px">
-            <div id="11" class="wish flex-column"></div>
-            <div id="12" class="wish flex-column"></div>
-            <div id="13" class="wish flex-column"></div>
-            <div id="14" class="wish flex-column"></div>
-            <div id="15" class="wish flex-column"></div>
-            <div id="16" class="wish flex-column"></div>
-            <div id="17" class="wish flex-column"></div>
-          </div>
-          <div class="flex-row">
-            <div id="21" class="wish flex-column"></div>
-            <div id="22" class="wish flex-column"></div>
-            <div id="23" class="wish flex-column"></div>
-            <div id="24" class="wish flex-column"></div>
-            <div id="25" class="wish flex-column"></div>
-            <div id="26" class="wish flex-column"></div>
-            <div id="27" class="wish flex-column"></div>
-          </div>
-          <div class="flex-row">
-            <div id="31" class="wish flex-column"></div>
-            <div id="32" class="wish flex-column"></div>
-            <div id="33" class="wish flex-column"></div>
-            <div id="34" class="wish flex-column"></div>
-            <div id="35" class="wish flex-column"></div>
-            <div id="36" class="wish flex-column"></div>
-            <div id="37" class="wish flex-column"></div>
-          </div>
-        </div>
-        <select id="hack">
-          <option value="0">a/d</option>
-          <option value="1">adv</option>
-          <option value="2">tm</option>
-          <option value="3">drop</option>
-          <option value="4">aug</option>
-          <option value="5">engu</option>
-          <option value="6">mgnu</option>
-          <option value="7">blood</option>
-          <option value="8">qp</option>
-          <option value="9">dc</option>
-          <option value="10">xp</option>
-          <option value="11">number</option>
-          <option value="12">pp</option>
-          <option selected value="13">hack</option>
-          <option value="14">wish</option>
-        </select>
-        <br />
-        <div class="flex-wrap">
-          <button class="mode" id="mode2">IDLE</button>
-          <button class="mode" id="mode3">SNIPE</button>
-          <button class="mode" id="mode4">QUEST</button>
-          <button class="mode" id="mode5">30M</button>
-          <button class="mode" id="mode6">LAZY</button>
-          <button class="mode" id="mode0">TAB</button>
+        <div class="flex-row">
+          <div id="31" class="wish flex-column"></div>
+          <div id="32" class="wish flex-column"></div>
+          <div id="33" class="wish flex-column"></div>
+          <div id="34" class="wish flex-column"></div>
+          <div id="35" class="wish flex-column"></div>
+          <div id="36" class="wish flex-column"></div>
+          <div id="37" class="wish flex-column"></div>
         </div>
       </div>
     </div>

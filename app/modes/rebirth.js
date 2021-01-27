@@ -9,8 +9,10 @@ import hacks from '../util/hacks.js';
 import spells from '../util/spells.js';
 import ngu from '../util/ngu.js';
 
-const rebirth = async (data, rmode) => {
+const rebirth = async (data) => {
   try {
+    const { rmode } = data.cfg;
+
     // fight boss
     await button(data, positions.FightBoss.Menu);
     await button(data, positions.FightBoss.Nuke);
