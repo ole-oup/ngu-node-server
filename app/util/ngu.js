@@ -11,13 +11,13 @@ const ngu = async (data, ngumode) => {
   await button(data, positions.NGU.CapAll);
 
   // pp minus, todo weg wenn sad cap
-  if (ngumode != 'evil') await click(data, 555, 520);
+  // if (ngumode != 'evil') await click(data, 555, 520);
 
   await button(data, positions.NGU.SwitchMode);
   await button(data, positions.NGU.CapAll);
 
   // adv ß minus, todo weg wenn sad cap
-  if (ngumode !== 'evil') await click(data, 555, 450);
+  // if (ngumode !== 'evil') await click(data, 555, 450);
 };
 
 export default ngu;

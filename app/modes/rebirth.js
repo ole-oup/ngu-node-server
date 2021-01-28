@@ -22,10 +22,10 @@ const rebirth = async (data) => {
     robot.keyTap('t');
     robot.keyTap('f');
 
-    await wait(0.25);
-
     // 9e18 res input
     await button(data, positions.Inputs.InputCustom4);
+
+    await wait(0.25);
 
     // gold diggers
     await button(data, positions.Diggers.Menu);
