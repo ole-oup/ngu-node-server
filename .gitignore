@@ -5,7 +5,3 @@ yarn.lock
 *.log
 
 public/config.json
-
-
-dist
-alt

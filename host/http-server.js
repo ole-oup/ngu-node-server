@@ -30,8 +30,6 @@ const createResponse = (action = '', status = 0, msg = '') => {
 };
 
 const server = () => {
-  console.clear();
-
   const app = express();
   const port = 3000;
 
