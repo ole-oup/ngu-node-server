@@ -1,6 +1,6 @@
 /* global fetch:false document:false WebSocket:false location:false */
 
-const serverip = '192.168.178.20:3000';
+const serverip = 'localhost:3000';
 
 const alert = document.querySelector('#alert');
 const restart = document.querySelector('#restart');

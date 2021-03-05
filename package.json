@@ -23,6 +23,7 @@
   },
   "scripts": {
     "start": "pm2 start index.js -l server.log --merge-logs --log-date-format YYYY-MM-DDTHH:mm:ss.SSSS && pm2 logs",
-    "stop": "pm2 del index.js"
+    "stop": "pm2 del index.js",
+    "restart": "yarn stop && yarn start"
   }
 }

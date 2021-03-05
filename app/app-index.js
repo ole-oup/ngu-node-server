@@ -9,6 +9,7 @@ import lazyshifter from './modes/lazyshifter.js';
 import reserver from './modes/reserver.js';
 import tab from './modes/tab.js';
 import { setImmediatePromise } from './util/waitFor.js';
+import alignWindows from '../host/align-windows.js';
 
 const { windowManager } = nwm;
 
@@ -16,28 +17,12 @@ export const activeWindow = () => {
   return windowManager.getActiveWindow();
 };
 
-const getGame = () => {
-  let gameWin = false;
-
-  const windows = windowManager.getWindows();
-
-  const gamePath =
-    'C:\\Program Files (x86)\\Steam\\steamapps\\common\\NGU IDLE\\NGUIdle.exe';
-
-  for (let i = 0; i < windows.length; i++) {
-    gameWin = windows[i].path === gamePath ? windows[i] : false;
-    if (gameWin) return gameWin;
-  }
-
-  return false;
-};
-
 const startApp = async (config, mode, broadcast, response) => {
   try {
     const m = Number(mode);
     let resolution = 0;
 
-    const gameWin = getGame();
+    const gameWin = alignWindows();
     if (!gameWin) throw 'Game not found';
     const initWin = activeWindow();
     gameWin.bringToTop();

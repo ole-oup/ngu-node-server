@@ -33,7 +33,7 @@ const alignWindows = () => {
       gameWin.setBounds({ x: -3, y: -27 });
     }
 
-    return true;
+    return gameWin;
   } catch (err) {
     console.log(err);
     return false;
